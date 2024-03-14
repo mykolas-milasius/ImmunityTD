@@ -1290,10 +1290,10 @@ RectTransform:
   - {fileID: 1354110532}
   m_Father: {fileID: 329026112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -547.25, y: 399.5}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1237192039
 MonoBehaviour:
@@ -1546,6 +1546,7 @@ GameObject:
   - component: {fileID: 1382086610}
   - component: {fileID: 1382086609}
   - component: {fileID: 1382086608}
+  - component: {fileID: 1382086611}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1603,6 +1604,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1382086611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382086607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d73b5a3685545cfa04522eecb7ab7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1425327826}
+  pauseButton: {fileID: 1237192037}
 --- !u!1 &1425327826
 GameObject:
   m_ObjectHideFlags: 0
