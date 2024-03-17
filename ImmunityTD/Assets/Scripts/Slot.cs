@@ -28,6 +28,7 @@ public class Slot : MonoBehaviour
         if (towerPrefab != null)
         {
             Instantiate(towerPrefab, transform.position, Quaternion.identity);
+            this.gameObject.SetActive(false);
         }
     }
 }
