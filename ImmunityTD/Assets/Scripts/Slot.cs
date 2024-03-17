@@ -7,19 +7,21 @@ public class Slot : MonoBehaviour
     private void OnMouseDown()
     {
         TowerSelectionButton.currentSlot = this;
+        InputHandler.prevSlot = this;
+        ChangeColor();
+    }
+    public void ChangeColor()
+    {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        // Activate tower selection canvas
         if (spriteRenderer.color == Color.green)
         {
             spriteRenderer.color = Color.white;
         }
-        else if(spriteRenderer.color == Color.white)
+        else if (spriteRenderer.color == Color.white)
         {
             spriteRenderer.color = Color.green;
         }
     }
-
-    // Instantiate the selected tower prefab at the slot's position
     public void PlaceTower(GameObject towerPrefab)
     {
         // Instantiate the selected tower prefab at the slot's position
