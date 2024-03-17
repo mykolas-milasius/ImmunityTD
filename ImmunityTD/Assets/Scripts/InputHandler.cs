@@ -5,7 +5,7 @@ public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
     public GameObject ShopCanvas;
-    private bool state = false;
+    private GameObject previousClick;
 
     private void Awake()
     {
@@ -17,23 +17,13 @@ public class InputHandler : MonoBehaviour
 
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (!rayHit.collider) return;
+        Slot click;
+        
         
         Debug.Log(rayHit.collider.gameObject.name);
-        if (!rayHit.collider.gameObject.name.Contains("Slot"))
+        if (rayHit.collider.gameObject.name.Contains("Slot"))
         {
-            ShopCanvas.SetActive(false);
-        }
-        else
-        {
-            if (state)
-            {
-                state = false;
-            }
-            else
-            {
-                state = true;
-            }
-            ShopCanvas.SetActive(state);
+            //rayHit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         }
     }
 }
