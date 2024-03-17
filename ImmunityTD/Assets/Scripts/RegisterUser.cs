@@ -13,7 +13,7 @@ public class RegisterScript : MonoBehaviour
     public Button registerButton;
 
     // Enter server URL here
-    private string registerUrl = "http://localhost/register.php";
+    private string registerUrl = "http://localhost/immunityTD.php";
 
     private bool isRegistering = false;
 
