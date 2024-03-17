@@ -5,7 +5,9 @@ public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
     public GameObject ShopCanvas;
+
     public static Slot prevSlot;
+    public static TowerMenu tower;
 
     private void Awake()
     {
@@ -30,6 +32,13 @@ public class InputHandler : MonoBehaviour
         if (!rayHit.collider.gameObject.name.Contains("Slot"))
         {
             TowerSelectionButton.currentSlot = null;
+        }
+        if(tower != null)
+        {
+            if (rayHit.collider.gameObject.name != tower.gameObject.name)
+            {
+                tower.towerMenuCanvas.SetActive(false);
+            }
         }
     }
 }
