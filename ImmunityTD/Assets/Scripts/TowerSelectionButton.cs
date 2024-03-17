@@ -23,6 +23,7 @@ public class TowerSelectionButton : MonoBehaviour
         {
             // Place tower at the current slot
             currentSlot.PlaceTower(towerPrefab);
+            currentSlot = null;
         }
         else
         {

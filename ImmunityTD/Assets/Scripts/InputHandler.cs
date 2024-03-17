@@ -5,11 +5,12 @@ public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
     public GameObject ShopCanvas;
-    private GameObject previousClick;
+    public static Slot prevSlot;
 
     private void Awake()
     {
         _mainCamera = Camera.main;
+        
     }
     public void OnClick(InputAction.CallbackContext context)
     {
@@ -17,13 +18,18 @@ public class InputHandler : MonoBehaviour
 
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (!rayHit.collider) return;
-        Slot click;
-        
-        
-        Debug.Log(rayHit.collider.gameObject.name);
-        if (rayHit.collider.gameObject.name.Contains("Slot"))
+        if (prevSlot != null)
         {
-            //rayHit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            if(rayHit.collider.gameObject.name != prevSlot.gameObject.name)
+            {
+                prevSlot.ChangeColor();
+                prevSlot = null;
+            }
+        }
+        Debug.Log(rayHit.collider.gameObject.name);
+        if (!rayHit.collider.gameObject.name.Contains("Slot"))
+        {
+            TowerSelectionButton.currentSlot = null;
         }
     }
 }
