@@ -32,8 +32,6 @@ public class RegisterScript : MonoBehaviour
         errorMessageText.gameObject.SetActive(false); // Hide error message initially
     }
 
-
-
     public void Register()
     {
         if (isRegistering)
@@ -81,14 +79,12 @@ public class RegisterScript : MonoBehaviour
             confirmPasswordWarningText.gameObject.SetActive(false);
         }
 
-
-
-
         isRegistering = true;
         registerButton.interactable = false;
 
         StartCoroutine(RegisterOnServer(username, password));
     }
+
     public void UpdatePasswordStrengthText(string password)
     {
         string passwordStrength = EvaluatePasswordStrength(password);
@@ -186,10 +182,10 @@ public class RegisterScript : MonoBehaviour
                 }
             }
         }
-
         isRegistering = false;
         registerButton.interactable = true;
     }
+
     private void ShowError(string message)
     {
         errorMessageText.text = message;
