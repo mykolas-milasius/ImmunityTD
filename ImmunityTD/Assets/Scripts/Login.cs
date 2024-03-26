@@ -14,7 +14,7 @@ public class Login : MonoBehaviour
     public GameObject loginCanvas;
     public GameObject mainMenuCanvas;
     private string loginUrl = "http://localhost/immunityTDLogin.php";
-    private bool isLoggingIn = false;
+    public bool isLoggingIn = false;
 
     void Start()
     {
