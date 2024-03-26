@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) { // prideti kad paspaudus pause mygtuka
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             if (isPaused) {
                 DisablePauseMenu();
             } else {
