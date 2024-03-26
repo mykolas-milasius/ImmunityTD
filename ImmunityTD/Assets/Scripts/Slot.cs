@@ -4,7 +4,7 @@ public class Slot : MonoBehaviour
 {
     public GameObject towerSelectionCanvas; // Reference to the tower selection canvas
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         TowerSelectionButton.currentSlot = this;
         InputHandler.prevSlot = this;

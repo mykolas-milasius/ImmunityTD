@@ -8,7 +8,7 @@ public class TowerMenu : MonoBehaviour
     public static Slot currentSlot;
     private bool state = false;
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         InputHandler.tower = this;
         // Check if the tower menu canvas is assigned
