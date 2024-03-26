@@ -7,6 +7,7 @@ public class Slot : MonoBehaviour
     public void OnMouseDown()
     {
         TowerSelectionButton.currentSlot = this;
+        PurchaseButton.currentSlot = this;
         InputHandler.prevSlot = this;
         ChangeColor();
     }
