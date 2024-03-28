@@ -15,20 +15,24 @@ public class EnemyPath : MonoBehaviour
 
     void MoveAlongPath()
     {
-if (currentWaypointIndex < waypoints.Length)
-    {
-        Vector2 targetPos = waypoints[currentWaypointIndex].position / 100; // Scale down by 100
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, targetPos) < 0.01f)
+        if (currentWaypointIndex < waypoints.Length)
         {
-            currentWaypointIndex++;
+            Transform targetWaypoint = waypoints[currentWaypointIndex];
+            // Calculate the distance to the next waypoint
+            float distance = Vector2.Distance(transform.position, targetWaypoint.position);
+            // Adjust the speed based on the distance and PPU
+            float adjustedSpeed = (speed / 100) * (distance / 100);
+            // Use the adjusted speed for movement
+            transform.position = Vector2.MoveTowards(transform.position, targetWaypoint.position, adjustedSpeed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.01f) // A small threshold for reaching the waypoint
+            {
+                currentWaypointIndex++;
+            }
         }
-    }
         else
         {
-            // Enemy reached the end of the path
-            // Implement what happens next (e.g., recycle enemy, reduce player life, etc.)
+            // Handle what happens when the enemy reaches the end of the path
         }
     }
 }
