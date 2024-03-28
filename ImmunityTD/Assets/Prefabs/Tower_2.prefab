@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerMenuCanvas: {fileID: 5524830607803062618}
+  purchaseMenu: {fileID: 0}
 --- !u!114 &8202089597763261295
 MonoBehaviour:
   m_ObjectHideFlags: 0
