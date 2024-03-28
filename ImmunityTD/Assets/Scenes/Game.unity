@@ -4940,6 +4940,7 @@ GameObject:
   - component: {fileID: 1237192041}
   - component: {fileID: 1237192040}
   - component: {fileID: 1237192039}
+  - component: {fileID: 1237192042}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -5010,31 +5011,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1237192040}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1425327826}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1237192037}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1237192040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,6 +5050,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237192037}
   m_CullTransparentMesh: 1
+--- !u!114 &1237192042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237192037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d73b5a3685545cfa04522eecb7ab7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1425327826}
+  pauseButton: {fileID: 1237192037}
+  isPaused: 0
 --- !u!1 &1341224777
 GameObject:
   m_ObjectHideFlags: 0
@@ -5343,6 +5335,7 @@ GameObject:
   - component: {fileID: 1425327829}
   - component: {fileID: 1425327828}
   - component: {fileID: 1425327827}
+  - component: {fileID: 1425327831}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -5438,6 +5431,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1425327831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425327826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d73b5a3685545cfa04522eecb7ab7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1425327826}
+  pauseButton: {fileID: 1237192037}
+  isPaused: 0
 --- !u!1 &1448479671
 GameObject:
   m_ObjectHideFlags: 0
