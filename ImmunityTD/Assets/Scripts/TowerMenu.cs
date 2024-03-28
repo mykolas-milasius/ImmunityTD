@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TowerMenu : MonoBehaviour
 {
-    public GameObject towerMenuCanvas; // Reference to the tower menu canvas
+    public GameObject towerMenuCanvas;
+    public Canvas purchaseMenu;
     public static Slot currentSlot;
     private bool state = false;
 

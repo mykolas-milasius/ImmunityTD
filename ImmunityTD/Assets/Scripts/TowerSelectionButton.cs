@@ -3,11 +3,14 @@ using UnityEngine.Events;
 
 public class TowerSelectionButton : MonoBehaviour
 {
-    public GameObject towerPrefab; // Reference to the tower prefab to be placed
-    public static Slot currentSlot; // Static reference to the current slot
+    public GameObject towerPrefab;
+    public static Slot currentSlot;
+    public Canvas purchaseMenu;
+    private SpriteRenderer sprite;
     private void Start()
     {
         // Ensure a tower prefab is assigned to the button
+        
         if (towerPrefab == null)
         {
             Debug.LogError("Tower prefab is not assigned to the tower selection button!");
