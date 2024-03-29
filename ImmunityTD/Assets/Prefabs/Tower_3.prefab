@@ -162,6 +162,7 @@ MonoBehaviour:
   damage: 1
   attackSpeed: 1.42
   range: 43
+  startPrice: 35
   damageText: {fileID: 338327018234020342}
   attackSpeedText: {fileID: 8441056259728805979}
   rangeText: {fileID: 1837648636926404172}

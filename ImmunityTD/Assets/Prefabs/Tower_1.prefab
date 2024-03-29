@@ -162,6 +162,7 @@ MonoBehaviour:
   damage: 1
   attackSpeed: 0.95
   range: 32
+  startPrice: 30
   damageText: {fileID: 7478336870569488499}
   attackSpeedText: {fileID: 1611513031760060894}
   rangeText: {fileID: 8861178409325893577}
@@ -211,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3858903093862782907, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4657441171402928171, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
       propertyPath: m_AnchoredPosition.x
