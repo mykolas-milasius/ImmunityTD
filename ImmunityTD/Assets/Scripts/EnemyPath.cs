@@ -31,8 +31,8 @@ public class EnemyPath : MonoBehaviour
         }
         else
         {
-            // When all waypoints are reached, activate the game over text
-            gameOverText.SetActive(true);
+            Destroy(gameObject);
+            // gameOverText.SetActive(true);
         }
     }
 }
