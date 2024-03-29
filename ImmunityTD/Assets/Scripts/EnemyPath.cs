@@ -6,7 +6,8 @@ public class EnemyPath : MonoBehaviour
 {
     public Transform[] waypoints;
     private int currentWaypointIndex = 0;
-    public float speed = 1.0f; // Speed in Unity units per second
+    public float speed = 1f; // Speed in Unity units per second
+    public GameObject gameOverText;
 
     void Update()
     {
@@ -18,21 +19,20 @@ public class EnemyPath : MonoBehaviour
         if (currentWaypointIndex < waypoints.Length)
         {
             Transform targetWaypoint = waypoints[currentWaypointIndex];
-            // Calculate the distance to the next waypoint
-            float distance = Vector2.Distance(transform.position, targetWaypoint.position);
-            // Adjust the speed based on the distance and PPU
-            float adjustedSpeed = (speed / 100) * (distance / 100);
-            // Use the adjusted speed for movement
-            transform.position = Vector2.MoveTowards(transform.position, targetWaypoint.position, adjustedSpeed * Time.deltaTime);
 
-            if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.01f) // A small threshold for reaching the waypoint
+            // Calculate the adjusted position by subtracting 960 from x and 540 from y
+            Vector2 adjustedPosition = new Vector2((targetWaypoint.position.x - 960) / 100, (targetWaypoint.position.y - 540) / 100);
+            transform.position = Vector2.MoveTowards(transform.position, adjustedPosition, speed * Time.deltaTime);
+            
+            if ((Vector2)transform.position == adjustedPosition)
             {
                 currentWaypointIndex++;
             }
         }
         else
         {
-            // Handle what happens when the enemy reaches the end of the path
+            // When all waypoints are reached, activate the game over text
+            gameOverText.SetActive(true);
         }
     }
 }
