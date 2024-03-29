@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
     public float damage;
     public float attackSpeed;
     public float range;
+    public float startPrice;
 
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI attackSpeedText;

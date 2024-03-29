@@ -3,12 +3,14 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     public GameObject towerSelectionCanvas; // Reference to the tower selection canvas
+    public bool clicked = false;
 
     public void OnMouseDown()
     {
         TowerSelectionButton.currentSlot = this;
         PurchaseButton.currentSlot = this;
         InputHandler.prevSlot = this;
+        clicked = !clicked;
         ChangeColor();
     }
     public void ChangeColor()
