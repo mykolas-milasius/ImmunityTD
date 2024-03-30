@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         originalHealthBarWidth = healthBarForeground.sizeDelta.x;
+        SetupRigidbody();
     }
 
     public void TakeDamage(float damage)
@@ -38,4 +39,18 @@ public class Enemy : MonoBehaviour
         float healthRatio = currentHealth / maxHealth;
         healthBarForeground.sizeDelta = new Vector2(originalHealthBarWidth * healthRatio, healthBarForeground.sizeDelta.y);
     }
+
+    private void SetupRigidbody()
+{
+    Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+    if (rb == null)
+    {
+        rb = gameObject.AddComponent<Rigidbody2D>();
+    }
+    
+    rb.bodyType = RigidbodyType2D.Kinematic;
+    rb.gravityScale = 0;
+    rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+    rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+}
 }
