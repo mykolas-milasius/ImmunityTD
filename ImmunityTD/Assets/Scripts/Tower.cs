@@ -47,7 +47,7 @@ public class Tower : MonoBehaviour
 
     public void DealDamage(GameObject enemy)
     {
-        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+        Enemy enemyHealth = enemy.GetComponent<Enemy>();
         if (enemyHealth != null)
         {
             enemyHealth.TakeDamage(this.damage);

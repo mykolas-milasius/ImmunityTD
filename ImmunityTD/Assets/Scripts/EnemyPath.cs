@@ -6,12 +6,17 @@ public class EnemyPath : MonoBehaviour
 {
     public Transform[] waypoints;
     private int currentWaypointIndex = 0;
-    public float speed = 1f; // Speed in Unity units per second
+    private float speed = 1f; // Speed in Unity units per second
     public GameObject gameOverText;
 
     void Update()
     {
         MoveAlongPath();
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
     }
 
     void MoveAlongPath()
