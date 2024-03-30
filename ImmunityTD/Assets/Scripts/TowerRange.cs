@@ -10,7 +10,7 @@ public class TowerRange : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy entered range: " + other.name);
+            // Debug.Log("Enemy entered range: " + other.name);
             parentTower.EnemyEnteredRange(other.gameObject);
         }
     }
@@ -19,7 +19,7 @@ public class TowerRange : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy exited range: " + other.name);
+            // Debug.Log("Enemy exited range: " + other.name);
             parentTower.EnemyExitedRange(other.gameObject);
         }
     }

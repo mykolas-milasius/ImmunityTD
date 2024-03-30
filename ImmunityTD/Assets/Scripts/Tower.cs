@@ -7,7 +7,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     public float damage;
-    public float attackSpeed;
+    public float attackSpeed; // attacks per second
     public float range;
     public float startPrice;
 
@@ -17,6 +17,7 @@ public class Tower : MonoBehaviour
     public GameObject rangePreview;
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
+    private float attackCooldown;
 
     public void Start()
     {
@@ -24,10 +25,15 @@ public class Tower : MonoBehaviour
         attackSpeedText.text = attackSpeed.ToString();
         rangeText.text = range.ToString();
         UpdateRange();
+        attackCooldown = 1f / attackSpeed;
     }
 
     public void Update(){
-        if (enemiesInRange.Count > 0) {
+        attackCooldown -= Time.deltaTime;
+
+        if (attackCooldown <= 0f && enemiesInRange.Count > 0)
+        {
+            attackCooldown = 1f / attackSpeed;
             DealDamage(enemiesInRange[0]);
         }
     }

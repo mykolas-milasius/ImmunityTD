@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
-    public GameObject towerSelectionCanvas; // Reference to the tower selection canvas
+    public GameObject towerSelectionCanvas;
     public bool clicked = false;
 
     public void OnMouseDown()
@@ -12,6 +12,7 @@ public class Slot : MonoBehaviour
         InputHandler.prevSlot = this;
         clicked = !clicked;
         ChangeColor();
+        towerSelectionCanvas.SetActive(true);
     }
     public void ChangeColor()
     {

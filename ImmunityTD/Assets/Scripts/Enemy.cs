@@ -1,11 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
     public float maxHealth = 100;
-    public float scoreWhenDied = 10;
+    public float coinsWhenDied = 10;
     public float speed = 2;
     public RectTransform healthBarForeground;
+
     private float originalHealthBarWidth;
     private float currentHealth;
 
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        Player.coins += coinsWhenDied;
         Destroy(gameObject);
     }
 
@@ -41,16 +44,20 @@ public class Enemy : MonoBehaviour
     }
 
     private void SetupRigidbody()
-{
-    Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-    if (rb == null)
     {
-        rb = gameObject.AddComponent<Rigidbody2D>();
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody2D>();
+        }
+        
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 0;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
-    
-    rb.bodyType = RigidbodyType2D.Kinematic;
-    rb.gravityScale = 0;
-    rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-    rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-}
+
+    private void AddCoins(){
+        
+    }
 }

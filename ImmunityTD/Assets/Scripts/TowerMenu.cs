@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,11 @@ public class TowerMenu : MonoBehaviour
 {
     public GameObject towerMenuCanvas;
     public GameObject towerRangePreview;
+    public SpriteRenderer rangeRenderer;
     public Canvas purchaseMenu;
     public static Slot currentSlot;
     private bool state = false;
+
 
     public void OnMouseDown()
     {
@@ -19,13 +22,13 @@ public class TowerMenu : MonoBehaviour
             if (!state)
             {
                 towerMenuCanvas.SetActive(true);
-                towerRangePreview.SetActive(true);
+                rangeRenderer.enabled = true;
                 state = true;
             }
             else if (state)
             {
                 towerMenuCanvas.SetActive(false);
-                towerRangePreview.SetActive(false);
+                rangeRenderer.enabled = false;
                 state = false;
             }
         }

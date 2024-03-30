@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerMenuCanvas: {fileID: 7546540491023799553}
   towerRangePreview: {fileID: 2507024361622737040}
+  rangeRenderer: {fileID: 5786678823805902267}
   purchaseMenu: {fileID: 0}
 --- !u!114 &-5957409607184458662
 MonoBehaviour:
@@ -161,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdab0b36bef419246ba56596eb0e471b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackSpeed: 0.95
+  damage: 10
+  attackSpeed: 2
   range: 32
   startPrice: 30
   damageText: {fileID: 7478336870569488499}
@@ -248,6 +249,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8660268253172249863, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
   m_PrefabInstance: {fileID: 6549862545701381527}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &5786678823805902267 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 768885128915286060, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+  m_PrefabInstance: {fileID: 6549862545701381527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6716874189041271482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302,7 +308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3858903093862782907, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4657441171402928171, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
       propertyPath: m_AnchoredPosition.x

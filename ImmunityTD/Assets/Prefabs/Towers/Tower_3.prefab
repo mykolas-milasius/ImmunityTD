@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerMenuCanvas: {fileID: 847569488295683204}
   towerRangePreview: {fileID: 8475149508159591956}
+  rangeRenderer: {fileID: 511461438327495487}
   purchaseMenu: {fileID: 0}
 --- !u!114 &990659629303972133
 MonoBehaviour:
@@ -161,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdab0b36bef419246ba56596eb0e471b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackSpeed: 1.42
+  damage: 30
+  attackSpeed: 4
   range: 43
   startPrice: 35
   damageText: {fileID: 338327018234020342}
@@ -181,9 +182,17 @@ PrefabInstance:
       propertyPath: parentTower
       value: 
       objectReference: {fileID: 990659629303972133}
+    - target: {fileID: 768885128915286060, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8660268253172249863, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
       propertyPath: m_Name
       value: RangePreview
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660268253172249863, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8830166544117391900, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,6 +239,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+--- !u!212 &511461438327495487 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 768885128915286060, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+  m_PrefabInstance: {fileID: 987048650377093907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8475149508159591956 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8660268253172249863, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
