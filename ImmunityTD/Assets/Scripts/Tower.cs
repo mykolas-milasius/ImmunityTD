@@ -14,6 +14,8 @@ public class Tower : MonoBehaviour
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI attackSpeedText;
     public TextMeshProUGUI rangeText;
+    public GameObject rangePreview;
+
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
     public void Start()
@@ -21,6 +23,7 @@ public class Tower : MonoBehaviour
         damageText.text = damage.ToString();
         attackSpeedText.text = attackSpeed.ToString();
         rangeText.text = range.ToString();
+        UpdateRange();
     }
 
     public void Update(){
@@ -29,20 +32,10 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            enemiesInRange.Add(other.gameObject);
-        }
-    }
+    private void UpdateRange(){
+        float diameter = range / 100;
+        rangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            enemiesInRange.Remove(other.gameObject);
-        }
     }
 
     public void DealDamage(GameObject enemy)
@@ -52,5 +45,16 @@ public class Tower : MonoBehaviour
         {
             enemyHealth.TakeDamage(this.damage);
         }
+    }
+
+    public void EnemyEnteredRange(GameObject enemy)
+    {
+        enemiesInRange.Add(enemy);
+        DealDamage(enemy);
+    }
+
+    public void EnemyExitedRange(GameObject enemy)
+    {
+        enemiesInRange.Remove(enemy);
     }
 }

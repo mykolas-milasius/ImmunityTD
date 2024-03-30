@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log(this + "took damage");
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthBar();

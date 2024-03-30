@@ -5671,6 +5671,7 @@ MonoBehaviour:
   damageText: {fileID: 4251189965321328475}
   attackSpeedText: {fileID: 5434191001303795446}
   rangeText: {fileID: 2868260440135561441}
+  rangePreview: {fileID: 0}
 --- !u!1 &1704630928
 GameObject:
   m_ObjectHideFlags: 0
@@ -5924,6 +5925,7 @@ MonoBehaviour:
   damageText: {fileID: 4251189965321328475}
   attackSpeedText: {fileID: 5434191001303795446}
   rangeText: {fileID: 2868260440135561441}
+  rangePreview: {fileID: 0}
 --- !u!1 &1713673178
 GameObject:
   m_ObjectHideFlags: 0
@@ -6311,6 +6313,7 @@ MonoBehaviour:
   damageText: {fileID: 4251189965321328475}
   attackSpeedText: {fileID: 5434191001303795446}
   rangeText: {fileID: 2868260440135561441}
+  rangePreview: {fileID: 0}
 --- !u!224 &1725016137
 RectTransform:
   m_ObjectHideFlags: 0
