@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerMenu : MonoBehaviour
 {
     public GameObject towerMenuCanvas;
+    public GameObject towerRangePreview;
     public Canvas purchaseMenu;
     public static Slot currentSlot;
     private bool state = false;
@@ -18,11 +19,13 @@ public class TowerMenu : MonoBehaviour
             if (!state)
             {
                 towerMenuCanvas.SetActive(true);
+                towerRangePreview.SetActive(true);
                 state = true;
             }
             else if (state)
             {
                 towerMenuCanvas.SetActive(false);
+                towerRangePreview.SetActive(false);
                 state = false;
             }
         }
