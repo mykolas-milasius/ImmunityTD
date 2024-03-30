@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     public float scoreWhenDied = 10;
     public float speed = 2;
     private float currentHealth;
-
+    
     void Start()
     {
         currentHealth = maxHealth;
@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
 
         if (currentHealth <= 0)
         {
@@ -22,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         Destroy(gameObject);
     }
