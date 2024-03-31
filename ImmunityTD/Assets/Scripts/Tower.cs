@@ -102,7 +102,6 @@ public class Tower : MonoBehaviour
     public void EnemyEnteredRange(GameObject enemy)
     {
         enemiesInRange.Add(enemy);
-        DealDamage(enemy);
     }
 
     public void EnemyExitedRange(GameObject enemy)
