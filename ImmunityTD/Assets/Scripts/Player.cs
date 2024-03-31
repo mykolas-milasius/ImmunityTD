@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         if (timer < generatorDelay)
         {
             timer += Time.deltaTime;
-            enemySpawnDelayText.text = String.Format("Enemies spawn in: {0:3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
+            enemySpawnDelayText.text = String.Format("Enemies spawn in: {0,3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
         }
         else {
             enemyGenerator.SetActive(true);
