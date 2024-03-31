@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform target;
+    private GameObject target;
+    public Tower tower;
     public float speed = 70f;
     public float damage = 10f;
     public float lifeTime = 2f;
 
-    public void Seek(Transform _target)
+    public void Seek(GameObject _target)
     {
         target = _target;
     }
@@ -27,7 +28,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        Vector3 direction = target.position - transform.position;
+        Vector3 direction = target.transform.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         if (direction.magnitude <= distanceThisFrame)
@@ -41,9 +42,7 @@ public class Bullet : MonoBehaviour
 
     void HitTarget()
     {
-        // Deal damage to the enemy
-        // You can implement damage logic here or in another script
-
+        tower.DealDamage(target);
         Destroy(gameObject);
     }
 }

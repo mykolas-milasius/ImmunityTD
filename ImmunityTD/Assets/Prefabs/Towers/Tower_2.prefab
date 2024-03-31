@@ -166,6 +166,7 @@ MonoBehaviour:
   attackSpeed: 3
   range: 40
   startPrice: 40
+  bulletPrefab: {fileID: 4332166051596580893, guid: 12ff0628db41d8047ae2878420b1fbf4, type: 3}
   damageText: {fileID: 4923161043509029696}
   attackSpeedText: {fileID: 7957819977033937295}
   rangeText: {fileID: 7559885118743696884}
