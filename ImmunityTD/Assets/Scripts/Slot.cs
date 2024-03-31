@@ -4,6 +4,12 @@ public class Slot : MonoBehaviour
 {
     public GameObject towerSelectionCanvas;
     public bool clicked = false;
+    public SpriteRenderer spriteRenderer;
+
+    public void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void OnMouseDown()
     {
@@ -16,7 +22,7 @@ public class Slot : MonoBehaviour
     }
     public void ChangeColor()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        
         if (spriteRenderer.color == Color.green)
         {
             spriteRenderer.color = Color.white;

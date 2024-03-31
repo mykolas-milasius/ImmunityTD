@@ -39,7 +39,7 @@ public class TowerMenu : MonoBehaviour
     }
     public void RemoveTower()
     {
-        Destroy(gameObject);
         currentSlot.gameObject.SetActive(true);
+        Destroy(gameObject);
     }
 }
