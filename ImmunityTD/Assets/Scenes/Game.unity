@@ -2720,7 +2720,7 @@ GameObject:
   - component: {fileID: 810241319}
   - component: {fileID: 810241318}
   m_Layer: 7
-  m_Name: Currency
+  m_Name: Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
