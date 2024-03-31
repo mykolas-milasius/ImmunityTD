@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
         coinsText.text = coins.ToString();
         scoreText.text = score.ToString();
         killsText.text = kills.ToString();
-
         // pakeisti kad tikrintu tik pradzioj ir nevalgytu resursu
         if (timer < generatorDelay)
         {
