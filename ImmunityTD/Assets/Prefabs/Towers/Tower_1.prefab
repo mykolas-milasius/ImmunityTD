@@ -166,6 +166,7 @@ MonoBehaviour:
   attackSpeed: 2
   range: 32
   startPrice: 30
+  bulletPrefab: {fileID: 4332166051596580893, guid: 12ff0628db41d8047ae2878420b1fbf4, type: 3}
   damageText: {fileID: 6936671933349521179}
   attackSpeedText: {fileID: 5366405809725029844}
   rangeText: {fileID: 5547464747146221999}
@@ -341,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3858903093862782907, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4361442688322709785, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
       propertyPath: m_Enabled

@@ -11,6 +11,7 @@ public class Tower : MonoBehaviour
     public float attackSpeed; // attacks per second
     public float range;
     public float startPrice;
+    public GameObject bulletPrefab;
 
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI attackSpeedText;
@@ -37,42 +38,58 @@ public class Tower : MonoBehaviour
         upgradeDamage = (float)Math.Round(damage * 1.2, 1);
         upgradeAttackSpeed = (float)Math.Round(attackSpeed * 1.2, 1);
         upgradeRange = (float)Math.Round(range * 1.2, 1);
-        button.interactable = false;
+        if (button != null)
+        {
+            button.interactable = false;
+        }
 
         UpdateRange();
         attackCooldown = 1f / attackSpeed;
     }
 
-    public void Update(){
+    public void Update()
+    {
 
         damageText.text = damage.ToString();
         attackSpeedText.text = attackSpeed.ToString();
         rangeText.text = range.ToString();
-
-        upgradeDamageText.text = upgradeDamage.ToString();
-        upgradeAttackSpeedText.text = upgradeAttackSpeed.ToString();
-        upgradeRangeText.text = upgradeRange.ToString();
-
-        upgradePriceText.text = upgradePrice.ToString();
-
-        attackCooldown -= Time.deltaTime;
-
-        if (attackCooldown <= 0f && enemiesInRange.Count > 0)
+        if (upgradeDamageText != null)
         {
-            attackCooldown = 1f / attackSpeed;
-            DealDamage(enemiesInRange[0]);
+            upgradeDamageText.text = upgradeDamage.ToString();
+            upgradeAttackSpeedText.text = upgradeAttackSpeed.ToString();
+            upgradeRangeText.text = upgradeRange.ToString();
+            upgradePriceText.text = upgradePrice.ToString();
         }
-        if(Player.coins >= upgradePrice)
+        if (enemiesInRange.Count != 0)
         {
-            button.interactable = true;
+            // Rotate tower to face the enemy
+            //Vector3 direction = enemiesInRange[0].transform.position - transform.position;
+            //Quaternion lookRotation = Quaternion.LookRotation(direction);
+            //transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+
+            // Fire bullets
+            attackCooldown -= Time.deltaTime;
+            if (attackCooldown <= 0f)
+            {
+                Shoot();
+                attackCooldown = 1f / attackSpeed;
+            }
         }
-        else
+        if (button != null)
         {
-            button.interactable = false;
+            if (Player.coins >= upgradePrice)
+            {
+                button.interactable = true;
+            }
+            else
+            {
+                button.interactable = false;
+            }
         }
+        
     }
     public void Upgrade()
-    {  
+    {
         damage = (float)(damage * 1.2);
         attackSpeed = (float)(attackSpeed * 1.2);
         range = (float)(range * 1.2);
@@ -84,10 +101,22 @@ public class Tower : MonoBehaviour
         upgradeRange = (float)Math.Round(range * 1.2, 1);
     }
 
-    private void UpdateRange(){
+    private void UpdateRange()
+    {
         float diameter = range / 100;
         rangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
 
+    }
+    void Shoot()
+    {
+        GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        
+        if (bullet != null)
+        {
+            bullet.tower = this;
+            bullet.Seek(enemiesInRange[0]);
+        }
     }
 
     public void DealDamage(GameObject enemy)
