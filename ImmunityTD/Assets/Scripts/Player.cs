@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
     
     public void FixedUpdate()
     {
+        coinsText.text = coins.ToString();
+        scoreText.text = score.ToString();
+        killsText.text = kills.ToString();
+
         // pakeisti kad tikrintu tik pradzioj ir nevalgytu resursu
         if (timer < generatorDelay)
         {
@@ -30,10 +34,6 @@ public class Player : MonoBehaviour
             enemyGenerator.SetActive(true);
             enemySpawnDelayText.enabled = false;
         }
-
-        coinsText.text = coins.ToString();
-        scoreText.text = score.ToString();
-        killsText.text = kills.ToString();
     }
 
     public static void AddCoins(float coinsToAdd)
