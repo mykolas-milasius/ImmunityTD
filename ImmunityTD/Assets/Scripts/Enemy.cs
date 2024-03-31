@@ -4,7 +4,7 @@ using TMPro;
 public class Enemy : MonoBehaviour
 {
     public float maxHealth = 100;
-    public float coinsWhenDied = 10;
+    public float coinsWhenDied = 1;
     public float speed = 2;
     public RectTransform healthBarForeground;
 
@@ -20,9 +20,10 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(this + "took damage");
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
+
+        Debug.Log(this.name + " took " + damage + " damage. Health left: " + currentHealth);
         UpdateHealthBar();
 
         if (currentHealth <= 0)
@@ -33,7 +34,9 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        Player.coins += coinsWhenDied;
+        Player.AddCoins(coinsWhenDied);
+        Player.AddKill();
+        Player.AddScore(coinsWhenDied);
         Destroy(gameObject);
     }
 
@@ -55,9 +58,5 @@ public class Enemy : MonoBehaviour
         rb.gravityScale = 0;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-    }
-
-    private void AddCoins(){
-        
     }
 }
