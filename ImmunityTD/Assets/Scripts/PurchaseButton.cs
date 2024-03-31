@@ -16,13 +16,16 @@ public class PurchaseButton : MonoBehaviour
 
     public void Update()
     {
-        if (Player.coins >= towerButton.price)
+        if (towerButton != null)
         {
-            button.interactable = true;
-        }
-        else
-        {
-            button.interactable = false;
+            if (Player.coins >= towerButton.price)
+            {
+                button.interactable = true;
+            }
+            else
+            {
+                button.interactable = false;
+            }
         }
     }
     public void PurchaseOnClick()
