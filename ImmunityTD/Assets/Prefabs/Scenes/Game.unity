@@ -6501,6 +6501,7 @@ MonoBehaviour:
   attackSpeed: 0.95
   range: 32
   startPrice: 30
+  bulletPrefab: {fileID: 0}
   damageText: {fileID: 4251189965321328475}
   attackSpeedText: {fileID: 5434191001303795446}
   rangeText: {fileID: 2868260440135561441}
@@ -6760,6 +6761,7 @@ MonoBehaviour:
   attackSpeed: 0.7
   range: 40
   startPrice: 40
+  bulletPrefab: {fileID: 0}
   damageText: {fileID: 4251189965321328475}
   attackSpeedText: {fileID: 5434191001303795446}
   rangeText: {fileID: 2868260440135561441}
@@ -7153,6 +7155,7 @@ MonoBehaviour:
   attackSpeed: 1.42
   range: 43
   startPrice: 35
+  bulletPrefab: {fileID: 0}
   damageText: {fileID: 4251189965321328475}
   attackSpeedText: {fileID: 5434191001303795446}
   rangeText: {fileID: 2868260440135561441}

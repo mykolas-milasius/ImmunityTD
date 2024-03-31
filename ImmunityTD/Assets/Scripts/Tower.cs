@@ -11,6 +11,7 @@ public class Tower : MonoBehaviour
     public float attackSpeed; // attacks per second
     public float range;
     public float startPrice;
+    public GameObject bulletPrefab;
 
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI attackSpeedText;
@@ -89,6 +90,16 @@ public class Tower : MonoBehaviour
         rangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
 
     }
+    void Shoot()
+    {
+        GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.Seek(enemiesInRange[0].transform);
+        }
+    }
 
     public void DealDamage(GameObject enemy)
     {
@@ -102,7 +113,6 @@ public class Tower : MonoBehaviour
     public void EnemyEnteredRange(GameObject enemy)
     {
         enemiesInRange.Add(enemy);
-        DealDamage(enemy);
     }
 
     public void EnemyExitedRange(GameObject enemy)
