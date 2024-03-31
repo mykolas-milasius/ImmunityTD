@@ -10,16 +10,18 @@ public class Enemy : MonoBehaviour
 
     private float originalHealthBarWidth;
     private float currentHealth;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
         currentHealth = maxHealth;
         originalHealthBarWidth = healthBarForeground.sizeDelta.x;
-        SetupRigidbody();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(float damage)
     {
+        DimSprite();
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
@@ -46,17 +48,25 @@ public class Enemy : MonoBehaviour
         healthBarForeground.sizeDelta = new Vector2(originalHealthBarWidth * healthRatio, healthBarForeground.sizeDelta.y);
     }
 
-    private void SetupRigidbody()
+    void DimSprite()
     {
-        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-        if (rb == null)
+        if (spriteRenderer != null)
         {
-            rb = gameObject.AddComponent<Rigidbody2D>();
+            Color newColor = spriteRenderer.color;
+            newColor.r = 0.8f;
+            spriteRenderer.color = newColor;
+
+            Invoke(nameof(ResetSpriteColor), 0.05f);
         }
-        
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.gravityScale = 0;
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+    }
+
+    void ResetSpriteColor()
+    {
+        if (spriteRenderer != null)
+        {
+            Color originalColor = spriteRenderer.color;
+            originalColor.r = 1f;
+            spriteRenderer.color = originalColor;
+        }
     }
 }

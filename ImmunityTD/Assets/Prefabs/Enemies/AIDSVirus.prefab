@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  scoreWhenDied: 10
+  coinsWhenDied: 1
   speed: 2
   healthBarForeground: {fileID: 1721387245084656724}
 --- !u!50 &9137335024313244777
