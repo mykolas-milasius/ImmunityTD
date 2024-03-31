@@ -78,7 +78,7 @@ public class Tower : MonoBehaviour
         range = (float)(range * 1.2);
         Player.coins -= upgradePrice;
 
-        upgradePrice = (float)Math.Round(startPrice * 2, 1);
+        upgradePrice = (float)Math.Round(upgradePrice * 2, 1);
         upgradeDamage = (float)Math.Round(damage * 1.2, 1);
         upgradeAttackSpeed = (float)Math.Round(attackSpeed * 1.2, 1);
         upgradeRange = (float)Math.Round(range * 1.2, 1);
