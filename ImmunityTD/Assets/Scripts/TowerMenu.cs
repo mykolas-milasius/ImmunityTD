@@ -1,14 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerMenu : MonoBehaviour
 {
-    public GameObject towerMenuCanvas; // Reference to the tower menu canvas
+    public GameObject towerMenuCanvas;
+    public GameObject towerRangePreview;
+    public SpriteRenderer rangeRenderer;
+    public Canvas purchaseMenu;
     public static Slot currentSlot;
     private bool state = false;
 
-    private void OnMouseDown()
+
+    public void OnMouseDown()
     {
         InputHandler.tower = this;
         // Check if the tower menu canvas is assigned
@@ -17,11 +22,13 @@ public class TowerMenu : MonoBehaviour
             if (!state)
             {
                 towerMenuCanvas.SetActive(true);
+                rangeRenderer.enabled = true;
                 state = true;
             }
             else if (state)
             {
                 towerMenuCanvas.SetActive(false);
+                rangeRenderer.enabled = false;
                 state = false;
             }
         }
@@ -32,7 +39,7 @@ public class TowerMenu : MonoBehaviour
     }
     public void RemoveTower()
     {
-        Destroy(gameObject);
         currentSlot.gameObject.SetActive(true);
+        Destroy(gameObject);
     }
 }

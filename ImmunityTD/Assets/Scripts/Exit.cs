@@ -16,7 +16,7 @@ public class Exit : MonoBehaviour
         
     }
 
-    [SerializeField] GameObject quitPanel;
+    [SerializeField] public GameObject quitPanel;
 
     public void openConfirmationMenu()
     {

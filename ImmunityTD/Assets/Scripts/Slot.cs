@@ -2,17 +2,27 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
-    public GameObject towerSelectionCanvas; // Reference to the tower selection canvas
+    public GameObject towerSelectionCanvas;
+    public bool clicked = false;
+    public SpriteRenderer spriteRenderer;
 
-    private void OnMouseDown()
+    public void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void OnMouseDown()
     {
         TowerSelectionButton.currentSlot = this;
+        PurchaseButton.currentSlot = this;
         InputHandler.prevSlot = this;
+        clicked = !clicked;
         ChangeColor();
+        towerSelectionCanvas.SetActive(true);
     }
     public void ChangeColor()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        
         if (spriteRenderer.color == Color.green)
         {
             spriteRenderer.color = Color.white;
