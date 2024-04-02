@@ -3,6 +3,7 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
+    public string name;
     public float maxHealth = 100;
     public float coinsWhenDied = 1;
     public float speed = 2;
