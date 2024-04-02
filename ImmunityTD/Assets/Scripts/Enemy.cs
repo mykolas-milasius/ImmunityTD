@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public float coinsWhenDied = 1;
     public float speed = 2;
     public RectTransform healthBarForeground;
+    public TextMeshProUGUI damageText;
 
     private float originalHealthBarWidth;
     private float currentHealth;
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
 
         Debug.Log(this.name + " took " + damage + " damage. Health left: " + currentHealth);
         UpdateHealthBar();
+        DisplayDamage(damage);
 
         if (currentHealth <= 0)
         {
@@ -68,5 +70,17 @@ public class Enemy : MonoBehaviour
             originalColor.r = 1f;
             spriteRenderer.color = originalColor;
         }
+    }
+
+    void DisplayDamage(float damage) 
+    {
+        damageText.enabled = true;
+        damageText.text = "-" + damage.ToString();
+        Invoke(nameof(DisableDamageText), 0.5f);
+    }
+
+    void DisableDamageText()
+    {
+        damageText.enabled = false;
     }
 }
