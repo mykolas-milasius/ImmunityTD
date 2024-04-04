@@ -9,7 +9,7 @@ public class EnemyPath : MonoBehaviour
     private float speed = 1f; // Speed in Unity units per second
     public GameObject gameOverText;
 
-    void Update()
+    public void Update()
     {
         MoveAlongPath();
     }

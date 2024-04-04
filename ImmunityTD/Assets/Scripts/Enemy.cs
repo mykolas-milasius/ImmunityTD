@@ -22,6 +22,11 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (damage <= 0)
+        {
+            return;
+        }
+        
         DimSprite();
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
