@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public static int score = 0;
     public static int kills = 0;
     private float timer = 0f;
-    private float generatorDelay = 10f;
+    public float generatorDelay = 10f;
 
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI scoreText;
