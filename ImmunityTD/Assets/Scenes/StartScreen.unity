@@ -2576,6 +2576,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2147214449}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &361901403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5752,6 +5764,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2147214449}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1111667504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7156,7 +7180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1406194646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11901,7 +11925,7 @@ MonoBehaviour:
   SFXSource: {fileID: 803499851}
   background: {fileID: 8300000, guid: 25342e84b4c30504191521f1abb329f0, type: 3}
   mainmenu: {fileID: 8300000, guid: f688480af668aad43bff3ef3161f55ad, type: 3}
-  buttonClick: {fileID: 8300000, guid: 6817515d829bd384d83765070260e355, type: 3}
+  buttonClick: {fileID: 8300000, guid: 1b398a9852be7954282fefd378a688c9, type: 3}
 --- !u!4 &2147214450
 Transform:
   m_ObjectHideFlags: 0
