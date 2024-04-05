@@ -589,6 +589,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &224218353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2069,7 +2081,7 @@ MonoBehaviour:
   SFXSource: {fileID: 691722208}
   background: {fileID: 8300000, guid: 25342e84b4c30504191521f1abb329f0, type: 3}
   mainmenu: {fileID: 8300000, guid: f688480af668aad43bff3ef3161f55ad, type: 3}
-  buttonClick: {fileID: 0}
+  buttonClick: {fileID: 8300000, guid: 1b398a9852be7954282fefd378a688c9, type: 3}
 --- !u!4 &552397403
 Transform:
   m_ObjectHideFlags: 0
@@ -2882,6 +2894,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &795871942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3290,7 +3314,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 875898449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &875898449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3779,7 +3815,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 893449684}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &893449684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4753,6 +4801,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1027736871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5192,6 +5252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03446adf638569a4480613268661db45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generatorDelay: 10
   coinsText: {fileID: 810241318}
   scoreText: {fileID: 1860163357}
   killsText: {fileID: 1052766689}
@@ -5651,6 +5712,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1425327831}
         m_TargetAssemblyTypeName: PauseMenu, Scripts
         m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8555,6 +8628,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1994470792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8712,6 +8797,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2037279966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8845,7 +8942,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2067715617}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2067715617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10923,6 +11032,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 552397402}
+        m_TargetAssemblyTypeName: AudioManager, Scripts
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
