@@ -29,7 +29,7 @@ public class EnemyGenerator : MonoBehaviour
         spawnInterval = Random.Range(0.1f, 3f);
     }
 
-    void SpawnEnemy(){
+    public void SpawnEnemy(){
         GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         EnemyPath enemyPathScript = newEnemy.GetComponent<EnemyPath>();
