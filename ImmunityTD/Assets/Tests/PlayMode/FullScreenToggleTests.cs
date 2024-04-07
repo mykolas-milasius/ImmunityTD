@@ -24,17 +24,65 @@ public class FullScreenToggleTests
     [Test]
     public void ToggleFullScreen_TogglesScreenState()
     {
-        // Capture the initial full screen state
-        bool initialState = Screen.fullScreen;
+        var mockScreenService = new MockScreenService
+        {
+            IsFullScreen = false // Initial state
+        };
 
-        // Call the ToggleFullScreen method
+        fullScreenToggle.ScreenService = mockScreenService;
+
         fullScreenToggle.ToggleFullScreen();
 
-        // Check if the full screen state has been toggled
-        Assert.AreNotEqual(initialState, Screen.fullScreen, "FullScreen state should be toggled.");
+        Assert.IsTrue(mockScreenService.IsFullScreen, "FullScreen state should be toggled to true.");
 
-        // Optionally, you can toggle back to ensure it's reversible, but it might affect your test environment
         fullScreenToggle.ToggleFullScreen();
-        Assert.AreEqual(initialState, Screen.fullScreen, "Toggling full screen twice should revert to the original state.");
+
+        Assert.IsFalse(mockScreenService.IsFullScreen, "FullScreen state should be toggled back to false.");
+    }
+}
+public class MockScreenService : IScreenService
+{
+    public bool IsFullScreen { get; set; }
+}
+
+public class ScreenServiceTests
+{
+    private ScreenService screenService;
+
+    [SetUp]
+    public void SetUp()
+    {
+        screenService = new ScreenService();
+    }
+
+    [Test]
+    public void SetIsFullScreen_UpdatesScreenFullScreenState()
+    {
+        // Initially set to the opposite of the current state to ensure the test is valid
+        screenService.IsFullScreen = !Screen.fullScreen;
+
+        // Assert that setting IsFullScreen updates Screen.fullScreen
+        Assert.AreEqual(screenService.IsFullScreen, Screen.fullScreen);
+
+        // Optionally, reset the state to avoid changing the development environment
+        screenService.IsFullScreen = !screenService.IsFullScreen;
+    }
+
+    [Test]
+    public void GetIsFullScreen_ReturnsCurrentScreenFullScreenState()
+    {
+        // Skip this test if running in an environment that doesn't support full-screen changes
+        if (Application.isBatchMode || Application.isEditor)
+        {
+            Assert.Inconclusive("Skipping full-screen test in the current environment.");
+            return;
+        }
+
+        // Proceed with the test if the environment supports full-screen changes
+        Screen.fullScreen = true;
+        Assert.IsTrue(screenService.IsFullScreen);
+
+        Screen.fullScreen = false;
+        Assert.IsFalse(screenService.IsFullScreen);
     }
 }
