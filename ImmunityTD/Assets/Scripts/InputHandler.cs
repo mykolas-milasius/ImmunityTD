@@ -8,6 +8,7 @@ public class InputHandler : MonoBehaviour
 
     public static Slot prevSlot;
     public static TowerMenu tower;
+    public static TowerSelectionButton towerSelectionButton;
 
     private void Awake()
     {

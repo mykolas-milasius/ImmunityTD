@@ -32,8 +32,16 @@ public class Tower : MonoBehaviour
     private float upgradeRange;
     private float upgradePrice;
 
+    public bool entered;
+    public bool exited;
+
     public void Start()
     {
+        if (rangePreview == null || bulletPrefab == null)
+        {
+            Debug.LogError("Missing references in Tower script. Ensure all required fields are assigned.");
+            return;
+        }
         upgradePrice = (float)Math.Round(startPrice * 2, 1);
         upgradeDamage = (float)Math.Round(damage * 1.2, 1);
         upgradeAttackSpeed = (float)Math.Round(attackSpeed * 1.2, 1);
@@ -50,9 +58,17 @@ public class Tower : MonoBehaviour
     public void Update()
     {
 
-        damageText.text = damage.ToString();
-        attackSpeedText.text = attackSpeed.ToString();
-        rangeText.text = range.ToString();
+        if (damageText != null)
+        {
+            damageText.text = damage.ToString();
+            attackSpeedText.text = attackSpeed.ToString();
+            rangeText.text = range.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("UI text fields not assigned in Tower script.");
+        }
+
         if (upgradeDamageText != null)
         {
             upgradeDamageText.text = upgradeDamage.ToString();
@@ -60,14 +76,13 @@ public class Tower : MonoBehaviour
             upgradeRangeText.text = upgradeRange.ToString();
             upgradePriceText.text = upgradePrice.ToString();
         }
-        if (enemiesInRange.Count != 0)
+        else
         {
-            // Rotate tower to face the enemy
-            //Vector3 direction = enemiesInRange[0].transform.position - transform.position;
-            //Quaternion lookRotation = Quaternion.LookRotation(direction);
-            //transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+            Debug.LogWarning("Upgrade UI elements not assigned in Tower script.");
+        }
 
-            // Fire bullets
+        if (enemiesInRange.Count != 0 && button != null)
+        {
             attackCooldown -= Time.deltaTime;
             if (attackCooldown <= 0f)
             {
@@ -111,11 +126,15 @@ public class Tower : MonoBehaviour
     {
         GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
-        
+
         if (bullet != null)
         {
             bullet.tower = this;
             bullet.Seek(enemiesInRange[0]);
+        }
+        else
+        {
+            Debug.LogWarning("Bullet prefab does not contain Bullet component.");
         }
     }
 
@@ -131,10 +150,14 @@ public class Tower : MonoBehaviour
     public void EnemyEnteredRange(GameObject enemy)
     {
         enemiesInRange.Add(enemy);
+        entered = true;
+        exited = false;
     }
 
     public void EnemyExitedRange(GameObject enemy)
     {
         enemiesInRange.Remove(enemy);
+        entered = false;
+        exited = true;
     }
 }
