@@ -6,11 +6,25 @@ using System.Collections;
 
 public class LoadSceneTests
 {
+    private GameObject gameObject;
+    private LoadScene loadScene;
+
+    [SetUp]
+    public void SetUp()
+    {
+        gameObject = new GameObject();
+        loadScene = gameObject.AddComponent<LoadScene>();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        Object.Destroy(gameObject);
+    }
+
     [UnityTest]
     public IEnumerator LoadScene_LoadsCorrectScene()
     {
-        GameObject gameObject = new GameObject();
-        LoadScene loadScene = gameObject.AddComponent<LoadScene>();
         string sceneName = "ExampleScene";
 
         loadScene.Load(sceneName);
