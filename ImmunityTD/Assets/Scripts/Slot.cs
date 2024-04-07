@@ -8,8 +8,13 @@ public class Slot : MonoBehaviour
 
     public void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // Ensure spriteRenderer is assigned
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
     }
+
 
     public void OnMouseDown()
     {
