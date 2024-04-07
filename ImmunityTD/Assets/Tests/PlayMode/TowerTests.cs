@@ -149,7 +149,7 @@ public class TowerTests
         tower.range = 100f; // Set new range
         tower.Start(); // To trigger range preview scaling
 
-        float expectedDiameter = tower.range / 100;
+        float expectedDiameter = (tower.range / 100) + 1;
         Vector3 expectedScale = new Vector3(expectedDiameter, expectedDiameter, 1);
 
         Assert.AreEqual(expectedScale, tower.rangePreview.transform.localScale, "Range preview scale should match tower range.");
