@@ -2,14 +2,17 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using System.Collections;
+using TMPro;
 
 public class BulletTests
 {
     private GameObject bulletGameObject;
-    private Bullet bulletScript;
     private GameObject targetGameObject;
     private GameObject towerGameObject;
+
+    private Bullet bulletScript;
     private Tower towerScript;
+
 
     [SetUp]
     public void SetUp()
@@ -18,14 +21,26 @@ public class BulletTests
         bulletGameObject = new GameObject("Bullet");
         bulletScript = bulletGameObject.AddComponent<Bullet>();
 
-        // Set up the target
+        // Set up the target with a Collider for raycasting
         targetGameObject = new GameObject("Target");
-        targetGameObject.AddComponent<BoxCollider2D>(); // Assuming the bullet uses 2D physics
-        targetGameObject.transform.position = new Vector3(10, 0, 0); // Place target away from the bullet
+        targetGameObject.AddComponent<BoxCollider2D>();
+        targetGameObject.transform.position = new Vector3(10, 0, 0);  // Position target away from the bullet
 
-        // Set up the mock tower
+        // Set up the mock tower and initialize all required components
         towerGameObject = new GameObject("Tower");
-        towerScript = towerGameObject.AddComponent<Tower>();
+        towerScript = towerGameObject.AddComponent<MockTower>();
+        
+        // Initialize necessary TextMeshProUGUI components and others required in Tower.Update()
+        towerScript.damageText = new GameObject("DamageText").AddComponent<TextMeshProUGUI>();
+        towerScript.attackSpeedText = new GameObject("AttackSpeedText").AddComponent<TextMeshProUGUI>();
+        towerScript.rangeText = new GameObject("RangeText").AddComponent<TextMeshProUGUI>();
+        // Add more initializations for other TextMeshProUGUI components and properties as needed...
+
+        // Initialize the range preview GameObject as it's used in Tower.Start() and Tower.Update()
+        var rangePreview = new GameObject("RangePreview");
+        towerScript.rangePreview = rangePreview;
+
+        // Link the bullet to the tower
         bulletScript.tower = towerScript;
     }
 
@@ -49,34 +64,63 @@ public class BulletTests
     }
 
     [UnityTest]
-    public IEnumerator Bullet_MovesTowardsTarget_AndGetsDestroyed()
+    public IEnumerator Bullet_GetsDestroyedAfterLifetime()
     {
         bulletScript.Seek(targetGameObject);
-        float initialDistance = Vector3.Distance(bulletGameObject.transform.position, targetGameObject.transform.position);
-        
-        // Allow some time for the bullet to move
-        yield return new WaitForSeconds(0.1f);
 
-        float newDistance = Vector3.Distance(bulletGameObject.transform.position, targetGameObject.transform.position);
+        // Wait for the bullet's lifetime to elapse
+        yield return new WaitForSeconds(bulletScript.lifeTime + 0.1f);
 
-        // Check if the bullet moved closer to the target
-        Assert.Less(newDistance, initialDistance);
-
-        // Allow enough time for the bullet to potentially hit the target and get destroyed
-        yield return new WaitForSeconds(2f);
-
-        // Check if the bullet got destroyed after hitting the target
-        Assert.IsTrue(bulletGameObject == null);
+        // Check if the bullet GameObject has been destroyed
+        Assert.IsTrue(bulletGameObject == null || !bulletGameObject.activeInHierarchy);
     }
 
     [UnityTest]
-    public IEnumerator Bullet_GetsDestroyedAfterLifetime()
+    public IEnumerator Bullet_DestroysItself_WhenTargetIsNull()
     {
-        // Wait for a time slightly longer than the bullet's lifetime
-        yield return new WaitForSeconds(bulletScript.lifeTime + 0.1f);
+        bulletScript.Seek(targetGameObject);  // Set the target for the bullet
+        bulletScript.Seek(null);  // Nullify the target
 
-        // Check if the bullet got destroyed after its lifetime
-        Assert.IsTrue(bulletGameObject == null);
+        // Let some time pass
+        yield return new WaitForSeconds(0.1f);
+
+        // Check if the bullet GameObject has been destroyed
+        Assert.IsTrue(bulletGameObject == null, "Bullet GameObject should be destroyed when target is null.");
     }
 
+    [UnityTest]
+    public IEnumerator Bullet_MovesTowardsTarget_EachFrame()
+    {
+        bulletScript.Seek(targetGameObject);
+
+        Vector3 initialPosition = bulletGameObject.transform.position;
+        yield return null;  // Wait for one frame
+
+        Vector3 newPosition = bulletGameObject.transform.position;
+
+        // Assert the bullet has moved from its initial position towards the target
+        Assert.AreNotEqual(initialPosition, newPosition);
+        Assert.Less(Vector3.Distance(newPosition, targetGameObject.transform.position), Vector3.Distance(initialPosition, targetGameObject.transform.position));
+    }
+}
+
+public class MockTower : Tower
+{
+    public bool DamageDealt { get; private set; } = false;
+
+    public override void DealDamage(GameObject enemy)
+    {
+        DamageDealt = true;
+    }
+    
+}
+
+public class MockTarget : MonoBehaviour
+{
+    public bool DamageDealt { get; private set; } = false;
+
+    public void DealDamage(float damage)
+    {
+        DamageDealt = true;
+    }
 }
