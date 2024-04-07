@@ -6,7 +6,7 @@ public class TowerRange : MonoBehaviour
 {
     public Tower parentTower;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
@@ -15,7 +15,7 @@ public class TowerRange : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {

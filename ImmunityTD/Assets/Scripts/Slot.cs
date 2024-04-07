@@ -5,6 +5,7 @@ public class Slot : MonoBehaviour
     public GameObject towerSelectionCanvas;
     public bool clicked = false;
     public SpriteRenderer spriteRenderer;
+    public TowerSelectionButton towerSelectionButton;
 
     public void Start()
     {

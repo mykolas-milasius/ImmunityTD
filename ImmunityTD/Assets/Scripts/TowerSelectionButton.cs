@@ -7,12 +7,13 @@ public class TowerSelectionButton : MonoBehaviour
     public static Slot currentSlot = null;
     public Canvas purchaseMenu;
     public float price;
-    private void Start()
+    public void Start()
     {
         if (towerPrefab == null)
         {
             Debug.LogError("Tower prefab is not assigned to the tower selection button!");
         }
+        InputHandler.towerSelectionButton = this;
     }
     public void OnTowerButtonClick()
     {
@@ -36,7 +37,10 @@ public class TowerSelectionButton : MonoBehaviour
                     Debug.LogWarning("Not enough coins.");
                 }
             }
-            
+            else
+            {
+                Debug.LogWarning("Slot is not clicked.");
+            }
         }
         else
         {
