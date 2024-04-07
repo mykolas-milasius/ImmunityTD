@@ -2,11 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FullScreenToggle : MonoBehaviour
+public interface IScreenService
 {
-    public void ToggleFullScreen()
+    bool IsFullScreen { get; set; }
+}
+
+public class ScreenService : IScreenService
+{
+    public bool IsFullScreen
     {
-        Screen.fullScreen = !Screen.fullScreen;
+        get => Screen.fullScreen;
+        set => Screen.fullScreen = value;
     }
 }
 
+public class FullScreenToggle : MonoBehaviour
+{
+    public IScreenService ScreenService { get; set; } = new ScreenService();
+
+    public void ToggleFullScreen()
+    {
+        ScreenService.IsFullScreen = !ScreenService.IsFullScreen;
+    }
+}
