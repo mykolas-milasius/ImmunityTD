@@ -17,43 +17,38 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI killsText;
     public GameObject enemyGenerator;
     public TextMeshProUGUI enemySpawnDelayText;
-    private bool generatorActivated = false;
-
+    
     public void FixedUpdate()
     {
-        if (!generatorActivated)
-            {
-            if (coinsText != null)
-            {
-                coinsText.text = coins.ToString();
-            }
-            if (scoreText != null)
-            {
-                scoreText.text = score.ToString();
-            }
-            if (killsText != null)
-            {
-                killsText.text = kills.ToString();
-            }
+        if (coinsText != null)
+        {
+            coinsText.text = coins.ToString();
+        }
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString();
+        }
+        if (killsText != null)
+        {
+            killsText.text = kills.ToString();
+        }
 
-            if (timer >= generatorDelay)
+        if (timer < generatorDelay)
+        {
+            timer += Time.deltaTime;
+            if (enemySpawnDelayText != null)
             {
-                generatorActivated = true;
-                timer += Time.deltaTime;
-                if (enemySpawnDelayText != null)
-                {
-                    enemySpawnDelayText.text = String.Format("Enemies spawn in: {0,3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
-                }
+                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0,3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
             }
-            else {
-                if (enemyGenerator != null)
-                {
-                    enemyGenerator.SetActive(true);
-                }
-                if (enemySpawnDelayText != null)
-                {
-                    enemySpawnDelayText.enabled = false;
-                }
+        }
+        else {
+            if (enemyGenerator != null)
+            {
+                enemyGenerator.SetActive(true);
+            }
+            if (enemySpawnDelayText != null)
+            {
+                enemySpawnDelayText.enabled = false;
             }
         }
     }
