@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.TestTools;
 
 public class PlayerTests
 {
@@ -94,19 +95,20 @@ public class PlayerTests
         Assert.AreEqual("0", killsText.text);
     }
 
-    // Test FixedUpdate activates enemy generator after delay
-    [Test]
-    public void FixedUpdate_ActivatesEnemyGeneratorAfterDelay()
+    [UnityTest]
+    public IEnumerator FixedUpdate_ActivatesEnemyGeneratorAfterDelay()
     {
         // Simulate time until the generator should be activated
         float simulateTime = player.generatorDelay + 1f;
         for (float t = 0; t < simulateTime; t += Time.fixedDeltaTime)
         {
-            player.FixedUpdate();
+            // Wait for the next FixedUpdate cycle
+            yield return new WaitForFixedUpdate();
         }
 
-        Assert.IsTrue(enemyGenerator.activeSelf); // corrected assertion
-        Assert.IsFalse(enemySpawnDelayText.enabled);
+        // Now that sufficient time has passed, check the conditions
+        Assert.IsTrue(enemyGenerator.activeSelf, "Enemy generator should be active after the delay.");
+        Assert.IsFalse(enemySpawnDelayText.enabled, "Enemy spawn delay text should be disabled after the delay.");
     }
 
     // Cleanup after each test
