@@ -118,7 +118,7 @@ public class Tower : MonoBehaviour
 
     private void UpdateRange()
     {
-        float diameter = range / 100;
+        float diameter = (range / 100)+1;
         rangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
 
     }
