@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.2896676, y: 4.3482556, z: 0}
-  m_LocalScale: {x: 1.35, y: 1.35, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2604810580130410201}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c52a1e4b2da86814b90bc159085f3a4c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d3bc6289b841c444c83776b3155ce268, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 6, y: 6}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -176,6 +176,8 @@ MonoBehaviour:
   upgradeRangeText: {fileID: 860480532034838936}
   upgradePriceText: {fileID: 2981289770659810275}
   button: {fileID: 5019053724604393464}
+  entered: 0
+  exited: 0
 --- !u!1001 &3803097554050357702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,11 +212,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8830166544117391900, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8830166544117391900, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8830166544117391900, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
       propertyPath: m_LocalScale.z
@@ -443,7 +445,7 @@ PrefabInstance:
     - target: {fileID: 8266848391383546169, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c52a1e4b2da86814b90bc159085f3a4c, type: 3}
+      objectReference: {fileID: 21300000, guid: d3bc6289b841c444c83776b3155ce268, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
