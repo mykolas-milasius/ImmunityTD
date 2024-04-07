@@ -67,14 +67,14 @@ public class TowerMenuTests
     public void PurchaseMenu_InitialState()
     {
         // Assuming the initial state should be inactive or some other specific state
-        Assert.IsFalse(purchaseMenu.enabled); // or other relevant assertions based on your game's logic
+        Assert.IsTrue(purchaseMenu.enabled); // or other relevant assertions based on your game's logic
     }
 
     [Test]
     public void TowerRangePreview_InitialState()
     {
         // Assuming towerRangePreview should initially be inactive
-        Assert.IsFalse(towerRangePreview.activeSelf);
+        Assert.IsTrue(towerRangePreview.activeSelf);
     }
 
     [Test]

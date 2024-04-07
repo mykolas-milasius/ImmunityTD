@@ -2,6 +2,8 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Reflection;
+using System.Collections;
+using UnityEngine.TestTools;
 
 public class EnemyGeneratorTests
 {
@@ -61,6 +63,54 @@ public class EnemyGeneratorTests
         var enemyPath = enemy.GetComponent<EnemyPath>();
         Assert.IsNotNull(enemyPath);
         Assert.AreEqual(generator.wayPoints.GetComponentsInChildren<Transform>().Length - 1, enemyPath.waypoints.Length);
+    }
+
+    [UnityTest]
+    public IEnumerator Update_SpawnsEnemyAfterInterval()
+    {
+        float initialInterval = generator.spawnInterval;
+        yield return new WaitForSeconds(initialInterval + 0.1f); // Wait for spawnInterval + a little more
+
+        // Check if an enemy was spawned
+        var enemy = GameObject.FindWithTag("Enemy");
+        Assert.IsNotNull(enemy);
+    }
+
+    [Test]
+    public void SpawnEnemy_ResetsTimer()
+    {
+        // Spawn an enemy to reset the timer
+        generator.SpawnEnemy();
+
+        // Use reflection to get the private timer field
+        FieldInfo timerField = typeof(EnemyGenerator).GetField("timer", BindingFlags.NonPublic | BindingFlags.Instance);
+        float timerValue = (float)timerField.GetValue(generator);
+
+        // Assert that timer is reset to 0
+        Assert.AreEqual(0f, timerValue);
+    }
+
+    [Test]
+    public void Start_SetsRandomSpawnInterval()
+    {
+        // Call Start manually to simulate the behaviour
+        generator.Start();
+
+        // Assert that spawnInterval is within the expected range
+        Assert.IsTrue(generator.spawnInterval >= 0.1f && generator.spawnInterval <= 3f);
+    }
+
+    [Test]
+    public void SpawnEnemy_InvokesRandomIntervalAgain()
+    {
+        // Record the initial spawn interval
+        float initialInterval = generator.spawnInterval;
+
+        // Spawn an enemy, which should invoke RandomInterval again
+        generator.SpawnEnemy();
+
+        // Assert that the spawn interval has changed
+        Assert.AreNotEqual(initialInterval, generator.spawnInterval);
     }
 
     [TearDown]

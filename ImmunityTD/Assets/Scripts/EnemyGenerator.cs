@@ -8,12 +8,12 @@ public class EnemyGenerator : MonoBehaviour
     public float spawnInterval;
     private float timer = 0f;
 
-    void Start()
+    public void Start()
     {
         RandomInterval();
     }
 
-    void Update()
+    public void Update()
     {
         // Update the timer every frame
         timer += Time.deltaTime;
