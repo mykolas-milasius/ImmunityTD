@@ -21,7 +21,6 @@ public class Login : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -56,7 +55,7 @@ public class Login : MonoBehaviour
         StartCoroutine(LoginOnServer(username, password));
     }
 
-    private IEnumerator LoginOnServer(string userName, string password)
+    public IEnumerator LoginOnServer(string userName, string password)
     {
         WWWForm form = new WWWForm();
         form.AddField("username", userName);
@@ -69,7 +68,7 @@ public class Login : MonoBehaviour
             if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogWarning("Error in login: " + www.error);
-                ShowInfo("Error in login: " + www.error); // Show error using the new method
+                ShowInfo("Error in login: " + www.error);
             }
             else
             {
@@ -95,13 +94,12 @@ public class Login : MonoBehaviour
     {
         errorMessageText.text = message;
         errorMessageText.gameObject.SetActive(true);
-                                                         // Optionally, hide the error message after a few seconds
         Invoke("HideErrorMessage", 5);
     }
 
     private void SwitchToMainMenu()
     {
-        loginCanvas.SetActive(false); // Make LoginCanvas inactive
-        mainMenuCanvas.SetActive(true); // Make MainMenu active
+        loginCanvas.SetActive(false); 
+        mainMenuCanvas.SetActive(true); 
     }
 }
