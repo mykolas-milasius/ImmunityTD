@@ -42,7 +42,10 @@ public class Bullet : MonoBehaviour
 
     void HitTarget()
     {
-        tower.DealDamage(target);
-        Destroy(gameObject);
+        if (tower != null && target != null)
+        {
+            tower.DealDamage(target);
+            Destroy(gameObject);
+        }
     }
 }
