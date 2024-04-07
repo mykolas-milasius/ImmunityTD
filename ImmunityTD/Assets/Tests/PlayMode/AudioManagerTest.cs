@@ -55,4 +55,19 @@ public class AudioManagerTests
 
         Assert.IsTrue(audioManager.SFXSource.isPlaying, "SFX source is not playing.");
     }
+
+    [TearDown]
+    public void Teardown()
+    {
+        if (SceneManager.GetSceneByName("StartScreen").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("StartScreen");
+        }
+
+        if (SceneManager.GetSceneByName("Game").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Game");
+        }
+    }
+
 }
