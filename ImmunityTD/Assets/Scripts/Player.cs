@@ -20,18 +20,36 @@ public class Player : MonoBehaviour
     
     public void FixedUpdate()
     {
-        coinsText.text = coins.ToString();
-        scoreText.text = score.ToString();
-        killsText.text = kills.ToString();
-        // pakeisti kad tikrintu tik pradzioj ir nevalgytu resursu
+        if (coinsText != null)
+        {
+            coinsText.text = coins.ToString();
+        }
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString();
+        }
+        if (killsText != null)
+        {
+            killsText.text = kills.ToString();
+        }
+
         if (timer < generatorDelay)
         {
             timer += Time.deltaTime;
-            enemySpawnDelayText.text = String.Format("Enemies spawn in: {0,3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
+            if (enemySpawnDelayText != null)
+            {
+                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0,3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
+            }
         }
         else {
-            enemyGenerator.SetActive(true);
-            enemySpawnDelayText.enabled = false;
+            if (enemyGenerator != null)
+            {
+                enemyGenerator.SetActive(true);
+            }
+            if (enemySpawnDelayText != null)
+            {
+                enemySpawnDelayText.enabled = false;
+            }
         }
     }
 

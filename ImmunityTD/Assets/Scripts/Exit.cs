@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class Exit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public IApplicationQuitter applicationQuitter = new ApplicationQuitter();
 
     [SerializeField] public GameObject quitPanel;
 
@@ -29,6 +19,19 @@ public class Exit : MonoBehaviour
     }
 
     public void QuitGame()
+    {
+        applicationQuitter.Quit();
+    }
+}
+
+public interface IApplicationQuitter
+{
+    void Quit();
+}
+
+public class ApplicationQuitter : IApplicationQuitter
+{
+    public void Quit()
     {
         Application.Quit();
     }

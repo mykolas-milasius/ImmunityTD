@@ -39,7 +39,10 @@ public class TowerMenu : MonoBehaviour
     }
     public void RemoveTower()
     {
-        currentSlot.gameObject.SetActive(true);
+        if (currentSlot != null)
+        {
+            currentSlot.gameObject.SetActive(true);
+        }
         Destroy(gameObject);
     }
 }

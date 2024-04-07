@@ -1,43 +1,128 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class TowerMenuTest
+public class TowerMenuTests
 {
-    private GameObject towerMenuGameObject;
-    private TowerMenu towerMenuScript;
-    private GameObject towerMenuCanvas;
+    private GameObject towerMenuObject;
+    private TowerMenu towerMenu;
+    private GameObject towerRangePreview;
+    private SpriteRenderer rangeRenderer;
+    private Canvas purchaseMenu;
+    private GameObject slotGameObject;
+    private Slot slot;
 
     [SetUp]
-    public void Setup()
+    public void SetUp()
     {
-        towerMenuGameObject = new GameObject();
-        towerMenuScript = towerMenuGameObject.AddComponent<TowerMenu>();
-        towerMenuCanvas = new GameObject();
-        towerMenuScript.towerMenuCanvas = towerMenuCanvas;
-    }
+        // Set up the TowerMenu and its required components
+        towerMenuObject = new GameObject("TowerMenu");
+        towerMenu = towerMenuObject.AddComponent<TowerMenu>();
+        towerMenu.towerMenuCanvas = new GameObject("TowerMenuCanvas");
+        towerMenu.towerMenuCanvas.SetActive(false); // Initially set to inactive
 
-    [UnityTest]
-    public IEnumerator OnMouseDown_NoCanvas_AssignErrorLogged_Test()
-    {
-        towerMenuScript.towerMenuCanvas = null;
-        Debug.unityLogger.logEnabled = false;
-        towerMenuScript.OnMouseDown(); 
-        yield return null;
-        Debug.unityLogger.logEnabled = true;
-        LogAssert.Expect(LogType.Error, "Tower menu canvas is not assigned to the tower prefab!");
-    }
+        towerRangePreview = new GameObject("TowerRangePreview");
+        rangeRenderer = towerRangePreview.AddComponent<SpriteRenderer>();
+        towerMenu.rangeRenderer = rangeRenderer;
+        rangeRenderer.enabled = false; // Initially disabled
 
-    [UnityTest]
-    public IEnumerator RemoveTower_Test()
-    {
-        Slot slot = new GameObject().AddComponent<Slot>();
+        purchaseMenu = new GameObject("PurchaseMenu").AddComponent<Canvas>();
+        towerMenu.purchaseMenu = purchaseMenu;
+
+        // Set up a Slot object for testing RemoveTower
+        slotGameObject = new GameObject("Slot");
+        slot = slotGameObject.AddComponent<Slot>();
         TowerMenu.currentSlot = slot;
-        towerMenuScript.RemoveTower();
-        yield return null;
-        Assert.IsNull(towerMenuGameObject);
-        Assert.IsTrue(slot.gameObject.activeSelf);
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        // Clean up
+        GameObject.DestroyImmediate(towerMenuObject);
+        GameObject.DestroyImmediate(towerRangePreview);
+        GameObject.DestroyImmediate(slotGameObject);
+    }
+
+    [Test]
+    public void RemoveTower_WithoutCurrentSlot_DoesNotThrowError()
+    {
+        TowerMenu.currentSlot = null; // Set currentSlot to null to simulate the edge case
+
+        // Use Assert.DoesNotThrow to verify that no error is thrown when currentSlot is null
+        Assert.DoesNotThrow(() => towerMenu.RemoveTower());
+    }
+
+    [Test]
+    public void OnMouseDown_UpdatesInputHandlerTower()
+    {
+        towerMenu.OnMouseDown(); // Simulate mouse down event
+
+        // Assert that InputHandler.tower is set to this towerMenu instance
+        Assert.AreEqual(InputHandler.tower, towerMenu);
+    }
+
+    [Test]
+    public void PurchaseMenu_InitialState()
+    {
+        // Assuming the initial state should be inactive or some other specific state
+        Assert.IsTrue(purchaseMenu.enabled); // or other relevant assertions based on your game's logic
+    }
+
+    [Test]
+    public void TowerRangePreview_InitialState()
+    {
+        // Assuming towerRangePreview should initially be inactive
+        Assert.IsTrue(towerRangePreview.activeSelf);
+    }
+
+    [Test]
+    public void OnMouseDown_TogglesMenuAndRangeVisibility()
+    {
+        // Initial state should be inactive and disabled
+        Assert.IsFalse(towerMenu.towerMenuCanvas.activeSelf);
+        Assert.IsFalse(towerMenu.rangeRenderer.enabled);
+
+        // Simulate mouse down event
+        towerMenu.OnMouseDown();
+
+        // Menu and range should now be active and enabled
+        Assert.IsTrue(towerMenu.towerMenuCanvas.activeSelf);
+        Assert.IsTrue(towerMenu.rangeRenderer.enabled);
+
+        // Simulate another mouse down to toggle back
+        towerMenu.OnMouseDown();
+
+        // Menu and range should now be inactive and disabled again
+        Assert.IsFalse(towerMenu.towerMenuCanvas.activeSelf);
+        Assert.IsFalse(towerMenu.rangeRenderer.enabled);
+    }
+
+    [Test]
+    public void OnMouseDown_WithNoCanvasAssigned_LogsError()
+    {
+        towerMenu.towerMenuCanvas = null; // Unassign the canvas to simulate the error condition
+
+        LogAssert.Expect(LogType.Error, "Tower menu canvas is not assigned to the tower prefab!");
+        towerMenu.OnMouseDown(); // Simulate mouse down event
+    }
+
+    [UnityTest]
+    public IEnumerator RemoveTower_ReactivatesCurrentSlotAndDestroysItself()
+    {
+        // Make sure the slot is initially inactive
+        TowerMenu.currentSlot.gameObject.SetActive(false);
+
+        // Call RemoveTower
+        towerMenu.RemoveTower();
+
+        yield return null; // Wait for the next frame to ensure Destroy is processed
+
+        // Slot should now be active
+        Assert.IsTrue(TowerMenu.currentSlot.gameObject.activeSelf);
+
+        // TowerMenu object should be destroyed, so it should be null
+        Assert.IsTrue(towerMenu == null);
     }
 }

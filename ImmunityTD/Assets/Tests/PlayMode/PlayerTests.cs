@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using UnityEngine;
 using TMPro;
-using UnityEngine.TestTools;
 using System.Collections;
+using UnityEngine.TestTools;
 
 public class PlayerTests
 {
@@ -13,6 +13,7 @@ public class PlayerTests
     private TextMeshProUGUI killsText;
     private TextMeshProUGUI enemySpawnDelayText;
 
+    // Setup for each test
     [SetUp]
     public void SetUp()
     {
@@ -38,6 +39,7 @@ public class PlayerTests
         Player.kills = 0;
     }
 
+    // Test initial state
     [Test]
     public void InitialState_IsCorrect()
     {
@@ -46,6 +48,7 @@ public class PlayerTests
         Assert.AreEqual(0, Player.kills);
     }
 
+    // Test adding coins
     [Test]
     public void AddCoins_IncreasesCoins()
     {
@@ -53,13 +56,15 @@ public class PlayerTests
         Assert.AreEqual(150f, Player.coins);
     }
 
+    // Test adding score
     [Test]
     public void AddScore_IncreasesScore()
     {
-        Player.AddScore(10f);
+        Player.AddScore(10);
         Assert.AreEqual(10, Player.score);
     }
 
+    // Test adding a kill
     [Test]
     public void AddKill_IncreasesKills()
     {
@@ -67,6 +72,7 @@ public class PlayerTests
         Assert.AreEqual(1, Player.kills);
     }
 
+    // Test adding multiple kills
     [Test]
     public void AddKills_IncreasesMultipleKills()
     {
@@ -74,14 +80,14 @@ public class PlayerTests
         Assert.AreEqual(5, Player.kills);
     }
 
-    [UnityTest]
-    public IEnumerator FixedUpdate_UpdatesUIElements()
+    // Test FixedUpdate updates UI elements
+    [Test]
+    public void FixedUpdate_UpdatesUIElements()
     {
-        // Simulate a few frames
+        // Simulate FixedUpdate calls
         for (int i = 0; i < 5; i++)
         {
             player.FixedUpdate();
-            yield return null;
         }
 
         Assert.AreEqual("100", coinsText.text);
@@ -96,14 +102,16 @@ public class PlayerTests
         float simulateTime = player.generatorDelay + 1f;
         for (float t = 0; t < simulateTime; t += Time.fixedDeltaTime)
         {
-            player.FixedUpdate();
+            // Wait for the next FixedUpdate cycle
             yield return new WaitForFixedUpdate();
         }
 
-        Assert.IsTrue(enemyGenerator.activeSelf);
-        Assert.IsFalse(enemySpawnDelayText.enabled);
+        // Now that sufficient time has passed, check the conditions
+        Assert.IsTrue(enemyGenerator.activeSelf, "Enemy generator should be active after the delay.");
+        Assert.IsFalse(enemySpawnDelayText.enabled, "Enemy spawn delay text should be disabled after the delay.");
     }
 
+    // Cleanup after each test
     [TearDown]
     public void TearDown()
     {
