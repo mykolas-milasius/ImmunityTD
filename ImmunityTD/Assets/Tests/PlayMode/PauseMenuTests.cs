@@ -66,6 +66,63 @@ public class PauseMenuTests
         Assert.IsFalse(pauseMenuScript.isPaused);
     }
 
+    [Test]
+    public void TogglePause_TogglesPauseStateAndUIElements()
+    {
+        // Initially, the game is not paused
+        Assert.IsFalse(pauseMenuScript.isPaused);
+        Assert.IsTrue(pauseMenuScript.pauseButton.activeSelf);
+        Assert.IsFalse(pauseMenuScript.pauseMenu.activeSelf);
+
+        // Act - Simulate the first toggle (should pause the game)
+        pauseMenuScript.TogglePause();
+
+        // Assert - The game should now be paused
+        Assert.IsTrue(pauseMenuScript.isPaused);
+        Assert.IsFalse(pauseMenuScript.pauseButton.activeSelf);
+        Assert.IsTrue(pauseMenuScript.pauseMenu.activeSelf);
+
+        // Act - Simulate the second toggle (should resume the game)
+        pauseMenuScript.TogglePause();
+
+        // Assert - The game should now be resumed
+        Assert.IsFalse(pauseMenuScript.isPaused);
+        Assert.IsTrue(pauseMenuScript.pauseButton.activeSelf);
+        Assert.IsFalse(pauseMenuScript.pauseMenu.activeSelf);
+    }
+
+    [UnityTest]
+    public IEnumerator Update_TogglesPauseWhenEscapeIsPressed()
+    {
+        var mockInputHandler = new MockInputHandler();
+        pauseMenuScript.SetInputHandlerForTesting(mockInputHandler);
+
+        // Simulate Escape key press
+        mockInputHandler.EscapePressed = true;
+
+        // Wait one frame to let Update method process the input
+        yield return null;
+
+        // Assert the game is paused
+        Assert.IsTrue(pauseMenuScript.isPaused);
+        Assert.IsTrue(pauseMenuScript.pauseMenu.activeSelf);
+        Assert.IsFalse(pauseMenuScript.pauseButton.activeSelf);
+
+        // Reset and simulate another Escape key press
+        mockInputHandler.EscapePressed = false; // Reset the key press state
+        yield return null; // Wait one frame to process the key release
+        mockInputHandler.EscapePressed = true; // Simulate the key press again
+
+        // Wait one frame to let Update method process the input again
+        yield return null;
+
+        // Assert the game is resumed
+        Assert.IsFalse(pauseMenuScript.isPaused);
+        Assert.IsFalse(pauseMenuScript.pauseMenu.activeSelf);
+        Assert.IsTrue(pauseMenuScript.pauseButton.activeSelf);
+    }
+
+
     [TearDown]
     public void TearDown()
     {
@@ -76,5 +133,15 @@ public class PauseMenuTests
         GameObject.DestroyImmediate(pauseMenuScript.pauseMenu);
         GameObject.DestroyImmediate(pauseMenuScript.pauseButton);
         GameObject.DestroyImmediate(pauseMenuGO);
+    }
+}
+
+public class MockInputHandler : IInputHandler
+{
+    public bool EscapePressed { get; set; }
+
+    public bool GetKeyDown(KeyCode key)
+    {
+        return key == KeyCode.Escape && EscapePressed;
     }
 }

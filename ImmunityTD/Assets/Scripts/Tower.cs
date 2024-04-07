@@ -119,7 +119,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void DealDamage(GameObject enemy)
+    public virtual void DealDamage(GameObject enemy)
     {
         Enemy enemyHealth = enemy.GetComponent<Enemy>();
         if (enemyHealth != null)

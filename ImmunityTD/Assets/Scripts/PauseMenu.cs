@@ -7,19 +7,30 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseButton;
     public bool isPaused = false;
+    private IInputHandler inputHandler;
 
-    void Update()
+    void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        inputHandler = new UnityInputHandler();
+    }
+
+    public void Update()
+    {
+        if (inputHandler.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            TogglePause();
+        }
+    }
+
+    public void TogglePause()
+    {
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
         }
     }
 
@@ -37,5 +48,23 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
         pauseButton.SetActive(true);
+    }
+
+    public void SetInputHandlerForTesting(IInputHandler mockInputHandler)
+    {
+        inputHandler = mockInputHandler;
+    }
+}
+
+public interface IInputHandler
+{
+    bool GetKeyDown(KeyCode key);
+}
+
+public class UnityInputHandler : IInputHandler
+{
+    public bool GetKeyDown(KeyCode key)
+    {
+        return Input.GetKeyDown(key);
     }
 }

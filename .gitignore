@@ -23,6 +23,7 @@
 # Exclude Unity code coverage files
 **/[Cc]overage/
 **/[Cc]ode[Cc]overage/
+**/[Cc]ode [Cc]overage/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -79,7 +80,6 @@ crashlytics-build.properties
 **/[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # OS generated files #
-######################
 .DS_Store
 .DS_Store?
 ._*
@@ -87,10 +87,6 @@ crashlytics-build.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
 
 # Folder config file
 Desktop.ini
@@ -108,13 +104,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # MacOS system files
-.DS_Store
 .AppleDouble
 .LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disks
-.Spotlight-V100
-.Trashes

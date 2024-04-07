@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     public float damage = 10f;
     public float lifeTime = 2f;
 
+    private bool isDestroyed = false;
+
     public void Seek(GameObject _target)
     {
         target = _target;
@@ -42,7 +44,19 @@ public class Bullet : MonoBehaviour
 
     void HitTarget()
     {
-        tower.DealDamage(target);
-        Destroy(gameObject);
+        if (tower != null && target != null)
+        {
+            tower.DealDamage(target);
+            DestroyBullet();
+        }
+    }
+
+    void DestroyBullet()
+    {
+        if (!isDestroyed)
+        {
+            Destroy(gameObject);
+            isDestroyed = true;
+        }
     }
 }
