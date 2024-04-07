@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class AudioSettings : MonoBehaviour
 {
-    [SerializeField] private AudioMixer myMixer;
-    [SerializeField] private Slider masterSlider;
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider SFXSlider;
-    [SerializeField] private Slider UISlider;
-
+    [SerializeField] public AudioMixer myMixer;
+    [SerializeField] public Slider masterSlider;
+    [SerializeField] public Slider musicSlider;
+    [SerializeField] public Slider SFXSlider;
+    [SerializeField] public Slider UISlider;
     public void SetMasterVolume()
     {
         float volume = masterSlider.value;
