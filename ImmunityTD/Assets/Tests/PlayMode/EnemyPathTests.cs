@@ -1,6 +1,8 @@
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
 
 public class EnemyPathTests
 {
@@ -11,7 +13,10 @@ public class EnemyPathTests
     public void SetUp()
     {
         // Create a new scene for the test
-        SceneManager.CreateScene("TestScene");
+        if (!SceneManager.GetSceneByName("TestScene").IsValid())
+        {
+            SceneManager.CreateScene("TestScene");
+        }
 
         // Set up the Enemy GameObject
         enemyGO = new GameObject("Enemy");
@@ -49,6 +54,22 @@ public class EnemyPathTests
         // Check if the enemy has moved closer to the second waypoint's adjusted position
         float distanceToNextWaypoint = Vector2.Distance(enemyGO.transform.position, secondWaypointAdjustedPosition);
         Assert.Less(distanceToNextWaypoint, 1f);  // Assuming the waypoints were initially more than 1 unit apart after adjustment
+    }
+
+    [UnityTest]
+    public IEnumerator Enemy_Destroyed_After_Reaching_Last_Waypoint()
+    {
+        // Set the enemy speed high enough to ensure it reaches the last waypoint in a single frame
+        enemyPath.SetSpeed(10000f);
+
+        // Move the enemy
+        enemyPath.Update();
+
+        // Wait for the next frame
+        yield return null;
+
+        // Check if the enemy GameObject has been destroyed
+        Assert.IsTrue(enemyGO == null, "Enemy GameObject should be destroyed after reaching the last waypoint.");
     }
 
     [TearDown]

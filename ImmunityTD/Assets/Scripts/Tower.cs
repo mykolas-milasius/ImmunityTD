@@ -122,7 +122,7 @@ public class Tower : MonoBehaviour
         rangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
 
     }
-    void Shoot()
+    public void Shoot()
     {
         GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Bullet bullet = bulletGO.GetComponent<Bullet>();

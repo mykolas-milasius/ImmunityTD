@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private float currentHealth;
     private SpriteRenderer spriteRenderer;
 
-    void Start()
+    public void Start()
     {
         currentHealth = maxHealth;
         originalHealthBarWidth = healthBarForeground.sizeDelta.x;
@@ -87,5 +87,14 @@ public class Enemy : MonoBehaviour
     void DisableDamageText()
     {
         damageText.enabled = false;
+    }
+
+    public bool IsAlive() {
+        if (currentHealth > 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
