@@ -34,6 +34,7 @@ public class InputHandler : MonoBehaviour
                 prevSlot = null;
             }
         }
+
         Debug.Log(rayHit.collider.gameObject.name);
         if (!rayHit.collider.gameObject.name.Contains("Slot"))
         {
