@@ -14,6 +14,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      # Set up caching for the Library folder to speed up the workflow
+      - name: Cache Library
+        uses: actions/cache@v2
+        with:
+          path: |
+            ImmunityTD/Library
+          key: ${{ runner.os }}-library-${{ hashFiles('ImmunityTD/Library/**') }}
+          restore-keys: |
+            ${{ runner.os }}-library-
+
       - name: Setup Unity License
         run: |
           echo "UNITY_LICENSE<<EOF" >> $GITHUB_ENV
@@ -23,10 +33,10 @@ jobs:
       - name: Build Project
         uses: game-ci/unity-builder@v2
         with:
-          unityVersion: '2022.3.20f1'  # Specify your Unity version here
-          targetPlatform: StandaloneWindows64  # Adjust as needed
+          unityVersion: '2022.3.20f1'
+          targetPlatform: StandaloneWindows64
 
       - name: Run Tests
         uses: game-ci/unity-test-runner@v2
         with:
-          unityVersion: '2022.3.20f1'  # Use the same Unity version as above
+          unityVersion: '2022.3.20f1'
