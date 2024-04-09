@@ -1,7 +1,4 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
+name: Unity CI
 
 on:
   push:
@@ -11,17 +8,17 @@ on:
 
 jobs:
   build-and-test:
-    name: Build and Test
+    name: Build and Test Unity Project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        
+
       - name: Setup Unity License
-        run: echo UNITY_LICENSE=$UNITY_LICENSE >> $GITHUB_ENV
+        run: echo UNITY_LICENSE="$UNITY_LICENSE" >> $GITHUB_ENV
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      
+
       - name: Build Project
         uses: game-ci/unity-builder@v2
         with:
