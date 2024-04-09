@@ -10,25 +10,20 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  build-and-test:
+    name: Build and Test
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: List directory structure
-      run: ls -R
-      working-directory: ImmunityTD/
-    - name: Restore dependencies
-      run: dotnet restore
-      working-directory: ImmunityTD/
-    - name: Build
-      run: dotnet build --no-restore
-      working-directory: ImmunityTD/
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ImmunityTD/
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Build Project
+        uses: game-ci/unity-builder@v2
+        with:
+          unityVersion: '2022.3.20f1'  # Specify your Unity version here
+          targetPlatform: StandaloneWindows64  # Adjust as needed
+
+      - name: Run Tests
+        uses: game-ci/unity-test-runner@v2
+        with:
+          unityVersion: '2022.3.20f1'  # Use the same Unity version as above
