@@ -16,6 +16,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        
+      - name: Setup Unity License
+        run: echo UNITY_LICENSE=$UNITY_LICENSE >> $GITHUB_ENV
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
       
       - name: Build Project
         uses: game-ci/unity-builder@v2
