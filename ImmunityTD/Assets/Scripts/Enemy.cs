@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
-        Debug.Log(this.name + " took " + damage + " damage. Health left: " + currentHealth);
+        // Debug.Log(this.name + " took " + damage + " damage. Health left: " + currentHealth);
         UpdateHealthBar();
         DisplayDamage(damage);
 
@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
         Player.AddKill();
         Player.AddScore(coinsWhenDied);
         Destroy(gameObject);
+        EnemyGenerator.enemyCount--;
     }
 
     void UpdateHealthBar()

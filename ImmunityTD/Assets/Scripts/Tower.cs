@@ -39,7 +39,7 @@ public class Tower : MonoBehaviour
     {
         if (rangePreview == null || bulletPrefab == null)
         {
-            Debug.LogError("Missing references in Tower script. Ensure all required fields are assigned.");
+            // Debug.LogError("Missing references in Tower script. Ensure all required fields are assigned.");
             return;
         }
         upgradePrice = (float)Math.Round(startPrice * 2, 1);
@@ -66,7 +66,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("UI text fields not assigned in Tower script.");
+            // Debug.LogWarning("UI text fields not assigned in Tower script.");
         }
 
         if (upgradeDamageText != null)
@@ -78,7 +78,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Upgrade UI elements not assigned in Tower script.");
+            // Debug.LogWarning("Upgrade UI elements not assigned in Tower script.");
         }
 
         if (enemiesInRange.Count != 0 && button != null)

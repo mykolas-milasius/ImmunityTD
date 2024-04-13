@@ -15,14 +15,17 @@ public class EnemyGeneratorTests
     [SetUp]
     public void SetUp()
     {
+        // Create a new GameObject for the generator
+        generatorGO = new GameObject("EnemyGenerator");
+        
+        // Add the EnemyGenerator component to it
+        generator = generatorGO.AddComponent<EnemyGenerator>();
+
         // Generate a unique scene name to avoid conflicts
         testSceneName = "TestScene" + System.Guid.NewGuid().ToString();
 
         // Create a new scene with a unique name for each test
         SceneManager.CreateScene(testSceneName);
-
-        generatorGO = new GameObject("EnemyGenerator");
-        generator = generatorGO.AddComponent<EnemyGenerator>();
 
         // Ensure the prefab is located in a Resources folder and the path is correct
         generator.enemyPrefab = Resources.Load<GameObject>(aidsPrefabPath);
@@ -47,7 +50,11 @@ public class EnemyGeneratorTests
         randomIntervalMethod.Invoke(generator, null);
 
         // Assert that spawnInterval is within the expected range
-        Assert.IsTrue(generator.spawnInterval >= 0.1f && generator.spawnInterval <= 3f);
+                FieldInfo spawnIntervalField = typeof(EnemyGenerator).GetField("spawnInterval", BindingFlags.NonPublic | BindingFlags.Instance);
+        float spawnIntervalValue = (float)spawnIntervalField.GetValue(generator);
+
+        // Assert that spawnInterval is within the expected range
+        Assert.IsTrue(spawnIntervalValue >= 0f && spawnIntervalValue <= 10f / generator.spawnSpeed);
     }
 
     [Test]
@@ -68,7 +75,11 @@ public class EnemyGeneratorTests
     [UnityTest]
     public IEnumerator Update_SpawnsEnemyAfterInterval()
     {
-        float initialInterval = generator.spawnInterval;
+        // Use reflection to get the private spawnInterval field
+        FieldInfo spawnIntervalField = typeof(EnemyGenerator).GetField("spawnInterval", BindingFlags.NonPublic | BindingFlags.Instance);
+        float spawnIntervalValue = (float)spawnIntervalField.GetValue(generator);
+
+        float initialInterval = spawnIntervalValue;
         yield return new WaitForSeconds(initialInterval + 0.1f); // Wait for spawnInterval + a little more
 
         // Check if an enemy was spawned
@@ -96,21 +107,31 @@ public class EnemyGeneratorTests
         // Call Start manually to simulate the behaviour
         generator.Start();
 
+        // Use reflection to get the private spawnInterval field
+        FieldInfo spawnIntervalField = typeof(EnemyGenerator).GetField("spawnInterval", BindingFlags.NonPublic | BindingFlags.Instance);
+        float spawnIntervalValue = (float)spawnIntervalField.GetValue(generator);
+
         // Assert that spawnInterval is within the expected range
-        Assert.IsTrue(generator.spawnInterval >= 0.1f && generator.spawnInterval <= 3f);
+        Assert.IsTrue(spawnIntervalValue >= 0f && spawnIntervalValue <= 10f / generator.spawnSpeed);
     }
 
     [Test]
     public void SpawnEnemy_InvokesRandomIntervalAgain()
     {
+        // Use reflection to get the private spawnInterval field
+        FieldInfo spawnIntervalField = typeof(EnemyGenerator).GetField("spawnInterval", BindingFlags.NonPublic | BindingFlags.Instance);
+        float spawnIntervalValue = (float)spawnIntervalField.GetValue(generator);
+
         // Record the initial spawn interval
-        float initialInterval = generator.spawnInterval;
+        float initialInterval = spawnIntervalValue;
 
         // Spawn an enemy, which should invoke RandomInterval again
         generator.SpawnEnemy();
 
+        spawnIntervalValue = (float)spawnIntervalField.GetValue(generator);
+
         // Assert that the spawn interval has changed
-        Assert.AreNotEqual(initialInterval, generator.spawnInterval);
+        Assert.AreNotEqual(initialInterval, spawnIntervalValue);
     }
 
     [TearDown]

@@ -5,8 +5,11 @@ public class EnemyGenerator : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject wayPoints;
-    public float spawnInterval;
+    public int spawnSpeed = 3; // Max 100
+    private float spawnInterval;
     private float timer = 0f;
+    public int enemyLimit = 100;
+    public static int enemyCount = 0;
 
     public void Start()
     {
@@ -20,16 +23,20 @@ public class EnemyGenerator : MonoBehaviour
         if (timer >= spawnInterval)
         {
             timer = 0f;
-            SpawnEnemy();
+            if (enemyCount < enemyLimit) 
+            {
+                SpawnEnemy();
+            }
         }   
     }
 
     void RandomInterval()
     {
-        spawnInterval = Random.Range(0.1f, 3f);
+        spawnInterval = Random.Range(0, 10f / spawnSpeed);
     }
 
-    public void SpawnEnemy(){
+    public void SpawnEnemy()
+    {
         GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         EnemyPath enemyPathScript = newEnemy.GetComponent<EnemyPath>();
@@ -39,6 +46,10 @@ public class EnemyGenerator : MonoBehaviour
         {
             enemyPathScript.SetSpeed(enemyScript.speed);
         }
+
+        enemyCount++;
         RandomInterval();
+
+        // Debug.Log("enemies: " + enemyCount + "/" + enemyLimit);
     }
 }
