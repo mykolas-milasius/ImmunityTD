@@ -9,23 +9,23 @@ public class EnemyGeneratorTests
 {
     private GameObject generatorGO;
     private EnemyGenerator generator;
-    private EnemyGenerator generatorScript;
     private string aidsPrefabPath = "Prefabs/Enemies/AIDSVirus";
     private string testSceneName; // Store the scene name for use in TearDown
 
     [SetUp]
     public void SetUp()
     {
-        generatorScript = generatorGO.AddComponent<EnemyGenerator>();
+        // Create a new GameObject for the generator
+        generatorGO = new GameObject("EnemyGenerator");
+        
+        // Add the EnemyGenerator component to it
+        generator = generatorGO.AddComponent<EnemyGenerator>();
 
         // Generate a unique scene name to avoid conflicts
         testSceneName = "TestScene" + System.Guid.NewGuid().ToString();
 
         // Create a new scene with a unique name for each test
         SceneManager.CreateScene(testSceneName);
-
-        generatorGO = new GameObject("EnemyGenerator");
-        generator = generatorGO.AddComponent<EnemyGenerator>();
 
         // Ensure the prefab is located in a Resources folder and the path is correct
         generator.enemyPrefab = Resources.Load<GameObject>(aidsPrefabPath);

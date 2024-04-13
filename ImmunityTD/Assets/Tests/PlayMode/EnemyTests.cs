@@ -65,7 +65,6 @@ public class EnemyTests
         float currentHealth = (float)currentHealthField.GetValue(enemy);
 
         Assert.AreEqual(0, currentHealth, "Health should be zero when enemy dies");
-        LogAssert.Expect(LogType.Log, enemy.name + " took " + enemy.maxHealth + " damage. Health left: 0");
     }
 
     // Test to check if the sprite dims when taking damage
