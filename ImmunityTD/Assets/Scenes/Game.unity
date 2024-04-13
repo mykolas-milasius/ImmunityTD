@@ -6458,7 +6458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3875646891751454614, guid: df79cbaeffe3e4f98972760139e6d572, type: 3}
   wayPoints: {fileID: 289915106}
-  spawnSpeed: 100
+  spawnSpeed: 10
   enemyLimit: 100
 --- !u!4 &1621336811
 Transform:
