@@ -1070,6 +1070,7 @@ MonoBehaviour:
   towerSelectionCanvas: {fileID: 849696711}
   clicked: 0
   spriteRenderer: {fileID: 316671188}
+  towerSelectionButton: {fileID: 0}
 --- !u!1 &322545235
 GameObject:
   m_ObjectHideFlags: 0
@@ -3511,6 +3512,7 @@ MonoBehaviour:
   towerSelectionCanvas: {fileID: 849696711}
   clicked: 0
   spriteRenderer: {fileID: 880316068}
+  towerSelectionButton: {fileID: 0}
 --- !u!1 &885845861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4012,6 +4014,7 @@ MonoBehaviour:
   towerSelectionCanvas: {fileID: 849696711}
   clicked: 0
   spriteRenderer: {fileID: 928429461}
+  towerSelectionButton: {fileID: 0}
 --- !u!1 &975123519
 GameObject:
   m_ObjectHideFlags: 0
@@ -4426,6 +4429,7 @@ MonoBehaviour:
   towerSelectionCanvas: {fileID: 849696711}
   clicked: 0
   spriteRenderer: {fileID: 995399784}
+  towerSelectionButton: {fileID: 0}
 --- !u!1 &1011212006
 GameObject:
   m_ObjectHideFlags: 0
@@ -6454,7 +6458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3875646891751454614, guid: df79cbaeffe3e4f98972760139e6d572, type: 3}
   wayPoints: {fileID: 289915106}
-  spawnInterval: 2
+  spawnSpeed: 100
+  enemyLimit: 100
 --- !u!4 &1621336811
 Transform:
   m_ObjectHideFlags: 0
@@ -6864,6 +6869,8 @@ MonoBehaviour:
   upgradeRangeText: {fileID: 0}
   upgradePriceText: {fileID: 0}
   button: {fileID: 0}
+  entered: 0
+  exited: 0
 --- !u!1 &1704630928
 GameObject:
   m_ObjectHideFlags: 0
@@ -7124,6 +7131,8 @@ MonoBehaviour:
   upgradeRangeText: {fileID: 0}
   upgradePriceText: {fileID: 0}
   button: {fileID: 0}
+  entered: 0
+  exited: 0
 --- !u!1 &1713673178
 GameObject:
   m_ObjectHideFlags: 0
@@ -7518,6 +7527,8 @@ MonoBehaviour:
   upgradeRangeText: {fileID: 0}
   upgradePriceText: {fileID: 0}
   button: {fileID: 0}
+  entered: 0
+  exited: 0
 --- !u!224 &1725016137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7699,6 +7710,7 @@ MonoBehaviour:
   towerSelectionCanvas: {fileID: 849696711}
   clicked: 0
   spriteRenderer: {fileID: 1757209579}
+  towerSelectionButton: {fileID: 0}
 --- !u!1 &1761932083
 GameObject:
   m_ObjectHideFlags: 0
@@ -8520,6 +8532,7 @@ MonoBehaviour:
   towerSelectionCanvas: {fileID: 849696711}
   clicked: 0
   spriteRenderer: {fileID: 1956691173}
+  towerSelectionButton: {fileID: 0}
 --- !u!1 &1994470788
 GameObject:
   m_ObjectHideFlags: 0

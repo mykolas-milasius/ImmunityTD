@@ -37,6 +37,7 @@ public class EnemyPath : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            EnemyGenerator.enemyCount--;
             // gameOverText.SetActive(true);
         }
     }

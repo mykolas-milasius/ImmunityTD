@@ -3,11 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using System.Collections;
-
 public class InputHandlerTest
 {
     private GameObject inputHandlerGameObject;
