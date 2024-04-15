@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class EnemyGenerator : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject[] enemyArray;
     public GameObject wayPoints;
     public int spawnSpeed = 3; // Max 100
     private float spawnInterval;
@@ -32,12 +34,13 @@ public class EnemyGenerator : MonoBehaviour
 
     void RandomInterval()
     {
-        spawnInterval = Random.Range(0, 10f / spawnSpeed);
+        spawnInterval = UnityEngine.Random.Range(0, 10f / spawnSpeed);
     }
 
     public void SpawnEnemy()
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        float random = UnityEngine.Random.Range(0, enemyArray.Length);
+        GameObject newEnemy = Instantiate(enemyArray[(int)Math.Round(random, 0)], transform.position, Quaternion.identity);
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         EnemyPath enemyPathScript = newEnemy.GetComponent<EnemyPath>();
         enemyPathScript.waypoints = wayPoints.GetComponentsInChildren<Transform>().Skip(1).ToArray();

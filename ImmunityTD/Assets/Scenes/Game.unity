@@ -6457,8 +6457,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3875646891751454614, guid: df79cbaeffe3e4f98972760139e6d572, type: 3}
+  enemyArray:
+  - {fileID: 3875646891751454614, guid: df79cbaeffe3e4f98972760139e6d572, type: 3}
+  - {fileID: 3875646891751454614, guid: 1d409c82ee7054888b7c66f32179cbb3, type: 3}
+  - {fileID: 3875646891751454614, guid: 51a2f98ac96da451489d0b213a6790d9, type: 3}
+  - {fileID: 3875646891751454614, guid: 9d03bdb2263ac4932bba0c51fe132b4d, type: 3}
   wayPoints: {fileID: 289915106}
-  spawnSpeed: 10
+  spawnSpeed: 3
   enemyLimit: 100
 --- !u!4 &1621336811
 Transform:
