@@ -4,10 +4,9 @@ using System;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public GameObject[] enemyArray;
+    public GameObject[] enemyPrefabs;
     public GameObject wayPoints;
-    public int spawnSpeed = 3; // Max 100
+    public int spawnSpeed = 3;
     private float spawnInterval;
     private float timer = 0f;
     public int enemyLimit = 100;
@@ -20,7 +19,6 @@ public class EnemyGenerator : MonoBehaviour
 
     public void Update()
     {
-        // Update the timer every frame
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {
@@ -39,8 +37,8 @@ public class EnemyGenerator : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        float random = UnityEngine.Random.Range(0, enemyArray.Length);
-        GameObject newEnemy = Instantiate(enemyArray[(int)Math.Round(random, 0)], transform.position, Quaternion.identity);
+        float random = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+        GameObject newEnemy = Instantiate(enemyPrefabs[(int)Math.Round(random, 0)], transform.position, Quaternion.identity);
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         EnemyPath enemyPathScript = newEnemy.GetComponent<EnemyPath>();
         enemyPathScript.waypoints = wayPoints.GetComponentsInChildren<Transform>().Skip(1).ToArray();
