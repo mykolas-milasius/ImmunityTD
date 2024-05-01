@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip background;
     public AudioClip mainmenu;
     public AudioClip buttonClick;
+    public AudioClip virusDeath;
+    public AudioClip towerShoot;
 
     private void Start()
     {
@@ -38,5 +40,10 @@ public class AudioManager : MonoBehaviour
         SFXSource.clip = buttonClick;
         SFXSource.volume = 0.1f;
         SFXSource.Play();
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        SFXSource.PlayOneShot(clip);
     }
 }

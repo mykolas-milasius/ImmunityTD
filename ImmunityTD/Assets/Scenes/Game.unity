@@ -2061,7 +2061,7 @@ GameObject:
   - component: {fileID: 552397402}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2083,6 +2083,8 @@ MonoBehaviour:
   background: {fileID: 8300000, guid: 25342e84b4c30504191521f1abb329f0, type: 3}
   mainmenu: {fileID: 8300000, guid: f688480af668aad43bff3ef3161f55ad, type: 3}
   buttonClick: {fileID: 8300000, guid: 1b398a9852be7954282fefd378a688c9, type: 3}
+  virusDeath: {fileID: 8300000, guid: c690e2ebe376fab4c962dc594cd50561, type: 3}
+  towerShoot: {fileID: 8300000, guid: 71345e73d79eb844c8919cf2ea623b2e, type: 3}
 --- !u!4 &552397403
 Transform:
   m_ObjectHideFlags: 0
