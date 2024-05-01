@@ -35,6 +35,13 @@ public class Tower : MonoBehaviour
     public bool entered;
     public bool exited;
 
+    private AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     public void Start()
     {
         if (rangePreview == null || bulletPrefab == null)
@@ -126,6 +133,8 @@ public class Tower : MonoBehaviour
     {
         GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        audioManager.PlaySFX(audioManager.towerShoot);
 
         if (bullet != null)
         {
