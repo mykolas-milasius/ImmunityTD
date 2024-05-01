@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     public static int kills = 0;
     private float timer = 0f;
     public float generatorDelay = 10f;
+    public static int health = 100;
 
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI killsText;
+    public TextMeshProUGUI healthText;
     public GameObject enemyGenerator;
     public TextMeshProUGUI enemySpawnDelayText;
     
@@ -31,6 +33,10 @@ public class Player : MonoBehaviour
         if (killsText != null)
         {
             killsText.text = kills.ToString();
+        }
+        if(healthText != null)
+        {
+            healthText.text = health.ToString();
         }
 
         if (timer < generatorDelay)
@@ -72,5 +78,9 @@ public class Player : MonoBehaviour
     public static void AddKills(int killsToAdd)
     {
         kills += killsToAdd;
+    }
+    public static void TakeDamage(int damage)
+    {
+        health -= damage;
     }
 }
