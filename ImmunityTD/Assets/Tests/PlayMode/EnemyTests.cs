@@ -147,17 +147,17 @@ public class EnemyTests
         Player player = playerGameObject.AddComponent<Player>();
 
         // Record initial player stats
-        float initialCoins = Player.coins;
-        int initialKills = Player.kills;
-        int initialScore = Player.score;
+        float initialCoins = Player.Coins;
+        int initialKills = Player.Kills;
+        int initialScore = Player.Score;
 
         // Kill the enemy
         enemy.TakeDamage(enemy.maxHealth);
 
         // Since enemy death updates are static in the Player class, we don't need to access player instance
-        Assert.AreEqual(initialCoins + enemy.coinsWhenDied, Player.coins, "Player coins should increase by the coinsWhenDied value of the enemy");
-        Assert.AreEqual(initialKills + 1, Player.kills, "Player kill count should increase by 1");
-        Assert.AreEqual(initialScore + enemy.coinsWhenDied, Player.score, "Player score should increase by the coinsWhenDied value of the enemy");
+        Assert.AreEqual(initialCoins + enemy.coinsWhenDied, Player.Coins, "Player coins should increase by the coinsWhenDied value of the enemy");
+        Assert.AreEqual(initialKills + 1, Player.Kills, "Player kill count should increase by 1");
+        Assert.AreEqual(initialScore + enemy.coinsWhenDied, Player.Score, "Player score should increase by the coinsWhenDied value of the enemy");
     }
 
     // Cleanup after each test

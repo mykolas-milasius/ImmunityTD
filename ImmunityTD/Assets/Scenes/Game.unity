@@ -3172,7 +3172,7 @@ GameObject:
   - component: {fileID: 810241319}
   - component: {fileID: 810241318}
   m_Layer: 7
-  m_Name: Coins
+  m_Name: CoinsCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4667,7 +4667,7 @@ GameObject:
   - component: {fileID: 981907106}
   - component: {fileID: 981907105}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HealthCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5611,7 +5611,7 @@ GameObject:
   - component: {fileID: 1052766690}
   - component: {fileID: 1052766689}
   m_Layer: 7
-  m_Name: Kills
+  m_Name: KillsCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5762,16 +5762,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03446adf638569a4480613268661db45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generatorDelay: 8
-  enemyWaveTextTimer: 5
-  debugMode: 0
-  coinsText: {fileID: 810241318}
-  scoreText: {fileID: 1860163357}
-  killsText: {fileID: 1052766689}
-  healthText: {fileID: 981907105}
-  enemyGenerator: {fileID: 1621336809}
-  enemySpawnDelayText: {fileID: 522597145}
-  enemyWaveText: {fileID: 1338838455}
+  GeneratorDelay: 10
+  Difficulty: 2
+  DebugMode: 0
+  EnemyGenerator: {fileID: 1621336809}
+  CoinsText: {fileID: 810241318}
+  ScoreText: {fileID: 1860163357}
+  KillsText: {fileID: 1052766689}
+  HealthText: {fileID: 981907105}
+  EnemySpawnDelayText: {fileID: 522597145}
+  EnemyWaveText: {fileID: 1338838455}
 --- !u!4 &1148136252
 Transform:
   m_ObjectHideFlags: 0
@@ -6352,7 +6352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1338838454
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7100,16 +7100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81fba475e4dea445b9aa8dd4f32de015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 3875646891751454614, guid: 9d03bdb2263ac4932bba0c51fe132b4d, type: 3}
-  - {fileID: 3875646891751454614, guid: 51a2f98ac96da451489d0b213a6790d9, type: 3}
+  EnemyPrefabs:
   - {fileID: 3875646891751454614, guid: df79cbaeffe3e4f98972760139e6d572, type: 3}
   - {fileID: 3875646891751454614, guid: 1d409c82ee7054888b7c66f32179cbb3, type: 3}
-  wayPoints: {fileID: 289915106}
-  spawnSpeed: 3
-  enemyLimit: 100
-  difficulty: 2
-  enemyWaveText: {fileID: 1338838455}
+  - {fileID: 3875646891751454614, guid: 9d03bdb2263ac4932bba0c51fe132b4d, type: 3}
+  - {fileID: 3875646891751454614, guid: 51a2f98ac96da451489d0b213a6790d9, type: 3}
+  WayPoints: {fileID: 289915106}
+  SpawnSpeed: 0
+  EnemyLimit: 100
 --- !u!4 &1621336811
 Transform:
   m_ObjectHideFlags: 0
@@ -8596,7 +8594,7 @@ GameObject:
   - component: {fileID: 1860163358}
   - component: {fileID: 1860163357}
   m_Layer: 7
-  m_Name: Score
+  m_Name: ScoreCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

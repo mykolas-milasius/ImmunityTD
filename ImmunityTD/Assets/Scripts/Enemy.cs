@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
         Player.AddScore(coinsWhenDied);
         audioManager.PlaySFX(audioManager.virusDeath); // ------------------------------------------------------------------------------------------------------------------
         Destroy(gameObject);
-        EnemyGenerator.enemyCount--;
+        EnemyGenerator.EnemyCount--;
     }
 
     void UpdateHealthBar()

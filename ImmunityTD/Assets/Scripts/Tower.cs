@@ -99,7 +99,7 @@ public class Tower : MonoBehaviour
         }
         if (button != null)
         {
-            if (Player.coins >= upgradePrice)
+            if (Player.Coins >= upgradePrice)
             {
                 button.interactable = true;
             }
@@ -115,7 +115,7 @@ public class Tower : MonoBehaviour
         damage = (float)(damage * 1.2);
         attackSpeed = (float)(attackSpeed * 1.2);
         range = (float)(range * 1.2);
-        Player.coins -= upgradePrice;
+        Player.Coins -= upgradePrice;
 
         upgradePrice = (float)Math.Round(upgradePrice * 2, 1);
         upgradeDamage = (float)Math.Round(damage * 1.2, 1);

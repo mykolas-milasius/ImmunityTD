@@ -21,7 +21,7 @@ public class PurchaseButtonTests
         towerSelectionButton.towerPrefab = towerSelectionButtonObject;
 
         PurchaseButton.towerButton = towerSelectionButton;
-        Player.coins = 100; // Set player coins to a value more than tower price
+        Player.Coins = 100; // Set player coins to a value more than tower price
 
         // Act
         purchaseButton.Start(); // Call Start to initialize button state
@@ -89,7 +89,7 @@ public class PurchaseButtonTests
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
         towerSelectionButton.price = 50f; // Set tower price
         towerSelectionButton.towerPrefab = towerSelectionButtonObject;
-        Player.coins = 60;
+        Player.Coins = 60;
 
         GameObject slotObject = new GameObject();
         Slot slot = slotObject.AddComponent<Slot>();

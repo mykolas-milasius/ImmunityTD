@@ -89,7 +89,7 @@ public class TowerTests
     [Test]
     public void Tower_UpgradesCorrectly()
     {
-        Player.coins = 1000f;
+        Player.Coins = 1000f;
 
         float initialDamage = tower.damage;
         float initialAttackSpeed = tower.attackSpeed;

@@ -38,7 +38,7 @@ public class EnemyPath : MonoBehaviour
         {
             Destroy(gameObject);
             Player.TakeDamage(1);
-            EnemyGenerator.enemyCount--;
+            EnemyGenerator.EnemyCount--;
             // gameOverText.SetActive(true);
         }
     }
