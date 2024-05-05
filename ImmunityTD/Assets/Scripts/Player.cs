@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
@@ -44,29 +45,8 @@ public class Player : MonoBehaviour
     
     public void FixedUpdate()
     {
-        if (coinsText != null)
-        {
-            coinsText.text = coins.ToString();
-        }
-
-        if (scoreText != null)
-        {
-            scoreText.text = score.ToString();
-        }
-
-        if (killsText != null)
-        {
-            killsText.text = kills.ToString();
-        }
-
-        if (debugMode)
-        {
-            InitializeDebug();
-        }
-        else
-        {
-            Initialize();
-        }
+        UpdateTaskbar();
+        StartEnemyGenerator();
     }
 
     public static void AddCoins(float coinsToAdd)
@@ -89,33 +69,63 @@ public class Player : MonoBehaviour
         kills += killsToAdd;
     }
 
-    void Initialize()
-    {   
-        if (timer < generatorDelay)
+    /// <summary>
+    /// Starts the enemy generator 
+    /// </summary>
+    void StartEnemyGenerator()
+    {
+        if (!debugMode)
         {
-            timer += Time.deltaTime;
-            if (enemySpawnDelayText != null)
+            if (timer < generatorDelay)
             {
-                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0:f1} seconds", generatorDelay - timer);
+                timer += Time.deltaTime;
+                if (enemySpawnDelayText != null)
+                {
+                    enemySpawnDelayText.text = String.Format("Enemies spawn in: {0:f1} seconds", generatorDelay - timer);
+                }
+            }
+            else {
+                if (enemyGenerator != null)
+                {
+                    enemyGenerator.SetActive(true);
+                }
+                if (enemySpawnDelayText != null)
+                {
+                    enemySpawnDelayText.enabled = false;
+                }
             }
         }
-        else {
-            if (enemyGenerator != null)
-            {
-                enemyGenerator.SetActive(true);
-            }
-            if (enemySpawnDelayText != null)
-            {
-                enemySpawnDelayText.enabled = false;
-            }
+        else
+        {
+            coins = 1000000f;
+            generatorDelay = 0.1f;
+            enemyGenerator.SetActive(true);
+            enemySpawnDelayText.enabled = false;
         }
     }
 
-    void InitializeDebug()
+    /// <summary>
+    /// Updates the taskbar
+    /// </summary>
+    void UpdateTaskbar()
     {
-        coins = 1000000f;
-        generatorDelay = 0.1f;
-        enemyGenerator.SetActive(true);
-        enemySpawnDelayText.enabled = false;
+        NumberFormatInfo nfi = new NumberFormatInfo();
+        nfi.NumberGroupSeparator = " ";
+        nfi.NumberGroupSizes = new int[] { 3 };
+
+        if (coinsText != null)
+        {
+            coinsText.text = coins.ToString("n0", nfi);
+        }
+
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString("n0", nfi);
+        }
+
+        if (killsText != null)
+        {
+            killsText.text = kills.ToString("n0", nfi);
+        }
     }
 }

@@ -186,11 +186,15 @@ public class EnemyGenerator : MonoBehaviour
             else
             {
                 enemiesInWave = 0;
-                Debug.Log("Wave " + currentWave + " starting now");
+                Debug.Log("Wave " + currentWave + "/" + maxWaves + " starting now");
             }
         }
     }
 
+    /// <summary>
+    /// Returns the difficulty text based on the difficulty level
+    /// </summary>
+    /// <returns>Difficulty text</returns>
     string GetDifficultyText()
     {
         switch (difficulty)
