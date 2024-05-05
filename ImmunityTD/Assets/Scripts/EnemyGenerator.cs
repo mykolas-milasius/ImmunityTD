@@ -8,32 +8,22 @@ public class EnemyGenerator : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public GameObject wayPoints;
     public int spawnSpeed;
-
-    /// <summary>
-    /// Interval for spawning enemies
-    /// Random value between 0 and 10 divided by spawnSpeed
-    /// </summary>
-    private float spawnInterval;
-    private float timer = 0f;
+    public int difficulty = 2; // 1 - easy, 2 - medium, 3 - hard, 4 - slavery
     public int enemyLimit = 100;
-    public static int enemyCount = 0;
     
-    /// <summary>
-    /// Difficulty of the game
-    /// 1 - easy, 2 - medium, 3 - hard, 4 - slavery
-    /// </summary>
-    public int difficulty = 2;
+    private float spawnInterval; // Random value between 0 and 10 divided by spawnSpeed
+    private float timer = 0f;
+    public static int enemyCount = 0;
     private int[] maxEnemiesInWave = new int[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
     private int enemiesInWave = 0;
     private int maxWaves = 1;
     private int currentWave = 1;
-
-    public TextMeshProUGUI enemyWaveText;
-
+    
     public void Start()
     {
         SetInitialValuesBasedOnDifficulty(difficulty);
         RandomInterval();
+        Player.Instance.UpdateEnemyWaveText(currentWave, maxWaves, maxEnemiesInWave[currentWave - 1]);
     }
 
     public void Update()
@@ -113,11 +103,7 @@ public class EnemyGenerator : MonoBehaviour
                 break;
         }
     }
-
-    /// <summary>
-    /// Checks if the wave is completed.
-    /// If so, starts the next wave or ends the game.
-    /// </summary>
+    
     private void CheckWaveCompletion()
     {
         if (GameObject.FindObjectsOfType<Enemy>().Length == 0)

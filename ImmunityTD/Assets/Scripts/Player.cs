@@ -7,22 +7,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    /// <summary>
-    /// Player instance to access from other scripts
-    /// </summary>
-    public static Player Instance;
+    public static Player Instance; // Used to access Player class from other scripts
     public static float coins = 100f;
     public static int score = 0;
     public static int kills = 0;
-    private float timer = 0f;
     public float generatorDelay = 10f;
     public static int health = 100;
     public float enemyWaveTextTimer = 5f;
-
-    /// <summary>
-    /// Debug mode - infinite coins, no delay for enemy generator
-    /// </summary>
-    public bool debugMode = false;
+    public bool debugMode = false; // No delay for enemy generator, infinite coins
+    
+    private float timer = 0f;
     private bool gameRunning = false;
 
     public TextMeshProUGUI coinsText;
@@ -32,15 +26,15 @@ public class Player : MonoBehaviour
     public GameObject enemyGenerator;
     public TextMeshProUGUI enemySpawnDelayText;
     public TextMeshProUGUI enemyWaveText;
-    
+
     public void FixedUpdate()
     {
-        UpdateTaskbar();
         if (!gameRunning)
         {
-            enemySpawnDelayText.gameObject.SetActive(true);
             StartEnemyGenerator();
         }
+
+        UpdateTaskbar();
     }
 
     void Awake()
@@ -52,30 +46,6 @@ public class Player : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-        if(healthText != null)
-        {
-            healthText.text = health.ToString();
-        }
-
-        if (timer < generatorDelay)
-        {
-            timer += Time.deltaTime;
-            if (enemySpawnDelayText != null)
-            {
-                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0,3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
-            }
-        }
-        else
-        {
-            if (enemyGenerator != null)
-            {
-                enemyGenerator.SetActive(true);
-            }
-            if (enemySpawnDelayText != null)
-            {
-                enemySpawnDelayText.enabled = false;
-            }
         }
     }
 
@@ -110,22 +80,16 @@ public class Player : MonoBehaviour
             if (timer < generatorDelay)
             {
                 timer += Time.deltaTime;
-                if (enemySpawnDelayText != null)
-                {
-                    enemySpawnDelayText.text = String.Format("Enemies spawn in: {0:f1} seconds", generatorDelay - timer);
-                }
+                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0:f1} seconds", generatorDelay - timer);
             }
             else {
-                if (enemyGenerator != null && enemySpawnDelayText != null)
-                {
-                    TurnOnGame();
-                }
+                TurnOnGame();
             }
         }
         else
         {
             coins = 10000000f;
-            generatorDelay = 1f;
+            generatorDelay = 0.5f;
             TurnOnGame();
         }
     }
@@ -150,24 +114,36 @@ public class Player : MonoBehaviour
         {
             killsText.text = kills.ToString("n0", nfi);
         }
+
+        if (healthText != null)
+        {
+            healthText.text = health.ToString("n0", nfi);
+        }
     }
 
     public void TurnOnGame()
     {
-        gameRunning = true;
-        enemyGenerator.SetActive(true);
-        enemySpawnDelayText.gameObject.SetActive(false);
-        Debug.Log("Game started");
+        if (!gameRunning)
+        {
+            gameRunning = true;
+            StartEnemyGenerator();
+            enemyGenerator.SetActive(true);
+            enemySpawnDelayText.gameObject.SetActive(false);
+            Debug.Log("Game started");
+        }
     }
 
     public void TurnOffGame()
     {
-        gameRunning = false;
-        timer = 0f;
-        generatorDelay /= 2;
-        enemyGenerator.SetActive(false);
-        enemySpawnDelayText.gameObject.SetActive(true);
-        Debug.Log("Game stopped");
+        if (gameRunning)
+        {
+            gameRunning = false;
+            timer = 0f;
+            generatorDelay /= 2;
+            enemyGenerator.SetActive(false);
+            enemySpawnDelayText.gameObject.SetActive(true);
+            Debug.Log("Game stopped");
+        }
     }
 
     public void UpdateEnemyWaveText(int wave, int maxWaves, int enemiesInWave)
