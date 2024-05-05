@@ -13,6 +13,13 @@ public class Enemy : MonoBehaviour
     private float currentHealth;
     private SpriteRenderer spriteRenderer;
 
+    private AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     public void Start()
     {
         currentHealth = maxHealth;
@@ -46,6 +53,7 @@ public class Enemy : MonoBehaviour
         Player.AddCoins(coinsWhenDied);
         Player.AddKill();
         Player.AddScore(coinsWhenDied);
+        audioManager.PlaySFX(audioManager.virusDeath); // ------------------------------------------------------------------------------------------------------------------
         Destroy(gameObject);
         EnemyGenerator.enemyCount--;
     }

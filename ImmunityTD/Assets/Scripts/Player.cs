@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public static int kills = 0;
     private float timer = 0f;
     public float generatorDelay = 10f;
+    public static int health = 100;
     public float enemyWaveTextTimer = 5f;
 
     /// <summary>
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI killsText;
+    public TextMeshProUGUI healthText;
     public GameObject enemyGenerator;
     public TextMeshProUGUI enemySpawnDelayText;
     public TextMeshProUGUI enemyWaveText;
@@ -51,6 +53,30 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(healthText != null)
+        {
+            healthText.text = health.ToString();
+        }
+
+        if (timer < generatorDelay)
+        {
+            timer += Time.deltaTime;
+            if (enemySpawnDelayText != null)
+            {
+                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0,3} seconds", Math.Round(generatorDelay - timer, 1).ToString());
+            }
+        }
+        else
+        {
+            if (enemyGenerator != null)
+            {
+                enemyGenerator.SetActive(true);
+            }
+            if (enemySpawnDelayText != null)
+            {
+                enemySpawnDelayText.enabled = false;
+            }
+        }
     }
 
     public static void AddCoins(float coinsToAdd)
@@ -71,6 +97,10 @@ public class Player : MonoBehaviour
     public static void AddKills(int killsToAdd)
     {
         kills += killsToAdd;
+    }
+    public static void TakeDamage(int damage)
+    {
+        health -= damage;
     }
 
     void StartEnemyGenerator()
