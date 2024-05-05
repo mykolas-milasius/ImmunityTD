@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -11,7 +10,7 @@ public class Player : MonoBehaviour
     public static float Coins = 100f;
     public static int Score = 0;
     public static int Kills = 0;
-    public float GeneratorDelay = 10f;
+    public float GeneratorDelay = 8f;
     public static int Health = 100;
     public int Difficulty = 2; // 1 - easy, 2 - medium, 3 - hard, 4 - slavery
     public bool DebugMode = false; // No delay for enemy generator, infinite coins
@@ -55,9 +54,9 @@ public class Player : MonoBehaviour
         Coins += coinsToAdd;
     }
 
-    public static void AddScore(float scoreToAdd)
+    public static void AddScore(int scoreToAdd)
     {
-        Score += (int)scoreToAdd;
+        Score += scoreToAdd;
     }
 
     public static void AddKill()
@@ -76,6 +75,8 @@ public class Player : MonoBehaviour
 
     void StartEnemyGenerator()
     {
+        EnemySpawnDelayText.gameObject.SetActive(true);
+        
         if (!DebugMode)
         {
             if (_timer < GeneratorDelay)
@@ -83,23 +84,27 @@ public class Player : MonoBehaviour
                 _timer += Time.deltaTime;
                 EnemySpawnDelayText.text = String.Format("Enemies spawn in: {0:f1} seconds", GeneratorDelay - _timer);
             }
-            else {
+            else if (!_gameRunning)
+            {
                 TurnOnGame();
             }
         }
         else
         {
-            Coins = 10000000f;
-            GeneratorDelay = 0.5f;
+            Coins = 100000000;
+            GeneratorDelay = 1f;
+            Difficulty = 4;
             TurnOnGame();
         }
     }
 
     void UpdateTaskbar()
     {
-        NumberFormatInfo nfi = new NumberFormatInfo();
-        nfi.NumberGroupSeparator = " ";
-        nfi.NumberGroupSizes = new int[] { 3 };
+        NumberFormatInfo nfi = new NumberFormatInfo
+        {
+            NumberGroupSeparator = " ",
+            NumberGroupSizes = new int[] { 3 }
+        };
 
         if (CoinsText != null)
         {
@@ -127,10 +132,9 @@ public class Player : MonoBehaviour
         if (!_gameRunning)
         {
             _gameRunning = true;
-            _timer = 0f;
-            StartEnemyGenerator();
             EnemyGenerator.SetActive(true);
             EnemySpawnDelayText.gameObject.SetActive(false);
+            EnemyGenerator.GetComponent<EnemyGenerator>().StartNewWave();
             Debug.Log("Game started");
         }
     }
@@ -152,13 +156,13 @@ public class Player : MonoBehaviour
     {
         if (EnemyWaveText != null)
         {
-            EnemyWaveText.text = $"Wave {wave}/{maxWaves}. Enemies in wave: {enemiesInWave}";
             EnemyWaveText.gameObject.SetActive(true);
+            EnemyWaveText.text = $"Wave {wave}/{maxWaves}. Enemies in wave: {enemiesInWave}";
             StartCoroutine(HideEnemyWaveTextAfterDelay(_enemyWaveTextTimer));
         }
     }
 
-    public IEnumerator HideEnemyWaveTextAfterDelay(float delay)
+    private IEnumerator HideEnemyWaveTextAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         if (EnemyWaveText != null)

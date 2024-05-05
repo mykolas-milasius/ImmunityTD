@@ -1935,7 +1935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &522597144
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5762,7 +5762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03446adf638569a4480613268661db45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GeneratorDelay: 10
+  GeneratorDelay: 8
   Difficulty: 2
   DebugMode: 0
   EnemyGenerator: {fileID: 1621336809}
@@ -6352,7 +6352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1338838454
 RectTransform:
   m_ObjectHideFlags: 0

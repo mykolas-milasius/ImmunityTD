@@ -4,7 +4,7 @@ using TMPro;
 public class Enemy : MonoBehaviour
 {
     public float maxHealth = 100;
-    public float coinsWhenDied = 1;
+    public int coinsWhenDied = 1;
     public float speed = 2;
     public RectTransform healthBarForeground;
     public TextMeshProUGUI damageText;
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
-        // Debug.Log(this.name + " took " + damage + " damage. Health left: " + currentHealth);
+        Debug.Log(this.name + " took " + damage + " damage. Health left: " + currentHealth);
         UpdateHealthBar();
         DisplayDamage(damage);
 

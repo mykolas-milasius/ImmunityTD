@@ -102,22 +102,30 @@ public class EnemyGenerator : MonoBehaviour
                 break;
         }
     }
+
+    public void StartNewWave()
+    {
+        if (_currentWave <= _maxWaves)
+        {
+            UpdateEnemyWaveText();
+            _timer = 0f;
+        }
+    }
     
     private void CheckWaveCompletion()
     {
         if (GameObject.FindObjectsOfType<Enemy>().Length == 0)
         {
-            _currentWave++;
             Player.Instance.TurnOffGame();
 
-            if (_currentWave > _maxWaves)
+            if (_currentWave >= _maxWaves)
             {
                 Debug.Log("All waves completed");
             }
             else
             {
+                _currentWave++;
                 _enemiesInWave = 0;
-                UpdateEnemyWaveText();
                 Debug.Log($"Wave: {_currentWave}/{_maxWaves} starting now");
             }
         }
