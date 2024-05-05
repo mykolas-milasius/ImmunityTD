@@ -6,11 +6,35 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    /// <summary>
+    /// Current number of coins
+    /// </summary>
     public static float coins = 100f;
+
+    /// <summary>
+    /// Current number of coins
+    /// </summary>
     public static int score = 0;
+
+    /// <summary>
+    /// Current number of kills
+    /// </summary>
     public static int kills = 0;
+
+    /// <summary>
+    /// Timer for enemy generator
+    /// </summary>
     private float timer = 0f;
+
+    /// <summary>
+    /// Delay for enemy generator
+    /// </summary>
     public float generatorDelay = 10f;
+
+    /// <summary>
+    /// Debug mode - infinite coins, no delay for enemy generator
+    /// </summary>
+    public bool debugMode = false;
 
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI scoreText;
@@ -24,32 +48,24 @@ public class Player : MonoBehaviour
         {
             coinsText.text = coins.ToString();
         }
+
         if (scoreText != null)
         {
             scoreText.text = score.ToString();
         }
+
         if (killsText != null)
         {
             killsText.text = kills.ToString();
         }
 
-        if (timer < generatorDelay)
+        if (debugMode)
         {
-            timer += Time.deltaTime;
-            if (enemySpawnDelayText != null)
-            {
-                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0:f1} seconds", generatorDelay - timer);
-            }
+            InitializeDebug();
         }
-        else {
-            if (enemyGenerator != null)
-            {
-                enemyGenerator.SetActive(true);
-            }
-            if (enemySpawnDelayText != null)
-            {
-                enemySpawnDelayText.enabled = false;
-            }
+        else
+        {
+            Initialize();
         }
     }
 
@@ -71,5 +87,35 @@ public class Player : MonoBehaviour
     public static void AddKills(int killsToAdd)
     {
         kills += killsToAdd;
+    }
+
+    void Initialize()
+    {   
+        if (timer < generatorDelay)
+        {
+            timer += Time.deltaTime;
+            if (enemySpawnDelayText != null)
+            {
+                enemySpawnDelayText.text = String.Format("Enemies spawn in: {0:f1} seconds", generatorDelay - timer);
+            }
+        }
+        else {
+            if (enemyGenerator != null)
+            {
+                enemyGenerator.SetActive(true);
+            }
+            if (enemySpawnDelayText != null)
+            {
+                enemySpawnDelayText.enabled = false;
+            }
+        }
+    }
+
+    void InitializeDebug()
+    {
+        coins = 1000000f;
+        generatorDelay = 0.1f;
+        enemyGenerator.SetActive(true);
+        enemySpawnDelayText.enabled = false;
     }
 }

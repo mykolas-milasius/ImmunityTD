@@ -5258,6 +5258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generatorDelay: 10
+  debugMode: 0
   coinsText: {fileID: 810241318}
   scoreText: {fileID: 1860163357}
   killsText: {fileID: 1052766689}
@@ -6599,6 +6600,7 @@ MonoBehaviour:
   wayPoints: {fileID: 289915106}
   spawnSpeed: 3
   enemyLimit: 100
+  difficulty: 2
 --- !u!4 &1621336811
 Transform:
   m_ObjectHideFlags: 0
