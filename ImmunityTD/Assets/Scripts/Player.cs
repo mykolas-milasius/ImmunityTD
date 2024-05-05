@@ -8,45 +8,49 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     /// <summary>
-    /// Current number of coins
+    /// Player instance to access from other scripts
     /// </summary>
+    public static Player Instance;
     public static float coins = 100f;
-
-    /// <summary>
-    /// Current number of coins
-    /// </summary>
     public static int score = 0;
-
-    /// <summary>
-    /// Current number of kills
-    /// </summary>
     public static int kills = 0;
-
-    /// <summary>
-    /// Timer for enemy generator
-    /// </summary>
     private float timer = 0f;
-
-    /// <summary>
-    /// Delay for enemy generator
-    /// </summary>
     public float generatorDelay = 10f;
+    public float enemyWaveTextTimer = 5f;
 
     /// <summary>
     /// Debug mode - infinite coins, no delay for enemy generator
     /// </summary>
     public bool debugMode = false;
+    private bool gameRunning = false;
 
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI killsText;
     public GameObject enemyGenerator;
     public TextMeshProUGUI enemySpawnDelayText;
+    public TextMeshProUGUI enemyWaveText;
     
     public void FixedUpdate()
     {
         UpdateTaskbar();
-        StartEnemyGenerator();
+        if (!gameRunning)
+        {
+            enemySpawnDelayText.gameObject.SetActive(true);
+            StartEnemyGenerator();
+        }
+    }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public static void AddCoins(float coinsToAdd)
@@ -69,9 +73,6 @@ public class Player : MonoBehaviour
         kills += killsToAdd;
     }
 
-    /// <summary>
-    /// Starts the enemy generator 
-    /// </summary>
     void StartEnemyGenerator()
     {
         if (!debugMode)
@@ -85,28 +86,20 @@ public class Player : MonoBehaviour
                 }
             }
             else {
-                if (enemyGenerator != null)
+                if (enemyGenerator != null && enemySpawnDelayText != null)
                 {
-                    enemyGenerator.SetActive(true);
-                }
-                if (enemySpawnDelayText != null)
-                {
-                    enemySpawnDelayText.enabled = false;
+                    TurnOnGame();
                 }
             }
         }
         else
         {
-            coins = 1000000f;
-            generatorDelay = 0.1f;
-            enemyGenerator.SetActive(true);
-            enemySpawnDelayText.enabled = false;
+            coins = 10000000f;
+            generatorDelay = 1f;
+            TurnOnGame();
         }
     }
 
-    /// <summary>
-    /// Updates the taskbar
-    /// </summary>
     void UpdateTaskbar()
     {
         NumberFormatInfo nfi = new NumberFormatInfo();
@@ -126,6 +119,43 @@ public class Player : MonoBehaviour
         if (killsText != null)
         {
             killsText.text = kills.ToString("n0", nfi);
+        }
+    }
+
+    public void TurnOnGame()
+    {
+        gameRunning = true;
+        enemyGenerator.SetActive(true);
+        enemySpawnDelayText.gameObject.SetActive(false);
+        Debug.Log("Game started");
+    }
+
+    public void TurnOffGame()
+    {
+        gameRunning = false;
+        timer = 0f;
+        generatorDelay /= 2;
+        enemyGenerator.SetActive(false);
+        enemySpawnDelayText.gameObject.SetActive(true);
+        Debug.Log("Game stopped");
+    }
+
+    public void UpdateEnemyWaveText(int wave, int maxWaves, int enemiesInWave)
+    {
+        if (enemyWaveText != null)
+        {
+            enemyWaveText.text = $"Wave {wave}/{maxWaves}. Enemies in wave: {enemiesInWave}";
+            enemyWaveText.gameObject.SetActive(true);
+            StartCoroutine(HideEnemyWaveTextAfterDelay(enemyWaveTextTimer));
+        }
+    }
+
+    private IEnumerator HideEnemyWaveTextAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (enemyWaveText != null)
+        {
+            enemyWaveText.gameObject.SetActive(false);
         }
     }
 }

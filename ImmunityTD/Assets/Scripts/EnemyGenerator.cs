@@ -1,22 +1,12 @@
 using UnityEngine;
 using System.Linq;
 using System;
+using TMPro;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    /// <summary>
-    /// All enemy prefabs
-    /// </summary>
     public GameObject[] enemyPrefabs;
-
-    /// <summary>
-    /// Waypoints for enemies to follow
-    /// </summary>
     public GameObject wayPoints;
-
-    /// <summary>
-    /// Speed of spawning enemies
-    /// </summary>
     public int spawnSpeed;
 
     /// <summary>
@@ -24,20 +14,8 @@ public class EnemyGenerator : MonoBehaviour
     /// Random value between 0 and 10 divided by spawnSpeed
     /// </summary>
     private float spawnInterval;
-
-    /// <summary>
-    /// Timer for spawning enemies
-    /// </summary>
     private float timer = 0f;
-
-    /// <summary>
-    /// Maximum number of enemies on the map
-    /// </summary>
     public int enemyLimit = 100;
-
-    /// <summary>
-    /// Current number of enemies on the map
-    /// </summary>
     public static int enemyCount = 0;
     
     /// <summary>
@@ -45,39 +23,19 @@ public class EnemyGenerator : MonoBehaviour
     /// 1 - easy, 2 - medium, 3 - hard, 4 - slavery
     /// </summary>
     public int difficulty = 2;
-
-    /// <summary>
-    /// Maximum number of enemies in the wave
-    /// </summary>
     private int[] maxEnemiesInWave = new int[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-
-    /// <summary>
-    /// Current number of enemies in the wave
-    /// </summary>
     private int enemiesInWave = 0;
-
-    /// <summary>
-    /// Maximum number of waves
-    /// </summary>
     private int maxWaves = 1;
-
-    /// <summary>
-    /// Current wave
-    /// </summary>
     private int currentWave = 1;
 
-    /// <summary>
-    /// Start method for EnemyGenerator
-    /// </summary>
+    public TextMeshProUGUI enemyWaveText;
+
     public void Start()
     {
         SetInitialValuesBasedOnDifficulty(difficulty);
         RandomInterval();
     }
 
-    /// <summary>
-    /// Update method for EnemyGenerator
-    /// </summary>
     public void Update()
     {
         timer += Time.deltaTime;
@@ -89,11 +47,7 @@ public class EnemyGenerator : MonoBehaviour
                 if (enemyCount < enemyLimit && enemiesInWave < maxEnemiesInWave[currentWave - 1])
                 {
                     SpawnEnemy();
-                    Debug.Log(
-                        "Difficulty: " + difficulty + ", " + GetDifficultyText() + ". " +
-                        "Wave: " + currentWave + "/" + maxWaves + ". " +
-                        "Enemies: " + enemiesInWave + "/" + maxEnemiesInWave[currentWave - 1]
-                    );
+                    Debug.Log($"Difficulty: {difficulty}, {GetDifficultyText()}. Wave: {currentWave}/{maxWaves}. Enemies: {enemiesInWave}/{maxEnemiesInWave[currentWave - 1]}");
                 }
                 else if (enemiesInWave >= maxEnemiesInWave[currentWave - 1])
                 {
@@ -103,17 +57,11 @@ public class EnemyGenerator : MonoBehaviour
         }   
     }
 
-    /// <summary>
-    /// Random interval for spawning enemies
-    /// </summary>
-    void RandomInterval()
+    private void RandomInterval()
     {
         spawnInterval = UnityEngine.Random.Range(0.1f, 10f / spawnSpeed);
     }
 
-    /// <summary>
-    /// Spawning enemies
-    /// </summary>
     public void SpawnEnemy()
     {
         int randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
@@ -139,11 +87,7 @@ public class EnemyGenerator : MonoBehaviour
         // Debug.Log("enemies: " + enemyCount + "/" + enemyLimit);
     }
 
-    /// <summary>
-    /// Sets initial values based on the given difficulty
-    /// </summary>
-    /// <param name="diff">Difficulty</param>
-    void SetInitialValuesBasedOnDifficulty(int diff)
+    private void SetInitialValuesBasedOnDifficulty(int diff)
     {
         switch (diff)
         {
@@ -174,11 +118,13 @@ public class EnemyGenerator : MonoBehaviour
     /// Checks if the wave is completed.
     /// If so, starts the next wave or ends the game.
     /// </summary>
-    void CheckWaveCompletion()
+    private void CheckWaveCompletion()
     {
         if (GameObject.FindObjectsOfType<Enemy>().Length == 0)
         {
             currentWave++;
+            Player.Instance.TurnOffGame();
+
             if (currentWave > maxWaves)
             {
                 Debug.Log("All waves completed");
@@ -186,16 +132,13 @@ public class EnemyGenerator : MonoBehaviour
             else
             {
                 enemiesInWave = 0;
-                Debug.Log("Wave " + currentWave + "/" + maxWaves + " starting now");
+                UpdateEnemyWaveText();
+                Debug.Log($"Wave: {currentWave}/{maxWaves} starting now");
             }
         }
     }
 
-    /// <summary>
-    /// Returns the difficulty text based on the difficulty level
-    /// </summary>
-    /// <returns>Difficulty text</returns>
-    string GetDifficultyText()
+    private string GetDifficultyText()
     {
         switch (difficulty)
         {
@@ -210,5 +153,10 @@ public class EnemyGenerator : MonoBehaviour
         }
         
         return "bbz";
+    }
+    
+    private void UpdateEnemyWaveText()
+    {
+        Player.Instance.UpdateEnemyWaveText(currentWave, maxWaves, maxEnemiesInWave[currentWave - 1]);
     }
 }
