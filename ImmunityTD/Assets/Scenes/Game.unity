@@ -5772,6 +5772,7 @@ MonoBehaviour:
   HealthText: {fileID: 981907105}
   EnemySpawnDelayText: {fileID: 522597145}
   EnemyWaveText: {fileID: 1338838455}
+  GameOverText: {fileID: 165607197}
 --- !u!4 &1148136252
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private float _timer = 0f;
     private float _enemyWaveTextTimer = 5f;
     private bool _gameRunning = false;
+    private bool _gameFinished = false;
 
     public GameObject EnemyGenerator;
     public TextMeshProUGUI CoinsText;
@@ -26,10 +27,11 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI EnemySpawnDelayText;
     public TextMeshProUGUI EnemyWaveText;
+    public TextMeshProUGUI GameOverText;
 
     public void FixedUpdate()
     {
-        if (!_gameRunning)
+        if (!_gameFinished && !_gameRunning)
         {
             StartEnemyGenerator();
         }
@@ -145,10 +147,24 @@ public class Player : MonoBehaviour
         {
             _gameRunning = false;
             _timer = 0f;
-            GeneratorDelay /= 2;
             EnemyGenerator.SetActive(false);
             EnemySpawnDelayText.gameObject.SetActive(true);
             Debug.Log("Game stopped");
+        }
+    }
+    
+    public void FinishGame()
+    {
+        if (_gameRunning)
+        {
+            _gameRunning = false;
+            _gameFinished = true;
+            _timer = 0f;
+            EnemyGenerator.SetActive(false);
+            EnemySpawnDelayText.gameObject.SetActive(false);
+            GameOverText.gameObject.SetActive(true);
+            GameOverText.text = "Game Over";
+            Debug.Log("Game finished");
         }
     }
 

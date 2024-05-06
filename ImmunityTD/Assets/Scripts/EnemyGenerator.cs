@@ -13,7 +13,7 @@ public class EnemyGenerator : MonoBehaviour
     
     private float _spawnInterval; // Random value between 0 and 10 divided by spawnSpeed
     private float _timer = 0f;
-    private int[] _maxEnemiesInWave = new int[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+    private int[] _maxEnemiesInWave = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
     private int _enemiesInWave = 0;
     private int _maxWaves = 1;
     private int _currentWave = 1;
@@ -116,14 +116,14 @@ public class EnemyGenerator : MonoBehaviour
     {
         if (GameObject.FindObjectsOfType<Enemy>().Length == 0)
         {
-            Player.Instance.TurnOffGame();
-
             if (_currentWave >= _maxWaves)
             {
+                Player.Instance.FinishGame();
                 Debug.Log("All waves completed");
             }
             else
             {
+                Player.Instance.TurnOffGame();
                 _currentWave++;
                 _enemiesInWave = 0;
                 Debug.Log($"Wave: {_currentWave}/{_maxWaves} starting now");
