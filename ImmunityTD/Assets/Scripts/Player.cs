@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private static int Health = 100;
     public int Difficulty = 2; // 1 - easy, 2 - medium, 3 - hard, 4 - slavery
     public bool DebugMode = false; // No delay for enemy generator, infinite coins
+    public bool EndlessMode = false;
     
     private float _timer = 0f;
     private float _enemyWaveTextTimer = 5f;

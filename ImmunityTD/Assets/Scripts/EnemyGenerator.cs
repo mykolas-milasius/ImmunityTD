@@ -13,16 +13,17 @@ public class EnemyGenerator : MonoBehaviour
     
     private float _spawnInterval; // Random value between 0 and 10 divided by spawnSpeed
     private float _timer = 0f;
-    private int[] _maxEnemiesInWave = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+    private int _maxEnemiesInWave = 10;
     private int _enemiesInWave = 0;
     private int _maxWaves = 1;
     private int _currentWave = 1;
+    private bool isInitialized = false;
     
     public void Start()
     {
         SetInitialValuesBasedOnDifficulty(Player.Instance.Difficulty);
         RandomInterval();
-        Player.Instance.UpdateEnemyWaveText(_currentWave, _maxWaves, _maxEnemiesInWave[_currentWave - 1]);
+        Player.Instance.UpdateEnemyWaveText(_currentWave, _maxWaves, _maxEnemiesInWave);
     }
 
     public void Update()
@@ -33,12 +34,12 @@ public class EnemyGenerator : MonoBehaviour
             _timer = 0f;
             if (_currentWave <= _maxWaves)
             {
-                if (EnemyCount < EnemyLimit && _enemiesInWave < _maxEnemiesInWave[_currentWave - 1])
+                if (EnemyCount < EnemyLimit && _enemiesInWave < _maxEnemiesInWave)
                 {
                     SpawnEnemy();
-                    Debug.Log($"Difficulty: {Player.Instance.Difficulty}, {GetDifficultyText()}. Wave: {_currentWave}/{_maxWaves}. Enemies: {_enemiesInWave}/{_maxEnemiesInWave[_currentWave - 1]}");
+                    Debug.Log($"Difficulty: {Player.Instance.Difficulty}, {GetDifficultyText()}. Wave: {_currentWave}/{_maxWaves}. Enemies: {_enemiesInWave}/{_maxEnemiesInWave}");
                 }
-                else if (_enemiesInWave >= _maxEnemiesInWave[_currentWave - 1])
+                else if (_enemiesInWave >= _maxEnemiesInWave)
                 {
                     CheckWaveCompletion();
                 }
@@ -78,6 +79,20 @@ public class EnemyGenerator : MonoBehaviour
 
     private void SetInitialValuesBasedOnDifficulty(int diff)
     {
+        if (isInitialized)
+        {
+            return;
+        }
+        
+        isInitialized = true;
+        
+        if (Player.Instance.EndlessMode)
+        {
+            _maxWaves = 1000;
+            SpawnSpeed = 2;
+            return;
+        }
+        
         switch (diff)
         {
             case 1:
@@ -116,7 +131,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         if (GameObject.FindObjectsOfType<Enemy>().Length == 0)
         {
-            if (_currentWave >= _maxWaves)
+            if (_currentWave >= _maxWaves && !Player.Instance.EndlessMode)
             {
                 Player.Instance.FinishGame();
                 Debug.Log("All waves completed");
@@ -126,6 +141,7 @@ public class EnemyGenerator : MonoBehaviour
                 Player.Instance.TurnOffGame();
                 _currentWave++;
                 _enemiesInWave = 0;
+                _maxEnemiesInWave += 10;
                 Debug.Log($"Wave: {_currentWave}/{_maxWaves} starting now");
             }
         }
@@ -150,6 +166,6 @@ public class EnemyGenerator : MonoBehaviour
     
     private void UpdateEnemyWaveText()
     {
-        Player.Instance.UpdateEnemyWaveText(_currentWave, _maxWaves, _maxEnemiesInWave[_currentWave - 1]);
+        Player.Instance.UpdateEnemyWaveText(_currentWave, _maxWaves, _maxEnemiesInWave);
     }
 }

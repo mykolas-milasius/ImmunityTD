@@ -5765,6 +5765,7 @@ MonoBehaviour:
   GeneratorDelay: 8
   Difficulty: 2
   DebugMode: 0
+  EndlessMode: 0
   EnemyGenerator: {fileID: 1621336809}
   CoinsText: {fileID: 810241318}
   ScoreText: {fileID: 1860163357}
