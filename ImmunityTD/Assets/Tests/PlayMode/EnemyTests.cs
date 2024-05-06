@@ -16,8 +16,8 @@ public class EnemyTests
     {
         enemyGameObject = new GameObject();
         enemy = enemyGameObject.AddComponent<Enemy>();
-        enemy.healthBarForeground = new GameObject().AddComponent<RectTransform>();
-        enemy.damageText = new GameObject().AddComponent<TextMeshProUGUI>();
+        enemy.HealthBarForeground = new GameObject().AddComponent<RectTransform>();
+        enemy.DamageText = new GameObject().AddComponent<TextMeshProUGUI>();
 
         // Mock SpriteRenderer to test DimSprite indirectly
         enemy.gameObject.AddComponent<SpriteRenderer>();
@@ -25,7 +25,7 @@ public class EnemyTests
         // Trigger the Start method manually
         enemy.SendMessage("Start");
 
-        initialHealthBarWidth = enemy.healthBarForeground.sizeDelta.x;
+        initialHealthBarWidth = enemy.HealthBarForeground.sizeDelta.x;
     }
 
     // Test to ensure the enemy is initialized correctly
@@ -35,7 +35,7 @@ public class EnemyTests
         var currentHealthField = typeof(Enemy).GetField("currentHealth", BindingFlags.NonPublic | BindingFlags.Instance);
         float currentHealth = (float)currentHealthField.GetValue(enemy);
 
-        Assert.AreEqual(enemy.maxHealth, currentHealth, "Current health should be initialized to max health");
+        Assert.AreEqual(enemy.MaxHealth, currentHealth, "Current health should be initialized to max health");
         Assert.AreNotEqual(0, initialHealthBarWidth, "Health bar should have a non-zero width");
     }
 
@@ -49,17 +49,17 @@ public class EnemyTests
         var currentHealthField = typeof(Enemy).GetField("currentHealth", BindingFlags.NonPublic | BindingFlags.Instance);
         float currentHealth = (float)currentHealthField.GetValue(enemy);
 
-        Assert.AreEqual(enemy.maxHealth - damage, currentHealth, "Health should decrease by the damage amount");
+        Assert.AreEqual(enemy.MaxHealth - damage, currentHealth, "Health should decrease by the damage amount");
 
-        float expectedWidth = (currentHealth / enemy.maxHealth) * initialHealthBarWidth;
-        Assert.AreEqual(expectedWidth, enemy.healthBarForeground.sizeDelta.x, "Health bar width should decrease proportionally to health loss");
+        float expectedWidth = (currentHealth / enemy.MaxHealth) * initialHealthBarWidth;
+        Assert.AreEqual(expectedWidth, enemy.HealthBarForeground.sizeDelta.x, "Health bar width should decrease proportionally to health loss");
     }
 
     // Test to ensure the enemy dies correctly when health reaches zero
     [Test]
     public void Enemy_DiesCorrectly()
     {
-        enemy.TakeDamage(enemy.maxHealth);
+        enemy.TakeDamage(enemy.MaxHealth);
 
         var currentHealthField = typeof(Enemy).GetField("currentHealth", BindingFlags.NonPublic | BindingFlags.Instance);
         float currentHealth = (float)currentHealthField.GetValue(enemy);
@@ -83,25 +83,25 @@ public class EnemyTests
     {
         enemy.TakeDamage(10f);
 
-        Assert.IsTrue(enemy.damageText.enabled, "Damage text should be enabled after taking damage");
-        Assert.AreEqual("-10", enemy.damageText.text, "Damage text should display the correct damage value");
+        Assert.IsTrue(enemy.DamageText.enabled, "Damage text should be enabled after taking damage");
+        Assert.AreEqual("-10", enemy.DamageText.text, "Damage text should display the correct damage value");
 
         // Assuming you have a mechanism to call `DisableDamageText` after a delay, you can simulate this call here
         enemy.SendMessage("DisableDamageText");
-        Assert.IsFalse(enemy.damageText.enabled, "Damage text should be disabled after a delay");
+        Assert.IsFalse(enemy.DamageText.enabled, "Damage text should be disabled after a delay");
     }
 
     // Test to ensure excessive damage sets health to zero and doesn't go negative
     [Test]
     public void Enemy_HealthDoesNotGoNegative()
     {
-        enemy.TakeDamage(enemy.maxHealth * 2);  // Deal double the max health as damage
+        enemy.TakeDamage(enemy.MaxHealth * 2);  // Deal double the max health as damage
 
         var currentHealthField = typeof(Enemy).GetField("currentHealth", BindingFlags.NonPublic | BindingFlags.Instance);
         float currentHealth = (float)currentHealthField.GetValue(enemy);
 
         Assert.AreEqual(0, currentHealth, "Health should not go below zero");
-        Assert.AreEqual(0, enemy.healthBarForeground.sizeDelta.x, "Health bar width should be zero when health is zero");
+        Assert.AreEqual(0, enemy.HealthBarForeground.sizeDelta.x, "Health bar width should be zero when health is zero");
     }
 
     // Test to ensure the health bar does not increase in size beyond its original width
@@ -110,7 +110,7 @@ public class EnemyTests
     {
         enemy.TakeDamage(-20f);  // Apply negative damage, theoretically healing the enemy
 
-        Assert.AreEqual(initialHealthBarWidth, enemy.healthBarForeground.sizeDelta.x, "Health bar width should not exceed its original width");
+        Assert.AreEqual(initialHealthBarWidth, enemy.HealthBarForeground.sizeDelta.x, "Health bar width should not exceed its original width");
     }
 
     // Test to check if the sprite dims and resets correctly on multiple damage instances
@@ -133,10 +133,10 @@ public class EnemyTests
     public void Enemy_DamageTextUpdatesCorrectlyForMultipleDamages()
     {
         enemy.TakeDamage(10f);
-        Assert.AreEqual("-10", enemy.damageText.text, "Damage text should display correct damage value for the first damage instance");
+        Assert.AreEqual("-10", enemy.DamageText.text, "Damage text should display correct damage value for the first damage instance");
 
         enemy.TakeDamage(5f);
-        Assert.AreEqual("-5", enemy.damageText.text, "Damage text should update to display correct damage value for the second damage instance");
+        Assert.AreEqual("-5", enemy.DamageText.text, "Damage text should update to display correct damage value for the second damage instance");
     }
 
     // Test to ensure player stats are updated upon enemy death
@@ -152,12 +152,12 @@ public class EnemyTests
         int initialScore = Player.Score;
 
         // Kill the enemy
-        enemy.TakeDamage(enemy.maxHealth);
+        enemy.TakeDamage(enemy.MaxHealth);
 
         // Since enemy death updates are static in the Player class, we don't need to access player instance
-        Assert.AreEqual(initialCoins + enemy.coinsWhenDied, Player.Coins, "Player coins should increase by the coinsWhenDied value of the enemy");
+        Assert.AreEqual(initialCoins + enemy.CoinsWhenDied, Player.Coins, "Player coins should increase by the coinsWhenDied value of the enemy");
         Assert.AreEqual(initialKills + 1, Player.Kills, "Player kill count should increase by 1");
-        Assert.AreEqual(initialScore + enemy.coinsWhenDied, Player.Score, "Player score should increase by the coinsWhenDied value of the enemy");
+        Assert.AreEqual(initialScore + enemy.CoinsWhenDied, Player.Score, "Player score should increase by the coinsWhenDied value of the enemy");
     }
 
     // Cleanup after each test

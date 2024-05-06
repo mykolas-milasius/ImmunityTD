@@ -57,16 +57,16 @@ public class EnemyGenerator : MonoBehaviour
         GameObject newEnemy = Instantiate(EnemyPrefabs[randomIndex], transform.position, Quaternion.identity);
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         EnemyPath enemyPathScript = newEnemy.GetComponent<EnemyPath>();
-        enemyPathScript.waypoints = WayPoints.GetComponentsInChildren<Transform>().Skip(1).ToArray();
+        enemyPathScript.Waypoints = WayPoints.GetComponentsInChildren<Transform>().Skip(1).ToArray();
 
         if (WayPoints != null)
         {
-            enemyPathScript.waypoints = WayPoints.GetComponentsInChildren<Transform>().Skip(1).ToArray();
+            enemyPathScript.Waypoints = WayPoints.GetComponentsInChildren<Transform>().Skip(1).ToArray();
         }
 
         if (enemyScript != null && enemyPathScript != null)
         {
-            enemyPathScript.SetSpeed(enemyScript.speed);
+            enemyPathScript.SetSpeed(enemyScript.GetSpeed());
         }
 
         EnemyCount++;

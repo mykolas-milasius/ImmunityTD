@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public static int Score = 0;
     public static int Kills = 0;
     public float GeneratorDelay = 8f;
-    public static int Health = 100;
+    private static int Health = 100;
     public int Difficulty = 2; // 1 - easy, 2 - medium, 3 - hard, 4 - slavery
     public bool DebugMode = false; // No delay for enemy generator, infinite coins
     
@@ -70,9 +70,14 @@ public class Player : MonoBehaviour
     {
         Kills += killsToAdd;
     }
+    
     public static void TakeDamage(int damage)
     {
         Health -= damage;
+        if (Health <= 0)
+        {
+            Instance.FinishGame();
+        }
     }
 
     void StartEnemyGenerator()

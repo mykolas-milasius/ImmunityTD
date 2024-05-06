@@ -71,7 +71,7 @@ public class EnemyGeneratorTests
         // Check if the enemy has the correct waypoints assigned
         var enemyPath = enemy.GetComponent<EnemyPath>();
         Assert.IsNotNull(enemyPath);
-        Assert.AreEqual(generator.WayPoints.GetComponentsInChildren<Transform>().Length - 1, enemyPath.waypoints.Length);
+        Assert.AreEqual(generator.WayPoints.GetComponentsInChildren<Transform>().Length - 1, enemyPath.Waypoints.Length);
     }
 
     [UnityTest]

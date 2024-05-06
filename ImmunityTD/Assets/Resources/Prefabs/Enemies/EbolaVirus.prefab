@@ -101,20 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cc380b9df5f4905b1963f0a1918408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  gameOverText: {fileID: 0}
+  Waypoints: []
 --- !u!114 &3553835303664295918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,11 +114,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e1ba22c38464adb9ea1a63d8935ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
-  coinsWhenDied: 2
-  speed: 1.5
-  healthBarForeground: {fileID: 1721387245084656724}
-  damageText: {fileID: 7085059472747651572}
+  Name: Ebola
+  IsVirus: 1
+  MaxHealth: 150
+  CoinsWhenDied: 4
+  Speed: 1
+  DamageIfNotKilled: 10
+  HealthBarForeground: {fileID: 1721387245084656724}
+  DamageText: {fileID: 7085059472747651572}
 --- !u!50 &9137335024313244777
 Rigidbody2D:
   serializedVersion: 4

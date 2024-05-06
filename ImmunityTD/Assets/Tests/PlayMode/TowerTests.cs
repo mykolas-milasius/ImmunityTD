@@ -32,7 +32,7 @@ public class TowerTests
         // Enemy setup
         enemyGameObject = new GameObject("Enemy");
         enemy = enemyGameObject.AddComponent<Enemy>();
-        enemy.maxHealth = 100;  // Example health
+        enemy.MaxHealth = 100;  // Example health
 
         // Assign mock UI components
         tower.damageText = new GameObject().AddComponent<TextMeshProUGUI>();
@@ -48,7 +48,7 @@ public class TowerTests
         tower.button = buttonGameObject.AddComponent<Button>();
 
         var healthBarGO = new GameObject("HealthBarForeground");
-        enemy.healthBarForeground = healthBarGO.AddComponent<RectTransform>();
+        enemy.HealthBarForeground = healthBarGO.AddComponent<RectTransform>();
 
         // Initialize Tower with valid starting values
         tower.damage = 50f;
@@ -58,7 +58,7 @@ public class TowerTests
 
         // Initialize UI components for Enemy
         GameObject damageTextGO = new GameObject("DamageText");
-        enemy.damageText = damageTextGO.AddComponent<TextMeshProUGUI>();
+        enemy.DamageText = damageTextGO.AddComponent<TextMeshProUGUI>();
     }
 
     [TearDown]
@@ -216,7 +216,7 @@ public class TowerTests
     public void Tower_DealsDamageToEnemy()
     {
         enemy.Start();
-        enemy.maxHealth = 100f;
+        enemy.MaxHealth = 100f;
         bool wasAliveBefore = enemy.IsAlive();
         tower.damage = 100f;
 
