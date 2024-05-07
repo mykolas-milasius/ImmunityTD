@@ -39,7 +39,7 @@ public class ExitButtonTests
     {
         exitScript.openConfirmationMenu();
         exitScript.openConfirmationMenu();
-        Assert.IsTrue(quitPanel.activeSelf, "Quit panel should remain active when openConfirmationMenu is called while it's already open");
+        Assert.IsTrue(quitPanel.activeSelf, "Quit panel should remain active when OpenConfirmationMenu is called while it's already open");
     }
 
     [Test]
@@ -48,7 +48,7 @@ public class ExitButtonTests
         quitPanel.SetActive(false);
         exitScript.closeConfirmationMenu();
 
-        Assert.IsFalse(quitPanel.activeSelf, "Quit panel should remain inactive when closeConfirmationMenu is called while it's already closed");
+        Assert.IsFalse(quitPanel.activeSelf, "Quit panel should remain inactive when CloseConfirmationMenu is called while it's already closed");
     }
 
     [Test]
@@ -65,7 +65,7 @@ public class ExitButtonTests
 
         exitScript.QuitGame();
 
-        Assert.IsTrue(mockQuitter.quitCalled, "QuitGame should call Quit on applicationQuitter");
+        Assert.IsTrue(mockQuitter.quitCalled, "QuitGame should call Quit on ApplicationQuitter");
     }
 
     [TearDown]

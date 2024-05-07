@@ -48,9 +48,9 @@ public class TowerMenuTests
     [Test]
     public void RemoveTower_WithoutCurrentSlot_DoesNotThrowError()
     {
-        TowerMenu.CurrentSlot = null; // Set currentSlot to null to simulate the edge case
+        TowerMenu.CurrentSlot = null; // Set CurrentSlot to null to simulate the edge case
 
-        // Use Assert.DoesNotThrow to verify that no error is thrown when currentSlot is null
+        // Use Assert.DoesNotThrow to verify that no error is thrown when CurrentSlot is null
         Assert.DoesNotThrow(() => towerMenu.RemoveTower());
     }
 
@@ -59,7 +59,7 @@ public class TowerMenuTests
     {
         towerMenu.OnMouseDown(); // Simulate mouse down event
 
-        // Assert that InputHandler.tower is set to this towerMenu instance
+        // Assert that InputHandler.Tower is set to this towerMenu instance
         Assert.AreEqual(InputHandler.tower, towerMenu);
     }
 
@@ -104,7 +104,7 @@ public class TowerMenuTests
     {
         towerMenu.TowerMenuCanvas = null; // Unassign the canvas to simulate the error condition
 
-        LogAssert.Expect(LogType.Error, "Tower menu canvas is not assigned to the tower prefab!");
+        LogAssert.Expect(LogType.Error, "Tower menu canvas is not assigned to the Tower prefab!");
         towerMenu.OnMouseDown(); // Simulate mouse down event
     }
 

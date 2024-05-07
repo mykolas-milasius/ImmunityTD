@@ -26,7 +26,7 @@ public class BulletTests
         targetGameObject.AddComponent<BoxCollider2D>();
         targetGameObject.transform.position = new Vector3(10, 0, 0);  // Position target away from the bullet
 
-        // Set up the mock tower and initialize all required components
+        // Set up the mock Tower and initialize all required components
         towerGameObject = new GameObject("Tower");
         towerScript = towerGameObject.AddComponent<MockTower>();
         
@@ -40,7 +40,7 @@ public class BulletTests
         var rangePreview = new GameObject("RangePreview");
         towerScript.RangePreview = rangePreview;
 
-        // Link the bullet to the tower
+        // Link the bullet to the Tower
         bulletScript.tower = towerScript;
     }
 

@@ -2,37 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exit : MonoBehaviour
+namespace Assets.Scripts
 {
-    public IApplicationQuitter applicationQuitter = new ApplicationQuitter();
-
-    [SerializeField] public GameObject quitPanel;
-
-    public void openConfirmationMenu()
+    public class Exit : MonoBehaviour
     {
-        quitPanel.SetActive(true);
+        public IApplicationQuitter ApplicationQuitter = new ApplicationQuitter();
+
+        [SerializeField] public GameObject QuitPanel;
+
+        public void OpenConfirmationMenu()
+        {
+            QuitPanel.SetActive(true);
+        }
+
+        public void CloseConfirmationMenu()
+        {
+            QuitPanel.SetActive(false);
+        }
+
+        public void QuitGame()
+        {
+            ApplicationQuitter.Quit();
+        }
     }
 
-    public void closeConfirmationMenu()
+    public interface IApplicationQuitter
     {
-        quitPanel.SetActive(false);
+        void Quit();
     }
 
-    public void QuitGame()
+    public class ApplicationQuitter : IApplicationQuitter
     {
-        applicationQuitter.Quit();
-    }
-}
-
-public interface IApplicationQuitter
-{
-    void Quit();
-}
-
-public class ApplicationQuitter : IApplicationQuitter
-{
-    public void Quit()
-    {
-        Application.Quit();
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }

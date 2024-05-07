@@ -3,50 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PurchaseButton : MonoBehaviour
+namespace Assets.Scripts
 {
-    public static Slot currentSlot; // Static reference to the current slot
-    public static TowerSelectionButton towerButton;
-    public Button button;
-
-    public void Start()
+    public class PurchaseButton : MonoBehaviour
     {
-        button.interactable = false;
-    }
+        public static Slot CurrentSlot; // Static reference to the current slot
+        public static TowerSelectionButton CowerButton;
+        public Button Button;
 
-    public void Update()
-    {
-        if (towerButton != null)
+        public void Start()
         {
-            if (Player.Coins >= towerButton.Price)
+            Button.interactable = false;
+        }
+
+        public void Update()
+        {
+            if (CowerButton != null)
             {
-                button.interactable = true;
+                if (Player.Coins >= CowerButton.Price)
+                {
+                    Button.interactable = true;
+                }
+                else
+                {
+                    Button.interactable = false;
+                }
+            }
+        }
+
+        public void PurchaseOnClick()
+        {
+            // Ensure CurrentSlot is not null
+            if (CurrentSlot != null)
+            {
+                if (CowerButton != null)
+                {
+                    CowerButton.Place();
+                    CowerButton = null;
+                }
+                else
+                {
+                    Debug.LogWarning("No Tower selected.");
+                }
+
             }
             else
             {
-                button.interactable = false;
+                Debug.LogWarning("No slot selected for Tower placement.");
             }
-        }
-    }
-    public void PurchaseOnClick()
-    {
-        // Ensure currentSlot is not null
-        if (currentSlot != null)
-        {
-            if (towerButton != null)
-            {
-                towerButton.Place();
-                towerButton = null;
-            }
-            else
-            {
-                Debug.LogWarning("No tower selected.");
-            }
-            
-        }
-        else
-        {
-            Debug.LogWarning("No slot selected for tower placement.");
         }
     }
 }

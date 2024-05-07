@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadScene : MonoBehaviour
+namespace Assets.Scripts
 {
-    public void Load(string sceneName)
+    public class LoadScene : MonoBehaviour
     {
-        SceneManager.LoadScene(sceneName);
+        public void Load(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

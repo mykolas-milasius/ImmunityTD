@@ -2,25 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerRange : MonoBehaviour
+namespace Assets.Scripts
 {
-    public Tower ParentTower;
-
-    public void OnTriggerEnter2D(Collider2D other)
+    public class TowerRange : MonoBehaviour
     {
-        if (other.CompareTag("Enemy"))
+        public Tower ParentTower;
+
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            // Debug.Log("Enemy entered range: " + other.name);
-            ParentTower.EnemyEnteredRange(other.gameObject);
+            if (other.CompareTag("Enemy"))
+            {
+                // Debug.Log("Enemy entered range: " + other.name);
+                ParentTower.EnemyEnteredRange(other.gameObject);
+            }
         }
-    }
 
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
+        public void OnTriggerExit2D(Collider2D other)
         {
-            // Debug.Log("Enemy exited range: " + other.name);
-            ParentTower.EnemyExitedRange(other.gameObject);
+            if (other.CompareTag("Enemy"))
+            {
+                // Debug.Log("Enemy exited range: " + other.name);
+                ParentTower.EnemyExitedRange(other.gameObject);
+            }
         }
     }
 }

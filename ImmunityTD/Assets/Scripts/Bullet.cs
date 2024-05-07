@@ -2,61 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+namespace Assets.Scripts
 {
-    private GameObject target;
-    public Tower tower;
-    public float speed = 70f;
-    public float damage = 10f;
-    public float lifeTime = 2f;
-
-    private bool isDestroyed = false;
-
-    public void Seek(GameObject _target)
+    public class Bullet : MonoBehaviour
     {
-        target = _target;
-    }
+        private GameObject _target;
+        public Tower Tower;
+        public float Speed = 70f;
+        public float Damage = 10f;
+        public float LifeTime = 2f;
 
-    void Start()
-    {
-        Destroy(gameObject, lifeTime);
-    }
+        private bool _isDestroyed = false;
 
-    void Update()
-    {
-        if (target == null)
+        public void Seek(GameObject target)
         {
-            Destroy(gameObject);
-            return;
+            this._target = target;
         }
 
-        Vector3 direction = target.transform.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        if (direction.magnitude <= distanceThisFrame)
+        void Start()
         {
-            HitTarget();
-            return;
+            Destroy(gameObject, LifeTime);
         }
 
-        transform.Translate(direction.normalized * distanceThisFrame, Space.World);
-    }
-
-    void HitTarget()
-    {
-        if (tower != null && target != null)
+        void Update()
         {
-            tower.DealDamage(target);
-            DestroyBullet();
+            if (_target == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Vector3 direction = _target.transform.position - transform.position;
+            float distanceThisFrame = Speed * Time.deltaTime;
+
+            if (direction.magnitude <= distanceThisFrame)
+            {
+                HitTarget();
+                return;
+            }
+
+            transform.Translate(direction.normalized * distanceThisFrame, Space.World);
         }
-    }
 
-    void DestroyBullet()
-    {
-        if (!isDestroyed)
+        void HitTarget()
         {
-            Destroy(gameObject);
-            isDestroyed = true;
+            if (Tower != null && _target != null)
+            {
+                Tower.DealDamage(_target);
+                DestroyBullet();
+            }
+        }
+
+        void DestroyBullet()
+        {
+            if (!_isDestroyed)
+            {
+                Destroy(gameObject);
+                _isDestroyed = true;
+            }
         }
     }
 }

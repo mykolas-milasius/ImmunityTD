@@ -16,7 +16,7 @@ public class AudioManagerTests
 
         Assert.IsNotNull(audioManager, "AudioManager component not found in StartScreen scene.");
 
-        Assert.AreEqual(audioManager.MusicSource.clip, audioManager.Mainmenu, "Music source clip is not set to mainmenu clip on StartScreen.");
+        Assert.AreEqual(audioManager.MusicSource.clip, audioManager.MainMenu, "Music source clip is not set to mainmenu clip on StartScreen.");
 
         Assert.IsTrue(audioManager.MusicSource.isPlaying, "Music source is not playing on StartScreen.");
     }

@@ -2,26 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IScreenService
+namespace Assets.Scripts
 {
-    bool IsFullScreen { get; set; }
-}
-
-public class ScreenService : IScreenService
-{
-    public bool IsFullScreen
+    public interface IScreenService
     {
-        get => Screen.fullScreen;
-        set => Screen.fullScreen = value;
+        bool IsFullScreen { get; set; }
     }
-}
 
-public class FullScreenToggle : MonoBehaviour
-{
-    public IScreenService ScreenService { get; set; } = new ScreenService();
-
-    public void ToggleFullScreen()
+    public class ScreenService : IScreenService
     {
-        ScreenService.IsFullScreen = !ScreenService.IsFullScreen;
+        public bool IsFullScreen
+        {
+            get => Screen.fullScreen;
+            set => Screen.fullScreen = value;
+        }
+    }
+
+    public class FullScreenToggle : MonoBehaviour
+    {
+        public IScreenService ScreenService { get; set; } = new ScreenService();
+
+        public void ToggleFullScreen()
+        {
+            ScreenService.IsFullScreen = !ScreenService.IsFullScreen;
+        }
     }
 }

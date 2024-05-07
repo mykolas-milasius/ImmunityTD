@@ -144,7 +144,7 @@ namespace Assets.Scripts
 
             if (bullet != null)
             {
-                bullet.tower = this;
+                bullet.Tower = this;
                 bullet.Seek(_enemiesInRange[0]);
             }
             else

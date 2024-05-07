@@ -20,10 +20,10 @@ public class SlotTest
         spriteRenderer = slotGameObject.AddComponent<SpriteRenderer>();
         slotScript.SpriteRenderer = spriteRenderer; // Ensure spriteRenderer is assigned
 
-        slotScript.TowerSelectionCanvas = new GameObject(); // Create a mock tower selection canvas
+        slotScript.TowerSelectionCanvas = new GameObject(); // Create a mock Tower selection canvas
         slotScript.TowerSelectionCanvas.SetActive(false); // Initially set it to inactive
 
-        towerPrefab = new GameObject(); // Mock tower prefab
+        towerPrefab = new GameObject(); // Mock Tower prefab
     }
 
     [TearDown]
@@ -77,7 +77,7 @@ public class SlotTest
 
         yield return null; // Wait for one frame to allow Instantiate to complete
 
-        // Assert that a tower instance was created at the slot's position
+        // Assert that a Tower instance was created at the slot's position
         var towerInstance = GameObject.Find(towerPrefab.name + "(Clone)");
         Assert.IsNotNull(towerInstance);
         Assert.AreEqual(slotGameObject.transform.position, towerInstance.transform.position);
@@ -85,6 +85,6 @@ public class SlotTest
         // Assert that the slot game object is deactivated
         Assert.IsFalse(slotGameObject.activeSelf);
 
-        GameObject.DestroyImmediate(towerInstance); // Clean up the instantiated tower
+        GameObject.DestroyImmediate(towerInstance); // Clean up the instantiated Tower
     }
 }

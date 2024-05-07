@@ -1,50 +1,58 @@
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TowerSelectionButton : MonoBehaviour
+namespace Assets.Scripts
 {
-    public GameObject TowerPrefab;
-    public static Slot CurrentSlot = null;
-    public Canvas PurchaseMenu;
-    public float Price;
-    public void Start()
+    public class TowerSelectionButton : MonoBehaviour
     {
-        if (TowerPrefab == null)
+        public GameObject TowerPrefab;
+        public static Slot CurrentSlot = null;
+        public Canvas PurchaseMenu;
+        public float Price;
+
+        public void Start()
         {
-            Debug.LogError("Tower prefab is not assigned to the tower selection button!");
-        }
-        InputHandler.towerSelectionButton = this;
-    }
-    public void OnTowerButtonClick()
-    {
-        PurchaseButton.towerButton = this;
-    }
-    public void Place()
-    {
-        if (CurrentSlot != null)
-        {
-            if (CurrentSlot.Clicked)
+            if (TowerPrefab == null)
             {
-                if (Player.Coins - Price >= 0)
+                Debug.LogError("Tower prefab is not assigned to the Tower selection Button!");
+            }
+
+            InputHandler.TowerSelectionButton = this;
+        }
+
+        public void OnTowerButtonClick()
+        {
+            PurchaseButton.CowerButton = this;
+        }
+
+        public void Place()
+        {
+            if (CurrentSlot != null)
+            {
+                if (CurrentSlot.Clicked)
                 {
-                    Player.Coins -= Price;
-                    CurrentSlot.PlaceTower(TowerPrefab);
-                    TowerMenu.CurrentSlot = CurrentSlot;
-                    CurrentSlot = null;
+                    if (Player.Coins - Price >= 0)
+                    {
+                        Player.Coins -= Price;
+                        CurrentSlot.PlaceTower(TowerPrefab);
+                        TowerMenu.CurrentSlot = CurrentSlot;
+                        CurrentSlot = null;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Not enough coins.");
+                    }
                 }
                 else
                 {
-                    Debug.LogWarning("Not enough coins.");
+                    Debug.LogWarning("Slot is not clicked.");
                 }
             }
             else
             {
-                Debug.LogWarning("Slot is not clicked.");
+                Debug.LogWarning("No slot selected.");
             }
-        }
-        else
-        {
-            Debug.LogWarning("No slot selected.");
         }
     }
 }
