@@ -38,7 +38,7 @@ public class TowerSelectionButtonTests
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
         TowerSelectionButton.currentSlot = null; // Set currentSlot to null
         towerSelectionButton.towerPrefab = new GameObject();
-        Player.coins = 20; // Set coins to 20
+        Player.Coins = 20; // Set coins to 20
         towerSelectionButton.price = 10f; // Set price
 
         // Act
@@ -47,7 +47,7 @@ public class TowerSelectionButtonTests
 
         // Assert
         LogAssert.Expect(LogType.Warning, "No slot selected.");
-        Assert.AreEqual(20, Player.coins); // Coins remain unchanged
+        Assert.AreEqual(20, Player.Coins); // Coins remain unchanged
     }
 
     [UnityTest]
@@ -59,7 +59,7 @@ public class TowerSelectionButtonTests
         TowerSelectionButton.currentSlot = towerSelectionButtonObject.AddComponent<Slot>(); // Mock currentSlot
 
         TowerSelectionButton.currentSlot.clicked = true;
-        Player.coins = 0; // Set coins to 0
+        Player.Coins = 0; // Set coins to 0
         towerSelectionButton.price = 10f; // Set price
 
         // Act
@@ -81,7 +81,7 @@ public class TowerSelectionButtonTests
 
 
         TowerSelectionButton.currentSlot.clicked = true;
-        Player.coins = 20; // Set coins to 20
+        Player.Coins = 20; // Set coins to 20
         towerSelectionButton.price = 10f; // Set price
 
         // Act
@@ -89,7 +89,7 @@ public class TowerSelectionButtonTests
         yield return null; // Wait for a frame to process Unity's warning
 
         // Assert
-        Assert.AreEqual(10, Player.coins); // Coins deducted correctly
+        Assert.AreEqual(10, Player.Coins); // Coins deducted correctly
         Assert.IsNull(TowerSelectionButton.currentSlot); // Tower placed
     }
     [UnityTest]

@@ -19,56 +19,56 @@ public class PlayerTests
         GameObject playerGO = new GameObject("Player");
         player = playerGO.AddComponent<Player>();
         enemyGenerator = new GameObject("EnemyGenerator");
-        player.enemyGenerator = enemyGenerator;
+        player.EnemyGenerator = enemyGenerator;
 
         coinsText = new GameObject("CoinsText").AddComponent<TextMeshProUGUI>();
         scoreText = new GameObject("ScoreText").AddComponent<TextMeshProUGUI>();
         killsText = new GameObject("KillsText").AddComponent<TextMeshProUGUI>();
         enemySpawnDelayText = new GameObject("EnemySpawnDelayText").AddComponent<TextMeshProUGUI>();
-        player.coinsText = coinsText;
-        player.scoreText = scoreText;
-        player.killsText = killsText;
-        player.enemySpawnDelayText = enemySpawnDelayText;
+        player.CoinsText = coinsText;
+        player.ScoreText = scoreText;
+        player.KillsText = killsText;
+        player.EnemySpawnDelayText = enemySpawnDelayText;
 
-        Player.coins = 100f;
-        Player.score = 0;
-        Player.kills = 0;
+        Player.Coins = 100f;
+        Player.Score = 0;
+        Player.Kills = 0;
     }
 
     [Test]
     public void InitialState_IsCorrect()
     {
-        Assert.AreEqual(100f, Player.coins);
-        Assert.AreEqual(0, Player.score);
-        Assert.AreEqual(0, Player.kills);
+        Assert.AreEqual(100f, Player.Coins);
+        Assert.AreEqual(0, Player.Score);
+        Assert.AreEqual(0, Player.Kills);
     }
 
     [Test]
     public void AddCoins_IncreasesCoins()
     {
         Player.AddCoins(50f);
-        Assert.AreEqual(150f, Player.coins);
+        Assert.AreEqual(150f, Player.Coins);
     }
 
     [Test]
     public void AddScore_IncreasesScore()
     {
         Player.AddScore(10);
-        Assert.AreEqual(10, Player.score);
+        Assert.AreEqual(10, Player.Score);
     }
 
     [Test]
     public void AddKill_IncreasesKills()
     {
         Player.AddKill();
-        Assert.AreEqual(1, Player.kills);
+        Assert.AreEqual(1, Player.Kills);
     }
 
     [Test]
     public void AddKills_IncreasesMultipleKills()
     {
         Player.AddKills(5);
-        Assert.AreEqual(5, Player.kills);
+        Assert.AreEqual(5, Player.Kills);
     }
 
     [Test]
@@ -87,7 +87,7 @@ public class PlayerTests
     [UnityTest]
     public IEnumerator FixedUpdate_ActivatesEnemyGeneratorAfterDelay()
     {
-        float simulateTime = player.generatorDelay + 1f;
+        float simulateTime = player.GeneratorDelay + 1f;
         for (float t = 0; t < simulateTime; t += Time.fixedDeltaTime)
         {
             yield return new WaitForFixedUpdate();
@@ -106,8 +106,8 @@ public class PlayerTests
         GameObject.DestroyImmediate(killsText.gameObject);
         GameObject.DestroyImmediate(enemySpawnDelayText.gameObject);
 
-        Player.coins = 100f;
-        Player.score = 0;
-        Player.kills = 0;
+        Player.Coins = 100f;
+        Player.Score = 0;
+        Player.Kills = 0;
     }
 }

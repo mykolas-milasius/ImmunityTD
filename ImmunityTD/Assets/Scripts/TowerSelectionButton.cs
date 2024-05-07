@@ -25,9 +25,9 @@ public class TowerSelectionButton : MonoBehaviour
         {
             if (currentSlot.clicked)
             {
-                if (Player.coins - price >= 0)
+                if (Player.Coins - price >= 0)
                 {
-                    Player.coins -= price;
+                    Player.Coins -= price;
                     currentSlot.PlaceTower(towerPrefab);
                     TowerMenu.currentSlot = currentSlot;
                     currentSlot = null;

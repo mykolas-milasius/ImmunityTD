@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class EnemyPath : MonoBehaviour
 {
-    public Transform[] waypoints;
-    private int currentWaypointIndex = 0;
-    private float speed = 1f; // Speed in Unity units per second
-    public GameObject gameOverText;
+    public Transform[] Waypoints;
+    
+    private int _currentWaypointIndex = 0;
+    private float _speed = 1f; // Speed in Unity units per second
+    private Enemy _enemyComponent;
+
+    private void Start()
+    {
+        _enemyComponent = GetComponent<Enemy>();
+    }
 
     public void Update()
     {
@@ -16,29 +22,30 @@ public class EnemyPath : MonoBehaviour
 
     public void SetSpeed(float newSpeed)
     {
-        speed = newSpeed;
+        _speed = newSpeed;
     }
 
     void MoveAlongPath()
     {
-        if (currentWaypointIndex < waypoints.Length)
+        if (_currentWaypointIndex < Waypoints.Length)
         {
-            Transform targetWaypoint = waypoints[currentWaypointIndex];
+            _speed = _enemyComponent.GetSpeed();
+            Transform targetWaypoint = Waypoints[_currentWaypointIndex];
 
             // Calculate the adjusted position by subtracting 960 from x and 540 from y
             Vector2 adjustedPosition = new Vector2((targetWaypoint.position.x - 960) / 100, (targetWaypoint.position.y - 540) / 100);
-            transform.position = Vector2.MoveTowards(transform.position, adjustedPosition, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, adjustedPosition, _speed * Time.deltaTime);
             
             if ((Vector2)transform.position == adjustedPosition)
             {
-                currentWaypointIndex++;
+                _currentWaypointIndex++;
             }
         }
         else
         {
+            Player.TakeDamage(_enemyComponent.GetDamageIfNotKilled());
             Destroy(gameObject);
-            Player.TakeDamage(1);
-            EnemyGenerator.enemyCount--;
+            EnemyGenerator.EnemyCount--;
             // gameOverText.SetActive(true);
         }
     }
