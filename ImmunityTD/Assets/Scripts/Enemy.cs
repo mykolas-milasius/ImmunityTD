@@ -19,9 +19,9 @@ public class Enemy : MonoBehaviour
     private AudioManager _audioManager;
 
     public TextMeshProUGUI DamageText;
-    
+
     #region Getters and Setters
-    
+
     public float GetSpeed()
     {
         return Speed;
@@ -31,9 +31,9 @@ public class Enemy : MonoBehaviour
     {
         return DamageIfNotKilled;
     }
-    
+
     #endregion
-    
+
     private void Awake()
     {
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
         _originalHealthBarWidth = HealthBarForeground.sizeDelta.x;
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    
+
     #region Collision Detection
 
     public void TakeDamage(float damage)
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        
+
         DimSprite();
         _currentHealth -= damage;
         _currentHealth = Mathf.Max(_currentHealth, 0);
@@ -81,73 +81,75 @@ public class Enemy : MonoBehaviour
         EnemyGenerator.EnemyCount--;
     }
 
-    void UpdateHealthBar()
+    private void UpdateHealthBar()
     {
-        float healthRatio = _currentHealth / MaxHealth;
-        HealthBarForeground.sizeDelta = new Vector2(_originalHealthBarWidth * healthRatio, HealthBarForeground.sizeDelta.y);
+        var healthRatio = _currentHealth / MaxHealth;
+        HealthBarForeground.sizeDelta =
+            new Vector2(_originalHealthBarWidth * healthRatio, HealthBarForeground.sizeDelta.y);
     }
 
-    void DisplayDamage(float damage) 
+    private void DisplayDamage(float damage)
     {
         DamageText.enabled = true;
         DamageText.text = "-" + damage;
         Invoke(nameof(DisableDamageText), 0.5f);
     }
 
-    void DisableDamageText()
+    private void DisableDamageText()
     {
         DamageText.enabled = false;
     }
 
-    public bool IsAlive() {
-        if (_currentHealth > 0)
-        {
-            return true;
-        }
+    public bool IsAlive()
+    {
 
-        return false;
+        return _currentHealth > 0;
     }
-    
+
     #endregion
 
     #region Special Effects
-    
+
     private void UseSpecialEffect()
     {
-        if (!_effectUsed)
+        if (_effectUsed)
         {
-            switch (Name)
-            {
-                case "Rabies":
-                    DoubleSpeed();
-                    break;
-            }
+            return;
+        }
+
+        switch (Name)
+        {
+            case "Rabies":
+                DoubleSpeed();
+                break;
         }
     }
-    
+
     private void DoubleSpeed()
     {
-        if (_currentHealth > 0 && _currentHealth <= MaxHealth * 0.5)
+        if (_currentHealth < 0 && _currentHealth > MaxHealth * 0.5)
         {
-            _originalSpeed = Speed;
-            Speed *= 2;
-            _effectUsed = true;
-            MakeSpriteTransparent();
-            Debug.Log($"{Name} effect used: Double speed. Speed: {Speed}");
-            Invoke("ResetSpeed", 1f);
+            return;
         }
+
+        _originalSpeed = Speed;
+        Speed *= 2;
+        _effectUsed = true;
+        MakeSpriteTransparent();
+        Debug.Log($"{Name} effect used: Double speed. Speed: {Speed}");
+        Invoke("ResetSpeed", 1f);
     }
-    
+
     private void ResetSpeed()
     {
         Speed = _originalSpeed;
         ResetSpriteTransparency();
         Debug.Log($"{Name} effect ended. Speed: {Speed}");
     }
-        
+
 
     #endregion
-    
+
     #region Sprite Manipulation
 
     private void MakeSpriteTransparent()
@@ -170,7 +172,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void DimSprite()
+    private void DimSprite()
     {
         if (_spriteRenderer != null)
         {
@@ -182,15 +184,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void ResetSpriteColor()
+    private void ResetSpriteColor()
     {
-        if (_spriteRenderer != null)
+        if (_spriteRenderer == null)
         {
-            Color originalColor = _spriteRenderer.color;
-            originalColor.r = 1f;
-            _spriteRenderer.color = originalColor;
+            return;
         }
+
+        var originalColor = _spriteRenderer.color;
+        originalColor.r = 1f;
+        _spriteRenderer.color = originalColor;
     }
-    
+
     #endregion
 }
