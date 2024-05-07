@@ -24,10 +24,10 @@ public class TowerTests
         // Mocking the bullet prefab with a simple GameObject
         GameObject bulletPrefab = new GameObject("BulletPrefab");
         bulletPrefab.AddComponent<Bullet>();  // Assuming Bullet has a no-arg constructor
-        tower.bulletPrefab = bulletPrefab;
+        tower.BulletPrefab = bulletPrefab;
 
         // Mocking the range preview GameObject
-        tower.rangePreview = new GameObject("RangePreview");
+        tower.RangePreview = new GameObject("RangePreview");
 
         // Enemy setup
         enemyGameObject = new GameObject("Enemy");
@@ -35,26 +35,26 @@ public class TowerTests
         enemy.MaxHealth = 100;  // Example health
 
         // Assign mock UI components
-        tower.damageText = new GameObject().AddComponent<TextMeshProUGUI>();
-        tower.attackSpeedText = new GameObject().AddComponent<TextMeshProUGUI>();
-        tower.rangeText = new GameObject().AddComponent<TextMeshProUGUI>();
-        tower.upgradeDamageText = new GameObject().AddComponent<TextMeshProUGUI>();
-        tower.upgradeAttackSpeedText = new GameObject().AddComponent<TextMeshProUGUI>();
-        tower.upgradeRangeText = new GameObject().AddComponent<TextMeshProUGUI>();
-        tower.upgradePriceText = new GameObject().AddComponent<TextMeshProUGUI>();
+        tower.DamageText = new GameObject().AddComponent<TextMeshProUGUI>();
+        tower.AttackSpeedText = new GameObject().AddComponent<TextMeshProUGUI>();
+        tower.RangeText = new GameObject().AddComponent<TextMeshProUGUI>();
+        tower.UpgradeDamageText = new GameObject().AddComponent<TextMeshProUGUI>();
+        tower.UpgradeAttackSpeedText = new GameObject().AddComponent<TextMeshProUGUI>();
+        tower.UpgradeRangeText = new GameObject().AddComponent<TextMeshProUGUI>();
+        tower.UpgradePriceText = new GameObject().AddComponent<TextMeshProUGUI>();
 
         // Mocking the Button component
         GameObject buttonGameObject = new GameObject();
-        tower.button = buttonGameObject.AddComponent<Button>();
+        tower.Button = buttonGameObject.AddComponent<Button>();
 
         var healthBarGO = new GameObject("HealthBarForeground");
         enemy.HealthBarForeground = healthBarGO.AddComponent<RectTransform>();
 
         // Initialize Tower with valid starting values
-        tower.damage = 50f;
-        tower.attackSpeed = 1f;
-        tower.range = 50f;
-        tower.startPrice = 50f;
+        tower.Damage = 50f;
+        tower.AttackSpeed = 1f;
+        tower.Range = 50f;
+        tower.StartPrice = 50f;
 
         // Initialize UI components for Enemy
         GameObject damageTextGO = new GameObject("DamageText");
@@ -73,8 +73,8 @@ public class TowerTests
     {
         tower.EnemyEnteredRange(enemyGameObject);
 
-        Assert.IsTrue(tower.entered, "Tower should mark enemy as entered when in range.");
-        Assert.IsFalse(tower.exited, "Tower should not mark enemy as exited immediately after entry.");
+        Assert.IsTrue(tower.Entered, "Tower should mark enemy as entered when in range.");
+        Assert.IsFalse(tower.Exited, "Tower should not mark enemy as exited immediately after entry.");
     }
 
     [Test]
@@ -83,7 +83,7 @@ public class TowerTests
         tower.EnemyEnteredRange(enemyGameObject);  // Enter range first
         tower.EnemyExitedRange(enemyGameObject);  // Then exit
 
-        Assert.IsTrue(tower.exited, "Tower should mark enemy as exited when out of range.");
+        Assert.IsTrue(tower.Exited, "Tower should mark enemy as exited when out of range.");
     }
 
     [Test]
@@ -91,15 +91,15 @@ public class TowerTests
     {
         Player.Coins = 1000f;
 
-        float initialDamage = tower.damage;
-        float initialAttackSpeed = tower.attackSpeed;
-        float initialRange = tower.range;
+        float initialDamage = tower.Damage;
+        float initialAttackSpeed = tower.AttackSpeed;
+        float initialRange = tower.Range;
 
         tower.Upgrade();
 
-        Assert.Greater(tower.damage, initialDamage, "Damage should increase after an upgrade.");
-        Assert.Greater(tower.attackSpeed, initialAttackSpeed, "Attack speed should increase after an upgrade.");
-        Assert.Greater(tower.range, initialRange, "Range should increase after an upgrade.");
+        Assert.Greater(tower.Damage, initialDamage, "Damage should increase after an upgrade.");
+        Assert.Greater(tower.AttackSpeed, initialAttackSpeed, "Attack speed should increase after an upgrade.");
+        Assert.Greater(tower.Range, initialRange, "Range should increase after an upgrade.");
     }
 
     [Test]
@@ -117,9 +117,9 @@ public class TowerTests
     {
         tower.Update();
 
-        Assert.AreEqual(tower.damage.ToString(), tower.damageText.text, "Damage text should match tower's damage.");
-        Assert.AreEqual(tower.attackSpeed.ToString(), tower.attackSpeedText.text, "Attack speed text should match tower's attack speed.");
-        Assert.AreEqual(tower.range.ToString(), tower.rangeText.text, "Range text should match tower's range.");
+        Assert.AreEqual(tower.Damage.ToString(), tower.DamageText.text, "Damage text should match tower's damage.");
+        Assert.AreEqual(tower.AttackSpeed.ToString(), tower.AttackSpeedText.text, "Attack speed text should match tower's attack speed.");
+        Assert.AreEqual(tower.Range.ToString(), tower.RangeText.text, "Range text should match tower's range.");
     }
 
     [Test]
@@ -131,7 +131,7 @@ public class TowerTests
         Bullet firstBullet = GameObject.FindObjectOfType<Bullet>();
 
         // Simulate just under cooldown time passing
-        float justUnderCooldownTime = 1f / tower.attackSpeed - 0.1f;
+        float justUnderCooldownTime = 1f / tower.AttackSpeed - 0.1f;
         for (float time = 0; time < justUnderCooldownTime; time += Time.deltaTime)
         {
             tower.Update();
@@ -146,13 +146,13 @@ public class TowerTests
     [Test]
     public void RangePreview_ScalesCorrectly_WithTowerRange()
     {
-        tower.range = 100f; // Set new range
+        tower.Range = 100f; // Set new range
         tower.Start(); // To trigger range preview scaling
 
-        float expectedDiameter = (tower.range / 100) + 1;
+        float expectedDiameter = (tower.Range / 100) + 1;
         Vector3 expectedScale = new Vector3(expectedDiameter, expectedDiameter, 1);
 
-        Assert.AreEqual(expectedScale, tower.rangePreview.transform.localScale, "Range preview scale should match tower range.");
+        Assert.AreEqual(expectedScale, tower.RangePreview.transform.localScale, "Range preview scale should match tower range.");
     }
 
     [Test]
@@ -161,16 +161,16 @@ public class TowerTests
 
         tower.Update();
 
-        Assert.AreEqual(tower.damage.ToString(), tower.damageText.text, "Damage text should match tower's damage.");
-        Assert.AreEqual(tower.attackSpeed.ToString(), tower.attackSpeedText.text, "Attack speed text should match tower's attack speed.");
-        Assert.AreEqual(tower.range.ToString(), tower.rangeText.text, "Range text should match tower's range.");
+        Assert.AreEqual(tower.Damage.ToString(), tower.DamageText.text, "Damage text should match tower's damage.");
+        Assert.AreEqual(tower.AttackSpeed.ToString(), tower.AttackSpeedText.text, "Attack speed text should match tower's attack speed.");
+        Assert.AreEqual(tower.Range.ToString(), tower.RangeText.text, "Range text should match tower's range.");
     }
 
     [Test]
     public void UI_Warns_WhenTextFieldsNotAssigned()
     {
-        GameObject.DestroyImmediate(tower.damageText.gameObject);
-        tower.damageText = null; // Simulate unassigned text component
+        GameObject.DestroyImmediate(tower.DamageText.gameObject);
+        tower.DamageText = null; // Simulate unassigned text component
 
         LogAssert.Expect(LogType.Warning, "UI text fields not assigned in Tower script.");
         tower.Update(); // Trigger the Update method to check for warnings
@@ -206,7 +206,7 @@ public class TowerTests
     public void WarningLogged_WhenBulletPrefabMissingBulletComponent()
     {
         // Remove the Bullet component to simulate a misconfigured prefab
-        GameObject.DestroyImmediate(tower.bulletPrefab.GetComponent<Bullet>());
+        GameObject.DestroyImmediate(tower.BulletPrefab.GetComponent<Bullet>());
 
         LogAssert.Expect(LogType.Warning, "Bullet prefab does not contain Bullet component.");
         tower.Shoot(); // Trigger the shoot method that should log the warning
@@ -218,7 +218,7 @@ public class TowerTests
         enemy.Start();
         enemy.MaxHealth = 100f;
         bool wasAliveBefore = enemy.IsAlive();
-        tower.damage = 100f;
+        tower.Damage = 100f;
 
         tower.DealDamage(enemyGameObject); // Apply damage
 

@@ -5,168 +5,175 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviour
+namespace Assets.Scripts
 {
-    public float damage;
-    public float attackSpeed; // attacks per second
-    public float range;
-    public float startPrice;
-    public GameObject bulletPrefab;
-
-    public TextMeshProUGUI damageText;
-    public TextMeshProUGUI attackSpeedText;
-    public TextMeshProUGUI rangeText;
-    public GameObject rangePreview;
-
-    public TextMeshProUGUI upgradeDamageText;
-    public TextMeshProUGUI upgradeAttackSpeedText;
-    public TextMeshProUGUI upgradeRangeText;
-    public TextMeshProUGUI upgradePriceText;
-
-    public Button button;
-
-    private List<GameObject> enemiesInRange = new List<GameObject>();
-    private float attackCooldown;
-    private float upgradeDamage;
-    private float upgradeAttackSpeed;
-    private float upgradeRange;
-    private float upgradePrice;
-
-    public bool entered;
-    public bool exited;
-
-    private AudioManager audioManager;
-
-    private void Awake()
+    public class Tower : MonoBehaviour
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-    }
+        public float Damage;
+        public float AttackSpeed; // attacks per second
+        public float Range;
+        public float StartPrice;
+        public GameObject BulletPrefab;
 
-    public void Start()
-    {
-        if (rangePreview == null || bulletPrefab == null)
-        {
-            // Debug.LogError("Missing references in Tower script. Ensure all required fields are assigned.");
-            return;
-        }
-        upgradePrice = (float)Math.Round(startPrice * 2, 1);
-        upgradeDamage = (float)Math.Round(damage * 1.2, 1);
-        upgradeAttackSpeed = (float)Math.Round(attackSpeed * 1.2, 1);
-        upgradeRange = (float)Math.Round(range * 1.2, 1);
-        if (button != null)
-        {
-            button.interactable = false;
-        }
+        public TextMeshProUGUI DamageText;
+        public TextMeshProUGUI AttackSpeedText;
+        public TextMeshProUGUI RangeText;
+        public GameObject RangePreview;
 
-        UpdateRange();
-        attackCooldown = 1f / attackSpeed;
-    }
+        public TextMeshProUGUI UpgradeDamageText;
+        public TextMeshProUGUI UpgradeAttackSpeedText;
+        public TextMeshProUGUI UpgradeRangeText;
+        public TextMeshProUGUI UpgradePriceText;
 
-    public void Update()
-    {
+        public Button Button;
 
-        if (damageText != null)
+        private List<GameObject> _enemiesInRange = new List<GameObject>();
+        private float _attackCooldown;
+        private float _upgradeDamage;
+        private float _upgradeAttackSpeed;
+        private float _upgradeRange;
+        private float _upgradePrice;
+
+        public bool Entered;
+        public bool Exited;
+
+        private AudioManager _audioManager;
+
+        private void Awake()
         {
-            damageText.text = damage.ToString();
-            attackSpeedText.text = attackSpeed.ToString();
-            rangeText.text = range.ToString();
-        }
-        else
-        {
-            // Debug.LogWarning("UI text fields not assigned in Tower script.");
+            _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         }
 
-        if (upgradeDamageText != null)
+        public void Start()
         {
-            upgradeDamageText.text = upgradeDamage.ToString();
-            upgradeAttackSpeedText.text = upgradeAttackSpeed.ToString();
-            upgradeRangeText.text = upgradeRange.ToString();
-            upgradePriceText.text = upgradePrice.ToString();
-        }
-        else
-        {
-            // Debug.LogWarning("Upgrade UI elements not assigned in Tower script.");
-        }
-
-        if (enemiesInRange.Count != 0 && button != null)
-        {
-            attackCooldown -= Time.deltaTime;
-            if (attackCooldown <= 0f)
+            if (RangePreview == null || BulletPrefab == null)
             {
-                Shoot();
-                attackCooldown = 1f / attackSpeed;
+                // Debug.LogError("Missing references in Tower script. Ensure all required fields are assigned.");
+                return;
             }
-        }
-        if (button != null)
-        {
-            if (Player.Coins >= upgradePrice)
+
+            _upgradePrice = (float)Math.Round(StartPrice * 2, 1);
+            _upgradeDamage = (float)Math.Round(Damage * 1.2, 1);
+            _upgradeAttackSpeed = (float)Math.Round(AttackSpeed * 1.2, 1);
+            _upgradeRange = (float)Math.Round(Range * 1.2, 1);
+            if (Button != null)
             {
-                button.interactable = true;
+                Button.interactable = false;
+            }
+
+            UpdateRange();
+            _attackCooldown = 1f / AttackSpeed;
+        }
+
+        public void Update()
+        {
+
+            if (DamageText != null)
+            {
+                DamageText.text = Damage.ToString();
+                AttackSpeedText.text = AttackSpeed.ToString();
+                RangeText.text = Range.ToString();
             }
             else
             {
-                button.interactable = false;
+                // Debug.LogWarning("UI text fields not assigned in Tower script.");
+            }
+
+            if (UpgradeDamageText != null)
+            {
+                UpgradeDamageText.text = _upgradeDamage.ToString();
+                UpgradeAttackSpeedText.text = _upgradeAttackSpeed.ToString();
+                UpgradeRangeText.text = _upgradeRange.ToString();
+                UpgradePriceText.text = _upgradePrice.ToString();
+            }
+            else
+            {
+                // Debug.LogWarning("Upgrade UI elements not assigned in Tower script.");
+            }
+
+            if (_enemiesInRange.Count != 0 && Button != null)
+            {
+                _attackCooldown -= Time.deltaTime;
+                if (_attackCooldown <= 0f)
+                {
+                    Shoot();
+                    _attackCooldown = 1f / AttackSpeed;
+                }
+            }
+
+            if (Button != null)
+            {
+                if (Player.Coins >= _upgradePrice)
+                {
+                    Button.interactable = true;
+                }
+                else
+                {
+                    Button.interactable = false;
+                }
+            }
+
+        }
+
+        public void Upgrade()
+        {
+            Damage = (float)(Damage * 1.2);
+            AttackSpeed = (float)(AttackSpeed * 1.2);
+            Range = (float)(Range * 1.2);
+            Player.Coins -= _upgradePrice;
+
+            _upgradePrice = (float)Math.Round(_upgradePrice * 2, 1);
+            _upgradeDamage = (float)Math.Round(Damage * 1.2, 1);
+            _upgradeAttackSpeed = (float)Math.Round(AttackSpeed * 1.2, 1);
+            _upgradeRange = (float)Math.Round(Range * 1.2, 1);
+        }
+
+        private void UpdateRange()
+        {
+            float diameter = (Range / 100) + 1;
+            RangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
+
+        }
+
+        public void Shoot()
+        {
+            GameObject bulletGO = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+            Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+            _audioManager.PlaySFX(_audioManager.TowerShoot);
+
+            if (bullet != null)
+            {
+                bullet.tower = this;
+                bullet.Seek(_enemiesInRange[0]);
+            }
+            else
+            {
+                Debug.LogWarning("Bullet prefab does not contain Bullet component.");
             }
         }
-        
-    }
-    public void Upgrade()
-    {
-        damage = (float)(damage * 1.2);
-        attackSpeed = (float)(attackSpeed * 1.2);
-        range = (float)(range * 1.2);
-        Player.Coins -= upgradePrice;
 
-        upgradePrice = (float)Math.Round(upgradePrice * 2, 1);
-        upgradeDamage = (float)Math.Round(damage * 1.2, 1);
-        upgradeAttackSpeed = (float)Math.Round(attackSpeed * 1.2, 1);
-        upgradeRange = (float)Math.Round(range * 1.2, 1);
-    }
-
-    private void UpdateRange()
-    {
-        float diameter = (range / 100)+1;
-        rangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
-
-    }
-    public void Shoot()
-    {
-        GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
-
-        audioManager.PlaySFX(audioManager.towerShoot);
-
-        if (bullet != null)
+        public virtual void DealDamage(GameObject enemy)
         {
-            bullet.tower = this;
-            bullet.Seek(enemiesInRange[0]);
+            Enemy enemyHealth = enemy.GetComponent<Enemy>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(this.Damage);
+            }
         }
-        else
+
+        public void EnemyEnteredRange(GameObject enemy)
         {
-            Debug.LogWarning("Bullet prefab does not contain Bullet component.");
+            _enemiesInRange.Add(enemy);
+            Entered = true;
+            Exited = false;
         }
-    }
 
-    public virtual void DealDamage(GameObject enemy)
-    {
-        Enemy enemyHealth = enemy.GetComponent<Enemy>();
-        if (enemyHealth != null)
+        public void EnemyExitedRange(GameObject enemy)
         {
-            enemyHealth.TakeDamage(this.damage);
+            _enemiesInRange.Remove(enemy);
+            Entered = false;
+            Exited = true;
         }
-    }
-
-    public void EnemyEnteredRange(GameObject enemy)
-    {
-        enemiesInRange.Add(enemy);
-        entered = true;
-        exited = false;
-    }
-
-    public void EnemyExitedRange(GameObject enemy)
-    {
-        enemiesInRange.Remove(enemy);
-        entered = false;
-        exited = true;
     }
 }

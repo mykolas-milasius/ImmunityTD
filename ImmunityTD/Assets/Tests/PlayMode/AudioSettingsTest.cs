@@ -20,16 +20,16 @@ public class AudioSettingsTest
 
         // Load a test audio mixer from the Resources folder and assign it to the myMixer field
         audioMixer = Resources.Load<AudioMixer>("Audio/NewAudioMixer");
-        audioSettings.myMixer = audioMixer;
+        audioSettings.MyMixer = audioMixer;
 
         // Create separate GameObjects for each Slider and add them as children of audioSettingsObject
         GameObject masterSliderObject = new GameObject("MasterSlider");
         masterSliderObject.transform.parent = audioSettingsObject.transform;
-        audioSettings.masterSlider = masterSliderObject.AddComponent<Slider>();
+        audioSettings.MasterSlider = masterSliderObject.AddComponent<Slider>();
 
         GameObject musicSliderObject = new GameObject("MusicSlider");
         musicSliderObject.transform.parent = audioSettingsObject.transform;
-        audioSettings.musicSlider = musicSliderObject.AddComponent<Slider>();
+        audioSettings.MusicSlider = musicSliderObject.AddComponent<Slider>();
 
         GameObject SFXSliderObject = new GameObject("SFXSlider");
         SFXSliderObject.transform.parent = audioSettingsObject.transform;
@@ -55,15 +55,15 @@ public class AudioSettingsTest
     {
         // Arrange
         Slider masterSlider = audioSettingsObject.AddComponent<Slider>();
-        audioSettings.masterSlider = masterSlider;
+        audioSettings.MasterSlider = masterSlider;
 
         // Act
-        audioSettings.masterSlider.value = 0.5f;
+        audioSettings.MasterSlider.value = 0.5f;
         audioSettings.SetMasterVolume();
 
         // Assert
         float masterVolume;
-        audioSettings.myMixer.GetFloat("MasterVolume", out masterVolume);
+        audioSettings.MyMixer.GetFloat("MasterVolume", out masterVolume);
         Assert.AreEqual(Mathf.Log10(0.5f) * 20, masterVolume);
     }
 
@@ -72,15 +72,15 @@ public class AudioSettingsTest
     {
         // Arrange
         Slider musicSlider = audioSettingsObject.AddComponent<Slider>();
-        audioSettings.musicSlider = musicSlider;
+        audioSettings.MusicSlider = musicSlider;
 
         // Act
-        audioSettings.musicSlider.value = 0.7f;
+        audioSettings.MusicSlider.value = 0.7f;
         audioSettings.SetMusicVolume();
 
         // Assert
         float musicVolume;
-        audioSettings.myMixer.GetFloat("MusicVolume", out musicVolume);
+        audioSettings.MyMixer.GetFloat("MusicVolume", out musicVolume);
         Assert.AreEqual(Mathf.Log10(0.7f) * 20, musicVolume);
     }
 
@@ -97,7 +97,7 @@ public class AudioSettingsTest
 
         // Assert
         float SFXVolume;
-        audioSettings.myMixer.GetFloat("SFXVolume", out SFXVolume);
+        audioSettings.MyMixer.GetFloat("SFXVolume", out SFXVolume);
         Assert.AreEqual(Mathf.Log10(0.3f) * 20, SFXVolume);
     }
 
@@ -114,7 +114,7 @@ public class AudioSettingsTest
 
         // Assert
         float UIVolume;
-        audioSettings.myMixer.GetFloat("UIVolume", out UIVolume);
+        audioSettings.MyMixer.GetFloat("UIVolume", out UIVolume);
         Assert.AreEqual(Mathf.Log10(0.8f) * 20, UIVolume);
     }
 }

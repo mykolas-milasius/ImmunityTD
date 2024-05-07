@@ -3,13 +3,13 @@ using UnityEngine.Events;
 
 public class TowerSelectionButton : MonoBehaviour
 {
-    public GameObject towerPrefab;
-    public static Slot currentSlot = null;
-    public Canvas purchaseMenu;
-    public float price;
+    public GameObject TowerPrefab;
+    public static Slot CurrentSlot = null;
+    public Canvas PurchaseMenu;
+    public float Price;
     public void Start()
     {
-        if (towerPrefab == null)
+        if (TowerPrefab == null)
         {
             Debug.LogError("Tower prefab is not assigned to the tower selection button!");
         }
@@ -21,16 +21,16 @@ public class TowerSelectionButton : MonoBehaviour
     }
     public void Place()
     {
-        if (currentSlot != null)
+        if (CurrentSlot != null)
         {
-            if (currentSlot.clicked)
+            if (CurrentSlot.Clicked)
             {
-                if (Player.Coins - price >= 0)
+                if (Player.Coins - Price >= 0)
                 {
-                    Player.Coins -= price;
-                    currentSlot.PlaceTower(towerPrefab);
-                    TowerMenu.currentSlot = currentSlot;
-                    currentSlot = null;
+                    Player.Coins -= Price;
+                    CurrentSlot.PlaceTower(TowerPrefab);
+                    TowerMenu.CurrentSlot = CurrentSlot;
+                    CurrentSlot = null;
                 }
                 else
                 {

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TowerRange : MonoBehaviour
 {
-    public Tower parentTower;
+    public Tower ParentTower;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
             // Debug.Log("Enemy entered range: " + other.name);
-            parentTower.EnemyEnteredRange(other.gameObject);
+            ParentTower.EnemyEnteredRange(other.gameObject);
         }
     }
 
@@ -20,7 +20,7 @@ public class TowerRange : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             // Debug.Log("Enemy exited range: " + other.name);
-            parentTower.EnemyExitedRange(other.gameObject);
+            ParentTower.EnemyExitedRange(other.gameObject);
         }
     }
 }

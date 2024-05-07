@@ -16,9 +16,9 @@ public class AudioManagerTests
 
         Assert.IsNotNull(audioManager, "AudioManager component not found in StartScreen scene.");
 
-        Assert.AreEqual(audioManager.musicSource.clip, audioManager.mainmenu, "Music source clip is not set to mainmenu clip on StartScreen.");
+        Assert.AreEqual(audioManager.MusicSource.clip, audioManager.Mainmenu, "Music source clip is not set to mainmenu clip on StartScreen.");
 
-        Assert.IsTrue(audioManager.musicSource.isPlaying, "Music source is not playing on StartScreen.");
+        Assert.IsTrue(audioManager.MusicSource.isPlaying, "Music source is not playing on StartScreen.");
     }
 
     [UnityTest]
@@ -33,9 +33,9 @@ public class AudioManagerTests
 
         Assert.IsNotNull(audioManager, "AudioManager component not found in Game scene.");
 
-        Assert.AreEqual(audioManager.musicSource.clip, audioManager.background, "Music source clip is not set to background clip in Game scene.");
+        Assert.AreEqual(audioManager.MusicSource.clip, audioManager.Background, "Music source clip is not set to background clip in Game scene.");
 
-        Assert.IsTrue(audioManager.musicSource.isPlaying, "Music source is not playing in Game scene.");
+        Assert.IsTrue(audioManager.MusicSource.isPlaying, "Music source is not playing in Game scene.");
     }
 
     [UnityTest]
@@ -51,7 +51,7 @@ public class AudioManagerTests
 
         audioManager.PlayButtonSound();
 
-        Assert.AreEqual(audioManager.SFXSource.clip, audioManager.buttonClick, "SFX source clip is not set to buttonClick clip.");
+        Assert.AreEqual(audioManager.SFXSource.clip, audioManager.ButtonClick, "SFX source clip is not set to buttonClick clip.");
 
         Assert.IsTrue(audioManager.SFXSource.isPlaying, "SFX source is not playing.");
     }
