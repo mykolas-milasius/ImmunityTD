@@ -48,7 +48,7 @@ public class InputHandlerTest
 
         // Assert that the prevSlot is an empty Slot object
         Assert.IsNotNull(InputHandler.prevSlot, "prevSlot should not be null");
-        Assert.IsFalse(InputHandler.prevSlot.clicked, "prevSlot should not be clicked");
+        Assert.IsFalse(InputHandler.prevSlot.Clicked, "prevSlot should not be clicked");
         // Add any additional assertions as needed for the state of the empty slot object
     }
 

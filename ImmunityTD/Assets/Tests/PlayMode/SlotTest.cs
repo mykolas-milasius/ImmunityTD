@@ -18,10 +18,10 @@ public class SlotTest
         slotGameObject = new GameObject();
         slotScript = slotGameObject.AddComponent<Slot>();
         spriteRenderer = slotGameObject.AddComponent<SpriteRenderer>();
-        slotScript.spriteRenderer = spriteRenderer; // Ensure spriteRenderer is assigned
+        slotScript.SpriteRenderer = spriteRenderer; // Ensure spriteRenderer is assigned
 
-        slotScript.towerSelectionCanvas = new GameObject(); // Create a mock tower selection canvas
-        slotScript.towerSelectionCanvas.SetActive(false); // Initially set it to inactive
+        slotScript.TowerSelectionCanvas = new GameObject(); // Create a mock tower selection canvas
+        slotScript.TowerSelectionCanvas.SetActive(false); // Initially set it to inactive
 
         towerPrefab = new GameObject(); // Mock tower prefab
     }
@@ -37,12 +37,12 @@ public class SlotTest
     [Test]
     public void Start_AssignsSpriteRenderer_IfNotSet()
     {
-        slotScript.spriteRenderer = null; // Simulate unassigned spriteRenderer
+        slotScript.SpriteRenderer = null; // Simulate unassigned spriteRenderer
 
         slotScript.Start(); // Call Start manually as Unity does not call it in Edit Mode
 
         // Assert that spriteRenderer is now assigned
-        Assert.IsNotNull(slotScript.spriteRenderer);
+        Assert.IsNotNull(slotScript.SpriteRenderer);
     }
 
     [UnityTest]
@@ -53,9 +53,9 @@ public class SlotTest
         yield return null; // Wait for one frame
 
         // Assert that 'clicked' is toggled
-        Assert.IsTrue(slotScript.clicked);
+        Assert.IsTrue(slotScript.Clicked);
         // Assert that towerSelectionCanvas is active
-        Assert.IsTrue(slotScript.towerSelectionCanvas.activeSelf);
+        Assert.IsTrue(slotScript.TowerSelectionCanvas.activeSelf);
         // Assert that the color changes to green initially (assuming starting color is not green)
         Assert.AreEqual(Color.green, spriteRenderer.color);
 
@@ -65,7 +65,7 @@ public class SlotTest
         yield return null; // Wait for one frame
 
         // Assert that 'clicked' is toggled back
-        Assert.IsFalse(slotScript.clicked);
+        Assert.IsFalse(slotScript.Clicked);
         // Color should toggle back to white
         Assert.AreEqual(Color.white, spriteRenderer.color);
     }

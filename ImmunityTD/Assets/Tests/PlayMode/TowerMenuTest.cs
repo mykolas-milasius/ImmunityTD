@@ -19,21 +19,21 @@ public class TowerMenuTests
         // Set up the TowerMenu and its required components
         towerMenuObject = new GameObject("TowerMenu");
         towerMenu = towerMenuObject.AddComponent<TowerMenu>();
-        towerMenu.towerMenuCanvas = new GameObject("TowerMenuCanvas");
-        towerMenu.towerMenuCanvas.SetActive(false); // Initially set to inactive
+        towerMenu.TowerMenuCanvas = new GameObject("TowerMenuCanvas");
+        towerMenu.TowerMenuCanvas.SetActive(false); // Initially set to inactive
 
         towerRangePreview = new GameObject("TowerRangePreview");
         rangeRenderer = towerRangePreview.AddComponent<SpriteRenderer>();
-        towerMenu.rangeRenderer = rangeRenderer;
+        towerMenu.RangeRenderer = rangeRenderer;
         rangeRenderer.enabled = false; // Initially disabled
 
         purchaseMenu = new GameObject("PurchaseMenu").AddComponent<Canvas>();
-        towerMenu.purchaseMenu = purchaseMenu;
+        towerMenu.PurchaseMenu = purchaseMenu;
 
         // Set up a Slot object for testing RemoveTower
         slotGameObject = new GameObject("Slot");
         slot = slotGameObject.AddComponent<Slot>();
-        TowerMenu.currentSlot = slot;
+        TowerMenu.CurrentSlot = slot;
     }
 
     [TearDown]
@@ -48,7 +48,7 @@ public class TowerMenuTests
     [Test]
     public void RemoveTower_WithoutCurrentSlot_DoesNotThrowError()
     {
-        TowerMenu.currentSlot = null; // Set currentSlot to null to simulate the edge case
+        TowerMenu.CurrentSlot = null; // Set currentSlot to null to simulate the edge case
 
         // Use Assert.DoesNotThrow to verify that no error is thrown when currentSlot is null
         Assert.DoesNotThrow(() => towerMenu.RemoveTower());
@@ -81,28 +81,28 @@ public class TowerMenuTests
     public void OnMouseDown_TogglesMenuAndRangeVisibility()
     {
         // Initial state should be inactive and disabled
-        Assert.IsFalse(towerMenu.towerMenuCanvas.activeSelf);
-        Assert.IsFalse(towerMenu.rangeRenderer.enabled);
+        Assert.IsFalse(towerMenu.TowerMenuCanvas.activeSelf);
+        Assert.IsFalse(towerMenu.RangeRenderer.enabled);
 
         // Simulate mouse down event
         towerMenu.OnMouseDown();
 
         // Menu and range should now be active and enabled
-        Assert.IsTrue(towerMenu.towerMenuCanvas.activeSelf);
-        Assert.IsTrue(towerMenu.rangeRenderer.enabled);
+        Assert.IsTrue(towerMenu.TowerMenuCanvas.activeSelf);
+        Assert.IsTrue(towerMenu.RangeRenderer.enabled);
 
         // Simulate another mouse down to toggle back
         towerMenu.OnMouseDown();
 
         // Menu and range should now be inactive and disabled again
-        Assert.IsFalse(towerMenu.towerMenuCanvas.activeSelf);
-        Assert.IsFalse(towerMenu.rangeRenderer.enabled);
+        Assert.IsFalse(towerMenu.TowerMenuCanvas.activeSelf);
+        Assert.IsFalse(towerMenu.RangeRenderer.enabled);
     }
 
     [Test]
     public void OnMouseDown_WithNoCanvasAssigned_LogsError()
     {
-        towerMenu.towerMenuCanvas = null; // Unassign the canvas to simulate the error condition
+        towerMenu.TowerMenuCanvas = null; // Unassign the canvas to simulate the error condition
 
         LogAssert.Expect(LogType.Error, "Tower menu canvas is not assigned to the tower prefab!");
         towerMenu.OnMouseDown(); // Simulate mouse down event
@@ -112,7 +112,7 @@ public class TowerMenuTests
     public IEnumerator RemoveTower_ReactivatesCurrentSlotAndDestroysItself()
     {
         // Make sure the slot is initially inactive
-        TowerMenu.currentSlot.gameObject.SetActive(false);
+        TowerMenu.CurrentSlot.gameObject.SetActive(false);
 
         // Call RemoveTower
         towerMenu.RemoveTower();
@@ -120,7 +120,7 @@ public class TowerMenuTests
         yield return null; // Wait for the next frame to ensure Destroy is processed
 
         // Slot should now be active
-        Assert.IsTrue(TowerMenu.currentSlot.gameObject.activeSelf);
+        Assert.IsTrue(TowerMenu.CurrentSlot.gameObject.activeSelf);
 
         // TowerMenu object should be destroyed, so it should be null
         Assert.IsTrue(towerMenu == null);

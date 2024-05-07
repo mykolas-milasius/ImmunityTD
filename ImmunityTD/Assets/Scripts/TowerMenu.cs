@@ -1,48 +1,50 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerMenu : MonoBehaviour
+namespace Assets.Scripts
 {
-    public GameObject towerMenuCanvas;
-    public GameObject towerRangePreview;
-    public SpriteRenderer rangeRenderer;
-    public Canvas purchaseMenu;
-    public static Slot currentSlot;
-    private bool state = false;
-
-
-    public void OnMouseDown()
+    public class TowerMenu : MonoBehaviour
     {
-        InputHandler.tower = this;
-        // Check if the tower menu canvas is assigned
-        if (towerMenuCanvas != null)
+        public GameObject TowerMenuCanvas;
+        public GameObject TowerRangePreview;
+        public SpriteRenderer RangeRenderer;
+        public Canvas PurchaseMenu;
+        public static Slot CurrentSlot;
+
+        private bool _state = false;
+
+        public void OnMouseDown()
         {
-            if (!state)
+            InputHandler.tower = this;
+            // Check if the tower menu canvas is assigned
+            if (TowerMenuCanvas != null)
             {
-                towerMenuCanvas.SetActive(true);
-                rangeRenderer.enabled = true;
-                state = true;
+                if (!_state)
+                {
+                    TowerMenuCanvas.SetActive(true);
+                    RangeRenderer.enabled = true;
+                    _state = true;
+                }
+                else if (_state)
+                {
+                    TowerMenuCanvas.SetActive(false);
+                    RangeRenderer.enabled = false;
+                    _state = false;
+                }
             }
-            else if (state)
+            else
             {
-                towerMenuCanvas.SetActive(false);
-                rangeRenderer.enabled = false;
-                state = false;
+                Debug.LogError("Tower menu canvas is not assigned to the tower prefab!");
             }
         }
-        else
+
+        public void RemoveTower()
         {
-            Debug.LogError("Tower menu canvas is not assigned to the tower prefab!");
+            if (CurrentSlot != null)
+            {
+                CurrentSlot.gameObject.SetActive(true);
+            }
+
+            Destroy(gameObject);
         }
-    }
-    public void RemoveTower()
-    {
-        if (currentSlot != null)
-        {
-            currentSlot.gameObject.SetActive(true);
-        }
-        Destroy(gameObject);
     }
 }

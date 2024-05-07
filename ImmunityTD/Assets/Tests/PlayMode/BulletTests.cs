@@ -31,14 +31,14 @@ public class BulletTests
         towerScript = towerGameObject.AddComponent<MockTower>();
         
         // Initialize necessary TextMeshProUGUI components and others required in Tower.Update()
-        towerScript.damageText = new GameObject("DamageText").AddComponent<TextMeshProUGUI>();
-        towerScript.attackSpeedText = new GameObject("AttackSpeedText").AddComponent<TextMeshProUGUI>();
-        towerScript.rangeText = new GameObject("RangeText").AddComponent<TextMeshProUGUI>();
+        towerScript.DamageText = new GameObject("DamageText").AddComponent<TextMeshProUGUI>();
+        towerScript.AttackSpeedText = new GameObject("AttackSpeedText").AddComponent<TextMeshProUGUI>();
+        towerScript.RangeText = new GameObject("RangeText").AddComponent<TextMeshProUGUI>();
         // Add more initializations for other TextMeshProUGUI components and properties as needed...
 
         // Initialize the range preview GameObject as it's used in Tower.Start() and Tower.Update()
         var rangePreview = new GameObject("RangePreview");
-        towerScript.rangePreview = rangePreview;
+        towerScript.RangePreview = rangePreview;
 
         // Link the bullet to the tower
         bulletScript.tower = towerScript;

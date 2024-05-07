@@ -18,7 +18,7 @@ public class PurchaseButton : MonoBehaviour
     {
         if (towerButton != null)
         {
-            if (Player.Coins >= towerButton.price)
+            if (Player.Coins >= towerButton.Price)
             {
                 button.interactable = true;
             }

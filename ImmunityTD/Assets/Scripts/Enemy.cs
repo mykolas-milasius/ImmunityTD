@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
         Player.AddCoins(CoinsWhenDied);
         Player.AddKill();
         Player.AddScore(CoinsWhenDied);
-        _audioManager.PlaySFX(_audioManager.virusDeath);
+        _audioManager.PlaySFX(_audioManager.VirusDeath);
         Destroy(gameObject);
         EnemyGenerator.EnemyCount--;
     }

@@ -29,9 +29,9 @@ public class RangeTest
         towerObject = new GameObject();
         tower = towerObject.AddComponent<Tower>();
         preview = new GameObject();
-        tower.rangePreview = preview;
+        tower.RangePreview = preview;
         bulletPrefab = new GameObject();
-        tower.bulletPrefab = bulletPrefab;
+        tower.BulletPrefab = bulletPrefab;
         GameObject text = new GameObject();
         GameObject text1 = new GameObject();
         GameObject text2 = new GameObject();
@@ -49,15 +49,15 @@ public class RangeTest
         upgradeRangeText = text5.AddComponent<TextMeshProUGUI>();
         upgradePriceText = text6.AddComponent<TextMeshProUGUI>();
         button = but.AddComponent<Button>();
-        tower.damageText = damageText;
-        tower.attackSpeedText = attackSpeedText;
-        tower.rangeText = rangeText;
-        tower.rangePreview = rangePreview;
-        tower.upgradeDamageText = upgradeDamageText;
-        tower.upgradeAttackSpeedText = upgradeAttackSpeedText;
-        tower.upgradeRangeText = upgradeRangeText;
-        tower.upgradePriceText = upgradePriceText;
-        tower.button = button;
+        tower.DamageText = damageText;
+        tower.AttackSpeedText = attackSpeedText;
+        tower.RangeText = rangeText;
+        tower.RangePreview = rangePreview;
+        tower.UpgradeDamageText = upgradeDamageText;
+        tower.UpgradeAttackSpeedText = upgradeAttackSpeedText;
+        tower.UpgradeRangeText = upgradeRangeText;
+        tower.UpgradePriceText = upgradePriceText;
+        tower.Button = button;
     }
 
     [TearDown]
@@ -83,7 +83,7 @@ public class RangeTest
         // Arrange
         GameObject rangeObject = new GameObject();
         TowerRange towerRange = rangeObject.AddComponent<TowerRange>();
-        towerRange.parentTower = tower;
+        towerRange.ParentTower = tower;
 
         GameObject enemyObject = new GameObject();
         enemyObject.tag = "Enemy";
@@ -95,7 +95,7 @@ public class RangeTest
 
         // Assert
         yield return null; // Wait for a frame to process Unity's OnTrigger logic
-        Assert.IsTrue(tower.entered); // Ensure EnemyEnteredRange method was called
+        Assert.IsTrue(tower.Entered); // Ensure EnemyEnteredRange method was called
     }
 
     [UnityTest]
@@ -103,7 +103,7 @@ public class RangeTest
     {
         GameObject rangeObject = new GameObject();
         TowerRange towerRange = rangeObject.AddComponent<TowerRange>();
-        towerRange.parentTower = tower;
+        towerRange.ParentTower = tower;
 
         GameObject enemyObject = new GameObject();
         enemyObject.tag = "Enemy";
@@ -117,6 +117,6 @@ public class RangeTest
 
         // Assert
         yield return null; // Wait for a frame to process Unity's OnTrigger logic
-        Assert.IsTrue(tower.exited); // Ensure EnemyExitedRange method was called
+        Assert.IsTrue(tower.Exited); // Ensure EnemyExitedRange method was called
     }
 }

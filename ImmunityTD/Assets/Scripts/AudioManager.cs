@@ -5,15 +5,15 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
     [Header("Audio Source")]
-    [SerializeField] public AudioSource musicSource;
+    [SerializeField] public AudioSource MusicSource;
     [SerializeField] public AudioSource SFXSource;
 
     [Header("Audio Clip")]
-    public AudioClip background;
-    public AudioClip mainmenu;
-    public AudioClip buttonClick;
-    public AudioClip virusDeath;
-    public AudioClip towerShoot;
+    public AudioClip Background;
+    public AudioClip Mainmenu;
+    public AudioClip ButtonClick;
+    public AudioClip VirusDeath;
+    public AudioClip TowerShoot;
 
     private void Start()
     {
@@ -22,22 +22,22 @@ public class AudioManager : MonoBehaviour
 
         if (sceneName == "StartScreen")
         {
-            musicSource.clip = mainmenu;
+            MusicSource.clip = Mainmenu;
         }
         else
         {
             if (sceneName == "Game")
             {
-                musicSource.clip = background;
+                MusicSource.clip = Background;
             }
         }
-        musicSource.volume = 0.1f;
-        musicSource.Play();
+        MusicSource.volume = 0.1f;
+        MusicSource.Play();
     }
 
     public void PlayButtonSound()
     {
-        SFXSource.clip = buttonClick;
+        SFXSource.clip = ButtonClick;
         SFXSource.volume = 0.1f;
         SFXSource.Play();
     }

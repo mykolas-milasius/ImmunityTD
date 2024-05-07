@@ -2,40 +2,40 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
-    public GameObject towerSelectionCanvas;
-    public bool clicked = false;
-    public SpriteRenderer spriteRenderer;
-    public TowerSelectionButton towerSelectionButton;
+    public GameObject TowerSelectionCanvas;
+    public bool Clicked = false;
+    public SpriteRenderer SpriteRenderer;
+    public TowerSelectionButton TowerSelectionButton;
 
     public void Start()
     {
         // Ensure spriteRenderer is assigned
-        if(spriteRenderer == null)
+        if(SpriteRenderer == null)
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            SpriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
 
 
     public void OnMouseDown()
     {
-        TowerSelectionButton.currentSlot = this;
+        TowerSelectionButton.CurrentSlot = this;
         PurchaseButton.currentSlot = this;
         InputHandler.prevSlot = this;
-        clicked = !clicked;
+        Clicked = !Clicked;
         ChangeColor();
-        towerSelectionCanvas.SetActive(true);
+        TowerSelectionCanvas.SetActive(true);
     }
     public void ChangeColor()
     {
         
-        if (spriteRenderer.color == Color.green)
+        if (SpriteRenderer.color == Color.green)
         {
-            spriteRenderer.color = Color.white;
+            SpriteRenderer.color = Color.white;
         }
-        else if (spriteRenderer.color == Color.white)
+        else if (SpriteRenderer.color == Color.white)
         {
-            spriteRenderer.color = Color.green;
+            SpriteRenderer.color = Color.green;
         }
     }
     public void PlaceTower(GameObject towerPrefab)

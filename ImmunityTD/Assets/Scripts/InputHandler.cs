@@ -26,11 +26,11 @@ public class InputHandler : MonoBehaviour
         {
             if(rayHit.collider.gameObject.name != prevSlot.gameObject.name)
             {
-                if(prevSlot.spriteRenderer.color == Color.green)
+                if(prevSlot.SpriteRenderer.color == Color.green)
                 {
                     prevSlot.ChangeColor();
                 }
-                prevSlot.clicked = false;
+                prevSlot.Clicked = false;
                 prevSlot = null;
             }
         }
@@ -38,13 +38,13 @@ public class InputHandler : MonoBehaviour
         Debug.Log(rayHit.collider.gameObject.name);
         if (!rayHit.collider.gameObject.name.Contains("Slot"))
         {
-            TowerSelectionButton.currentSlot = null;
+            TowerSelectionButton.CurrentSlot = null;
         }
         if(tower != null)
         {
             if (rayHit.collider.gameObject.name != tower.gameObject.name)
             {
-                tower.towerMenuCanvas.SetActive(false);
+                tower.TowerMenuCanvas.SetActive(false);
             }
         }
     }
