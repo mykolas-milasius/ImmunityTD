@@ -28,7 +28,7 @@ public class TowerSelectionButtonTests
         towerSelectionButton.Start();
 
         // Assert
-        LogAssert.Expect(LogType.Error, "Tower prefab is not assigned to the tower selection button!");
+        LogAssert.Expect(LogType.Error, "Tower prefab is not assigned to the Tower selection Button!");
     }
     [UnityTest]
     public IEnumerator PlaceTower_CurrentSlotNull_NoTowerPlaced()
@@ -36,7 +36,7 @@ public class TowerSelectionButtonTests
         // Arrange
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
-        TowerSelectionButton.CurrentSlot = null; // Set currentSlot to null
+        TowerSelectionButton.CurrentSlot = null; // Set CurrentSlot to null
         towerSelectionButton.TowerPrefab = new GameObject();
         Player.Coins = 20; // Set coins to 20
         towerSelectionButton.Price = 10f; // Set price
@@ -56,7 +56,7 @@ public class TowerSelectionButtonTests
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
         towerSelectionButton.TowerPrefab = new GameObject();
-        TowerSelectionButton.CurrentSlot = towerSelectionButtonObject.AddComponent<Slot>(); // Mock currentSlot
+        TowerSelectionButton.CurrentSlot = towerSelectionButtonObject.AddComponent<Slot>(); // Mock CurrentSlot
 
         TowerSelectionButton.CurrentSlot.Clicked = true;
         Player.Coins = 0; // Set coins to 0
@@ -68,7 +68,7 @@ public class TowerSelectionButtonTests
 
         // Assert
         LogAssert.Expect(LogType.Warning, "Not enough coins.");
-        Assert.IsNotNull(TowerSelectionButton.CurrentSlot); // Ensure no tower is placed
+        Assert.IsNotNull(TowerSelectionButton.CurrentSlot); // Ensure no Tower is placed
     }
 
     [UnityTest]
@@ -76,7 +76,7 @@ public class TowerSelectionButtonTests
     {
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
-        TowerSelectionButton.CurrentSlot = towerSelectionButtonObject.AddComponent<Slot>(); // Mock currentSlot
+        TowerSelectionButton.CurrentSlot = towerSelectionButtonObject.AddComponent<Slot>(); // Mock CurrentSlot
         towerSelectionButton.TowerPrefab = new GameObject();
 
 
@@ -112,7 +112,7 @@ public class TowerSelectionButtonTests
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
         towerSelectionButton.TowerPrefab = new GameObject();
 
-        TowerSelectionButton.CurrentSlot = towerSelectionButtonObject.AddComponent<Slot>(); // Mock currentSlot
+        TowerSelectionButton.CurrentSlot = towerSelectionButtonObject.AddComponent<Slot>(); // Mock CurrentSlot
 
 
         towerSelectionButton.Place();

@@ -2,48 +2,52 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class AudioManager : MonoBehaviour
+namespace Assets.Scripts
 {
-    [Header("Audio Source")]
-    [SerializeField] public AudioSource MusicSource;
-    [SerializeField] public AudioSource SFXSource;
-
-    [Header("Audio Clip")]
-    public AudioClip Background;
-    public AudioClip Mainmenu;
-    public AudioClip ButtonClick;
-    public AudioClip VirusDeath;
-    public AudioClip TowerShoot;
-
-    private void Start()
+    public class AudioManager : MonoBehaviour
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
+        [Header("Audio Source")] [SerializeField]
+        public AudioSource MusicSource;
 
-        if (sceneName == "StartScreen")
+        [SerializeField] public AudioSource SFXSource;
+
+        [Header("Audio Clip")] public AudioClip Background;
+        public AudioClip MainMenu;
+        public AudioClip ButtonClick;
+        public AudioClip VirusDeath;
+        public AudioClip TowerShoot;
+
+        private void Start()
         {
-            MusicSource.clip = Mainmenu;
-        }
-        else
-        {
-            if (sceneName == "Game")
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+
+            if (sceneName == "StartScreen")
             {
-                MusicSource.clip = Background;
+                MusicSource.clip = MainMenu;
             }
+            else
+            {
+                if (sceneName == "Game")
+                {
+                    MusicSource.clip = Background;
+                }
+            }
+
+            MusicSource.volume = 0.1f;
+            MusicSource.Play();
         }
-        MusicSource.volume = 0.1f;
-        MusicSource.Play();
-    }
 
-    public void PlayButtonSound()
-    {
-        SFXSource.clip = ButtonClick;
-        SFXSource.volume = 0.1f;
-        SFXSource.Play();
-    }
+        public void PlayButtonSound()
+        {
+            SFXSource.clip = ButtonClick;
+            SFXSource.volume = 0.1f;
+            SFXSource.Play();
+        }
 
-    public void PlaySFX(AudioClip clip)
-    {
-        SFXSource.PlayOneShot(clip);
+        public void PlaySFX(AudioClip clip)
+        {
+            SFXSource.PlayOneShot(clip);
+        }
     }
 }

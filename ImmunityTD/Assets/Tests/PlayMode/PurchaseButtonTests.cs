@@ -17,16 +17,16 @@ public class PurchaseButtonTests
         purchaseButton.button = buttonComponent;
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
-        towerSelectionButton.Price = 50f; // Set tower price
+        towerSelectionButton.Price = 50f; // Set Tower price
         towerSelectionButton.TowerPrefab = towerSelectionButtonObject;
 
         PurchaseButton.towerButton = towerSelectionButton;
-        Player.Coins = 100; // Set player coins to a value more than tower price
+        Player.Coins = 100; // Set player coins to a value more than Tower price
 
         // Act
-        purchaseButton.Start(); // Call Start to initialize button state
+        purchaseButton.Start(); // Call Start to initialize Button state
         purchaseButton.Update(); // Call Update to check coin amount
-        yield return null; // Wait for a frame to process tower placement
+        yield return null; // Wait for a frame to process Tower placement
 
         // Assert
         Assert.IsTrue(purchaseButton.button.interactable); // Button should be interactable when player has enough coins
@@ -42,15 +42,15 @@ public class PurchaseButtonTests
 
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
-        towerSelectionButton.Price = 50f; // Set tower price
+        towerSelectionButton.Price = 50f; // Set Tower price
         towerSelectionButton.TowerPrefab = towerSelectionButtonObject;
 
         PurchaseButton.currentSlot = null; // Mock current slot
 
         purchaseButton.PurchaseOnClick();
-        yield return null; // Wait for a frame to process tower placement
+        yield return null; // Wait for a frame to process Tower placement
 
-        LogAssert.Expect(LogType.Warning, "No slot selected for tower placement.");
+        LogAssert.Expect(LogType.Warning, "No slot selected for Tower placement.");
     }
     [UnityTest]
     public IEnumerator PurchaseButton_TowerButtonIsNull()
@@ -63,7 +63,7 @@ public class PurchaseButtonTests
 
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
-        towerSelectionButton.Price = 50f; // Set tower price
+        towerSelectionButton.Price = 50f; // Set Tower price
         towerSelectionButton.TowerPrefab = towerSelectionButtonObject;
 
         GameObject slotObject = new GameObject();
@@ -72,9 +72,9 @@ public class PurchaseButtonTests
         PurchaseButton.towerButton = null;
 
         purchaseButton.PurchaseOnClick();
-        yield return null; // Wait for a frame to process tower placement
+        yield return null; // Wait for a frame to process Tower placement
 
-        LogAssert.Expect(LogType.Warning, "No tower selected.");
+        LogAssert.Expect(LogType.Warning, "No Tower selected.");
     }
     [UnityTest]
     public IEnumerator PurchaseButton_PlaceTower()
@@ -87,7 +87,7 @@ public class PurchaseButtonTests
 
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
-        towerSelectionButton.Price = 50f; // Set tower price
+        towerSelectionButton.Price = 50f; // Set Tower price
         towerSelectionButton.TowerPrefab = towerSelectionButtonObject;
         Player.Coins = 60;
 
@@ -100,7 +100,7 @@ public class PurchaseButtonTests
         PurchaseButton.towerButton = towerSelectionButton;
 
         purchaseButton.PurchaseOnClick();
-        yield return null; // Wait for a frame to process tower placement
+        yield return null; // Wait for a frame to process Tower placement
 
         Assert.IsNull(TowerSelectionButton.CurrentSlot);
     }

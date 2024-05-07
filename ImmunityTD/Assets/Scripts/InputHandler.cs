@@ -1,50 +1,55 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputHandler : MonoBehaviour
+namespace Assets.Scripts
 {
-    private Camera _mainCamera;
-    public GameObject ShopCanvas;
-
-    public static Slot prevSlot;
-    public static TowerMenu tower;
-    public static TowerSelectionButton towerSelectionButton;
-
-    private void Awake()
+    public class InputHandler : MonoBehaviour
     {
-        _mainCamera = Camera.main;
-        
-    }
-    public void OnClick(InputAction.CallbackContext context)
-    {
-        if (!context.started) return;
+        private Camera _mainCamera;
 
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if (!rayHit.collider) return;
-        
-        if (prevSlot != null)
+        public static Slot PrevSlot;
+        public static TowerMenu Tower;
+        public static TowerSelectionButton TowerSelectionButton;
+
+        private void Awake()
         {
-            if(rayHit.collider.gameObject.name != prevSlot.gameObject.name)
+            _mainCamera = Camera.main;
+
+        }
+
+        public void OnClick(InputAction.CallbackContext context)
+        {
+            if (!context.started) return;
+
+            var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+            if (!rayHit.collider) return;
+
+            if (PrevSlot != null)
             {
-                if(prevSlot.SpriteRenderer.color == Color.green)
+                if (rayHit.collider.gameObject.name != PrevSlot.gameObject.name)
                 {
-                    prevSlot.ChangeColor();
-                }
-                prevSlot.Clicked = false;
-                prevSlot = null;
-            }
-        }
+                    if (PrevSlot.SpriteRenderer.color == Color.green)
+                    {
+                        PrevSlot.ChangeColor();
+                    }
 
-        Debug.Log(rayHit.collider.gameObject.name);
-        if (!rayHit.collider.gameObject.name.Contains("Slot"))
-        {
-            TowerSelectionButton.CurrentSlot = null;
-        }
-        if(tower != null)
-        {
-            if (rayHit.collider.gameObject.name != tower.gameObject.name)
+                    PrevSlot.Clicked = false;
+                    PrevSlot = null;
+                }
+            }
+
+            Debug.Log(rayHit.collider.gameObject.name);
+            if (!rayHit.collider.gameObject.name.Contains("Slot"))
             {
-                tower.TowerMenuCanvas.SetActive(false);
+                TowerSelectionButton.CurrentSlot = null;
+            }
+
+            if (Tower != null)
+            {
+                if (rayHit.collider.gameObject.name != Tower.gameObject.name)
+                {
+                    Tower.TowerMenuCanvas.SetActive(false);
+                }
             }
         }
     }

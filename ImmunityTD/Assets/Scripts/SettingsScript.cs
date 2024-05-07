@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class SettingsScript : MonoBehaviour
+namespace Assets.Scripts
 {
-    public GameObject PauseMenu;
-    public GameObject SettingsMenu;
-
-    // Call this function when the Settings button is clicked
-    public void OpenSettingsMenu()
+    public class SettingsScript : MonoBehaviour
     {
-        PauseMenu.SetActive(false);
-        SettingsMenu.SetActive(true);
-    }
+        public GameObject PauseMenu;
+        public GameObject SettingsMenu;
 
-    // Call this function when the Back button in the Settings menu is clicked
-    public void ReturnToPauseMenu()
-    {
-        SettingsMenu.SetActive(false);
-        PauseMenu.SetActive(true);
+        // Call this function when the Settings Button is clicked
+        public void OpenSettingsMenu()
+        {
+            PauseMenu.SetActive(false);
+            SettingsMenu.SetActive(true);
+        }
+
+        // Call this function when the Back Button in the Settings menu is clicked
+        public void ReturnToPauseMenu()
+        {
+            SettingsMenu.SetActive(false);
+            PauseMenu.SetActive(true);
+        }
     }
 }

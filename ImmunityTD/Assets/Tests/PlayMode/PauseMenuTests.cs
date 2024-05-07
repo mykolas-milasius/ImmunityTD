@@ -21,7 +21,7 @@ public class PauseMenuTests
         pauseMenuScript.pauseMenu = new GameObject("PauseMenuPanel");
         pauseMenuScript.pauseButton = new GameObject("PauseButton");
 
-        // Initially, the pause menu is inactive and the pause button is active
+        // Initially, the pause menu is inactive and the pause Button is active
         pauseMenuScript.pauseMenu.SetActive(false);
         pauseMenuScript.pauseButton.SetActive(true);
     }

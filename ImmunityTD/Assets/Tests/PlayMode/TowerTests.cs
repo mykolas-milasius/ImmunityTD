@@ -98,7 +98,7 @@ public class TowerTests
         tower.Upgrade();
 
         Assert.Greater(tower.Damage, initialDamage, "Damage should increase after an upgrade.");
-        Assert.Greater(tower.AttackSpeed, initialAttackSpeed, "Attack speed should increase after an upgrade.");
+        Assert.Greater(tower.AttackSpeed, initialAttackSpeed, "Attack Speed should increase after an upgrade.");
         Assert.Greater(tower.Range, initialRange, "Range should increase after an upgrade.");
     }
 
@@ -117,9 +117,9 @@ public class TowerTests
     {
         tower.Update();
 
-        Assert.AreEqual(tower.Damage.ToString(), tower.DamageText.text, "Damage text should match tower's damage.");
-        Assert.AreEqual(tower.AttackSpeed.ToString(), tower.AttackSpeedText.text, "Attack speed text should match tower's attack speed.");
-        Assert.AreEqual(tower.Range.ToString(), tower.RangeText.text, "Range text should match tower's range.");
+        Assert.AreEqual(tower.Damage.ToString(), tower.DamageText.text, "Damage text should match Tower's Damage.");
+        Assert.AreEqual(tower.AttackSpeed.ToString(), tower.AttackSpeedText.text, "Attack Speed text should match Tower's attack Speed.");
+        Assert.AreEqual(tower.Range.ToString(), tower.RangeText.text, "Range text should match Tower's range.");
     }
 
     [Test]
@@ -152,7 +152,7 @@ public class TowerTests
         float expectedDiameter = (tower.Range / 100) + 1;
         Vector3 expectedScale = new Vector3(expectedDiameter, expectedDiameter, 1);
 
-        Assert.AreEqual(expectedScale, tower.RangePreview.transform.localScale, "Range preview scale should match tower range.");
+        Assert.AreEqual(expectedScale, tower.RangePreview.transform.localScale, "Range preview scale should match Tower range.");
     }
 
     [Test]
@@ -161,9 +161,9 @@ public class TowerTests
 
         tower.Update();
 
-        Assert.AreEqual(tower.Damage.ToString(), tower.DamageText.text, "Damage text should match tower's damage.");
-        Assert.AreEqual(tower.AttackSpeed.ToString(), tower.AttackSpeedText.text, "Attack speed text should match tower's attack speed.");
-        Assert.AreEqual(tower.Range.ToString(), tower.RangeText.text, "Range text should match tower's range.");
+        Assert.AreEqual(tower.Damage.ToString(), tower.DamageText.text, "Damage text should match Tower's Damage.");
+        Assert.AreEqual(tower.AttackSpeed.ToString(), tower.AttackSpeedText.text, "Attack Speed text should match Tower's attack Speed.");
+        Assert.AreEqual(tower.Range.ToString(), tower.RangeText.text, "Range text should match Tower's range.");
     }
 
     [Test]
@@ -176,11 +176,11 @@ public class TowerTests
         tower.Update(); // Trigger the Update method to check for warnings
     }
     
-    // Saras turi sutvarkyti shop ir tower meniu
+    // Saras turi sutvarkyti shop ir Tower meniu
     // [Test]
     // public void Button_Interactability_IsInitiallyFalse()
     // {
-    //     Assert.IsFalse(tower.button.interactable, "Upgrade button should initially be not interactable.");
+    //     Assert.IsFalse(Tower.Button.interactable, "Upgrade Button should initially be not interactable.");
     // }
 
     [Test]
@@ -188,10 +188,10 @@ public class TowerTests
     {
         // Simulate an enemy entering range
         tower.EnemyEnteredRange(enemyGameObject);
-        tower.Update(); // Force the tower to shoot
+        tower.Update(); // Force the Tower to shoot
 
         Bullet bullet = GameObject.FindObjectOfType<Bullet>();
-        Assert.IsNotNull(bullet, "A bullet should be instantiated when the tower shoots.");
+        Assert.IsNotNull(bullet, "A bullet should be instantiated when the Tower shoots.");
 
         // Using reflection to get the value of the 'target' field
         Type bulletType = bullet.GetType();
@@ -220,11 +220,11 @@ public class TowerTests
         bool wasAliveBefore = enemy.IsAlive();
         tower.Damage = 100f;
 
-        tower.DealDamage(enemyGameObject); // Apply damage
+        tower.DealDamage(enemyGameObject); // Apply Damage
 
         bool isAliveAfter = enemy.IsAlive();
-        Assert.IsTrue(wasAliveBefore, "Enemy should be alive before taking damage.");
-        Assert.IsFalse(isAliveAfter, "Enemy should not be alive after taking enough damage.");
+        Assert.IsTrue(wasAliveBefore, "Enemy should be alive before taking Damage.");
+        Assert.IsFalse(isAliveAfter, "Enemy should not be alive after taking enough Damage.");
     }
 
 }

@@ -38,7 +38,7 @@ public class EnemyPathTests
     [Test]
     public void MoveAlongPath_MovesTowardsFirstWaypoint()
     {
-        // Set a specific speed for predictable movement
+        // Set a specific Speed for predictable movement
         enemyPath.SetSpeed(5f);
 
         // Simulate a short period of movement
@@ -59,7 +59,7 @@ public class EnemyPathTests
     [UnityTest]
     public IEnumerator Enemy_Destroyed_After_Reaching_Last_Waypoint()
     {
-        // Set the enemy speed high enough to ensure it reaches the last waypoint in a single frame
+        // Set the enemy Speed high enough to ensure it reaches the last waypoint in a single frame
         enemyPath.SetSpeed(10000f);
 
         // Move the enemy

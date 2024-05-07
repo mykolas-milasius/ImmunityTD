@@ -61,7 +61,7 @@ public class ScreenServiceTests
         // Initially set to the opposite of the current state to ensure the test is valid
         screenService.IsFullScreen = !Screen.fullScreen;
 
-        // Assert that setting IsFullScreen updates Screen.fullScreen
+        // Assert that setting _isFullScreen updates Screen.fullScreen
         Assert.AreEqual(screenService.IsFullScreen, Screen.fullScreen);
 
         // Optionally, reset the state to avoid changing the development environment

@@ -14,8 +14,8 @@ namespace Assets.Scripts
 
         public void OnMouseDown()
         {
-            InputHandler.tower = this;
-            // Check if the tower menu canvas is assigned
+            InputHandler.Tower = this;
+            // Check if the Tower menu canvas is assigned
             if (TowerMenuCanvas != null)
             {
                 if (!_state)
@@ -33,7 +33,7 @@ namespace Assets.Scripts
             }
             else
             {
-                Debug.LogError("Tower menu canvas is not assigned to the tower prefab!");
+                Debug.LogError("Tower menu canvas is not assigned to the Tower prefab!");
             }
         }
 
