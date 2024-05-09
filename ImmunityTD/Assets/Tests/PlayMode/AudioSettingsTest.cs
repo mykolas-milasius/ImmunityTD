@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using AudioSettings = Assets.Scripts.AudioSettings;
 
 public class AudioSettingsTest
 {

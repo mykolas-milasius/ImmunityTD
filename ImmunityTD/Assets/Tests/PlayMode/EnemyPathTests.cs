@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using Assets.Scripts;
 
 public class EnemyPathTests
 {

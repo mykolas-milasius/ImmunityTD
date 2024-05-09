@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using Assets.Scripts;
 
 public class RangeTest
 {

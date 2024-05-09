@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEditor.SceneManagement;
 using System.Collections;
+using Assets.Scripts;
 
 public class SlotTest
 {

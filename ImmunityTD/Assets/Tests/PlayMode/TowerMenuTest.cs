@@ -2,6 +2,7 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Assets.Scripts;
 
 public class TowerMenuTests
 {
@@ -60,7 +61,7 @@ public class TowerMenuTests
         towerMenu.OnMouseDown(); // Simulate mouse down event
 
         // Assert that InputHandler.Tower is set to this towerMenu instance
-        Assert.AreEqual(InputHandler.tower, towerMenu);
+        Assert.AreEqual(InputHandler.Tower, towerMenu);
     }
 
     [Test]

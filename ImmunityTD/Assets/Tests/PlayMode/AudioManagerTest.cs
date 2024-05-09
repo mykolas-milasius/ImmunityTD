@@ -3,6 +3,7 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Assets.Scripts;
 
 public class AudioManagerTests
 {

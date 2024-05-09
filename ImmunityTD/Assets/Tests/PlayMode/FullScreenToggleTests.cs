@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using Assets.Scripts;
 
 public class FullScreenToggleTests
 {

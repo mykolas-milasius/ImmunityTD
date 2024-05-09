@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using System.Reflection;
 using TMPro;
+using Assets.Scripts;
 
 public class EnemyTests
 {

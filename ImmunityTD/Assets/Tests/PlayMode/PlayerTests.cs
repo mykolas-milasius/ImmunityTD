@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.TestTools;
+using Assets.Scripts;
 
 public class PlayerTests
 {

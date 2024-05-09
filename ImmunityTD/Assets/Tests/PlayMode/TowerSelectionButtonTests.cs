@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using Assets.Scripts;
 
 public class TowerSelectionButtonTests
 {
@@ -103,7 +104,7 @@ public class TowerSelectionButtonTests
         yield return null; // Wait for a frame to process Unity's warning
 
         // Assert
-        Assert.AreEqual(towerSelectionButton, PurchaseButton.towerButton);
+        Assert.AreEqual(towerSelectionButton, PurchaseButton.TowerButton);
     }
     [UnityTest]
     public IEnumerator Place_Slot_IsClicked()
