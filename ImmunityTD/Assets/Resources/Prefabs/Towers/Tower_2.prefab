@@ -162,10 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdab0b36bef419246ba56596eb0e471b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
-  AttackSpeed: 0
-  Range: 0
-  StartPrice: 0
+  Damage: 25
+  AttackSpeed: 3
+  Range: 50
+  StartPrice: 50
   Entered: 0
   Exited: 0
   BulletPrefab: {fileID: 4332166051596580893, guid: 12ff0628db41d8047ae2878420b1fbf4, type: 3}

@@ -169,8 +169,7 @@ namespace Assets.Scripts
                     case "Papillomaviridae":
                         if (!_effectUsed)
                         {
-                            MakeInvisible(0.3f);
-                            Debug.Log("Papillomaviridae made invisible for 1 second");
+                            MakeInvisible(0.3f, 1); 
                         }
                         break;
 
@@ -212,22 +211,26 @@ namespace Assets.Scripts
                     yield return new WaitForSeconds(delay);
                     IncreaseSpeed(percentage, false);
                     Debug.Log($"{Name} speed increased by 10% every 5 seconds. Current speed: " + Speed);
-
                 }
             }
         }
 
-        private void MakeInvisible(float transparency)
+        private void MakeInvisible(float transparency, float duration )
         {
             if (_isInvisible)
             {
                 return;
             }
-            
-            _isInvisible = true;
-            MakeSpriteTransparent(transparency);
-            Debug.Log($"{Name} made invisible (transparency: {transparency}) for 1 second.");
-            Invoke(nameof(ResetSpriteTransparency), 1f);
+
+            _effectUsed = true;
+
+            while (true)
+            {
+                _isInvisible = true;
+                MakeSpriteTransparent(transparency);
+                Debug.Log($"{Name} made invisible (transparency: {transparency}) for 1 second.");
+                Invoke(nameof(ResetSpriteTransparency), duration);
+            }
         }
         
         private IEnumerator IncreaseDamageToPlayer(int damage, float delay)
@@ -263,6 +266,7 @@ namespace Assets.Scripts
                 Color originalColor = _spriteRenderer.color;
                 originalColor.a = 1f;
                 _spriteRenderer.color = originalColor;
+                _isInvisible = false;
             }
         }
 
