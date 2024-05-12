@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9137335024313244777}
   - component: {fileID: 3802182183400292308}
   m_Layer: 0
-  m_Name: StaphylococcusAureus
+  m_Name: PapillomaviridaeVirus
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 19f5d6fee9a8b4dacbbdca36487a0c7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2088616d2a6c34dcc8ff157afad0f1cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,12 +114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e1ba22c38464adb9ea1a63d8935ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Staphylococcus Aureus
+  Name: Papillomaviridae
   IsVirus: 1
-  MaxHealth: 80
-  CoinsWhenDied: 3
-  Speed: 1.5
-  DamageIfNotKilled: 4
+  MaxHealth: 60
+  CoinsWhenDied: 2
+  Speed: 2.5
+  DamageIfNotKilled: 5
   HealthBarForeground: {fileID: 1721387245084656724}
   DamageText: {fileID: 7085059472747651572}
 --- !u!50 &9137335024313244777

@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Influenza
-  IsVirus: 1
+  IsVirus: 0
   MaxHealth: 50
   CoinsWhenDied: 2
   Speed: 3

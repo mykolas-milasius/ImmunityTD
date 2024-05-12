@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -5,22 +6,27 @@ namespace Assets.Scripts
 {
     public class Enemy : MonoBehaviour
     {
+        // ReSharper disable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.Global RedundantDefaultMemberInitializer
         public string Name = "Virus";
-        public bool IsVirus = true;
+        public bool IsVirus = true; // if false, it's a bacterium
         public float MaxHealth = 100;
         public int CoinsWhenDied = 1;
         public float Speed = 2;
         public int DamageIfNotKilled = 1;
+
         public RectTransform HealthBarForeground;
+        public TextMeshProUGUI DamageText;
 
         private float _originalHealthBarWidth;
         private bool _effectUsed = false;
         private float _currentHealth;
         private float _originalSpeed;
+        private bool _isInvisible = false;
+        
         private SpriteRenderer _spriteRenderer;
         private AudioManager _audioManager;
-
-        public TextMeshProUGUI DamageText;
+        
+        // ReSharper enable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.GlobalRedundantDefaultMemberInitializer
 
         #region Getters and Setters
 
@@ -35,7 +41,8 @@ namespace Assets.Scripts
         }
 
         #endregion
-
+        
+        // ReSharper disable once UnusedMember.Local
         private void Awake()
         {
             _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -48,6 +55,14 @@ namespace Assets.Scripts
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        public void Update()
+        {
+            if (!_effectUsed)
+            {
+                UseSpecialEffect(false);
+            }
+        }
+
         #region Collision Detection
 
         public void TakeDamage(float damage)
@@ -55,6 +70,12 @@ namespace Assets.Scripts
             if (damage <= 0)
             {
                 return;
+            }
+
+            // Resists to damage by 20%
+            if (Name == "Staphylococcus aureus")
+            {
+                damage *= 0.8f;
             }
 
             DimSprite();
@@ -65,7 +86,7 @@ namespace Assets.Scripts
             UpdateHealthBar();
             DisplayDamage(damage);
 
-            UseSpecialEffect();
+            UseSpecialEffect(true);
 
             if (_currentHealth <= 0)
             {
@@ -112,22 +133,52 @@ namespace Assets.Scripts
 
         #region Special Effects
 
-        private void UseSpecialEffect()
+        private void UseSpecialEffect(bool onHit)
         {
             if (_effectUsed)
             {
                 return;
             }
 
-            switch (Name)
+            if (onHit)
             {
-                case "Rabies":
-                    DoubleSpeed();
-                    break;
+                switch (Name)
+                {
+                    case "Rabies":
+                        IncreaseSpeed(2f, true);
+                        Debug.Log("Rabies speed increased by 100%");
+                        break;
+                }
+            }
+            else
+            {
+                switch (Name)
+                {
+                    case "Tuberculosis":
+                        if (!_effectUsed)
+                        {
+                            StartCoroutine(IncreaseDamageToPlayer(1, 5f));
+                        }
+                        break;
+                    case "Influenza":
+                        if (!_effectUsed)
+                        {
+                            StartCoroutine(IncreaseSpeedOverTime(1.1f, 5f));
+                        }
+                        break;
+                    case "Papillomaviridae":
+                        if (!_effectUsed)
+                        {
+                            MakeInvisible(0.3f);
+                            Debug.Log("Papillomaviridae made invisible for 1 second");
+                        }
+                        break;
+
+                }
             }
         }
 
-        private void DoubleSpeed()
+        private void IncreaseSpeed(float percentage, bool reset)
         {
             if (_currentHealth < 0 && _currentHealth > MaxHealth * 0.5)
             {
@@ -135,31 +186,72 @@ namespace Assets.Scripts
             }
 
             _originalSpeed = Speed;
-            Speed *= 2;
+            Speed *= percentage;
             _effectUsed = true;
-            MakeSpriteTransparent();
-            Debug.Log($"{Name} effect used: Double Speed. Speed: {Speed}");
-            Invoke("ResetSpeed", 1f);
+            MakeSpriteTransparent(0.6f);
+            if (reset)
+            {
+                Invoke("ResetSpeed", 1f);
+            }
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void ResetSpeed()
         {
             Speed = _originalSpeed;
             ResetSpriteTransparency();
-            Debug.Log($"{Name} effect ended. Speed: {Speed}");
         }
 
+        private IEnumerator IncreaseSpeedOverTime(float percentage, float delay)
+        {
+            _effectUsed = true;
+            if (_spriteRenderer)
+            {
+                while (true)
+                {
+                    yield return new WaitForSeconds(delay);
+                    IncreaseSpeed(percentage, false);
+                    Debug.Log($"{Name} speed increased by 10% every 5 seconds. Current speed: " + Speed);
+
+                }
+            }
+        }
+
+        private void MakeInvisible(float transparency)
+        {
+            if (_isInvisible)
+            {
+                return;
+            }
+            
+            _isInvisible = true;
+            MakeSpriteTransparent(transparency);
+            Debug.Log($"{Name} made invisible (transparency: {transparency}) for 1 second.");
+            Invoke(nameof(ResetSpriteTransparency), 1f);
+        }
+        
+        private IEnumerator IncreaseDamageToPlayer(int damage, float delay)
+        {
+            _effectUsed = true;
+            while (true)
+            {
+                DamageIfNotKilled += damage;
+                yield return new WaitForSeconds(delay);
+                Debug.Log($"{Name} damage increased by 1 every 5 seconds. Current damage: " + DamageIfNotKilled);
+            }
+            // ReSharper disable once IteratorNeverReturns
+        }
 
         #endregion
 
         #region Sprite Manipulation
 
-        private void MakeSpriteTransparent()
+        private void MakeSpriteTransparent(float transparency = 0.5f)
         {
             if (_spriteRenderer != null)
             {
                 Color newColor = _spriteRenderer.color;
-                newColor.a = 0.5f;
+                newColor.a = transparency;
                 _spriteRenderer.color = newColor;
             }
         }

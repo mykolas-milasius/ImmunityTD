@@ -1202,7 +1202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3d5b1a9fdac114a83d869b10b17cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerSelectionCanvas: {fileID: 0}
+  ShopUICanvas: {fileID: 849696711}
   Clicked: 0
   SpriteRenderer: {fileID: 0}
   TowerSelectionButton: {fileID: 0}
@@ -3723,7 +3723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3d5b1a9fdac114a83d869b10b17cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerSelectionCanvas: {fileID: 0}
+  ShopUICanvas: {fileID: 849696711}
   Clicked: 0
   SpriteRenderer: {fileID: 0}
   TowerSelectionButton: {fileID: 0}
@@ -4382,7 +4382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3d5b1a9fdac114a83d869b10b17cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerSelectionCanvas: {fileID: 0}
+  ShopUICanvas: {fileID: 849696711}
   Clicked: 0
   SpriteRenderer: {fileID: 0}
   TowerSelectionButton: {fileID: 0}
@@ -4931,7 +4931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3d5b1a9fdac114a83d869b10b17cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerSelectionCanvas: {fileID: 0}
+  ShopUICanvas: {fileID: 849696711}
   Clicked: 0
   SpriteRenderer: {fileID: 0}
   TowerSelectionButton: {fileID: 0}
@@ -6905,8 +6905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d73b5a3685545cfa04522eecb7ab7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenuObject: {fileID: 0}
-  PauseButton: {fileID: 0}
+  PauseMenuObject: {fileID: 1425327826}
+  PauseButton: {fileID: 1237192037}
   IsPaused: 0
 --- !u!1 &1448479671
 GameObject:
@@ -7337,8 +7337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b6e12ef15df6f4d80a819da1e98297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 0}
-  PurchaseMenu: {fileID: 0}
+  TowerPrefab: {fileID: 1580781566450407631, guid: 5317f8b85ddbf1a4e8d4ba7400c71d04, type: 3}
+  PurchaseMenu: {fileID: 8360841043719302407}
   Price: 0
 --- !u!114 &1679822235
 MonoBehaviour:
@@ -7534,18 +7534,18 @@ MonoBehaviour:
   AttackSpeed: 0
   Range: 0
   StartPrice: 0
+  Entered: 0
+  Exited: 0
   BulletPrefab: {fileID: 0}
+  RangePreview: {fileID: 0}
+  Button: {fileID: 0}
   DamageText: {fileID: 0}
   AttackSpeedText: {fileID: 0}
   RangeText: {fileID: 0}
-  RangePreview: {fileID: 0}
   UpgradeDamageText: {fileID: 0}
   UpgradeAttackSpeedText: {fileID: 0}
   UpgradeRangeText: {fileID: 0}
   UpgradePriceText: {fileID: 0}
-  Button: {fileID: 0}
-  Entered: 0
-  Exited: 0
 --- !u!1 &1704630928
 GameObject:
   m_ObjectHideFlags: 0
@@ -7777,8 +7777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b6e12ef15df6f4d80a819da1e98297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 0}
-  PurchaseMenu: {fileID: 0}
+  TowerPrefab: {fileID: 5090327537936850401, guid: 81cd2e75092955d439234226946980e8, type: 3}
+  PurchaseMenu: {fileID: 8360841043719302407}
   Price: 0
 --- !u!114 &1704630934
 MonoBehaviour:
@@ -7796,18 +7796,18 @@ MonoBehaviour:
   AttackSpeed: 0
   Range: 0
   StartPrice: 0
+  Entered: 0
+  Exited: 0
   BulletPrefab: {fileID: 0}
+  RangePreview: {fileID: 0}
+  Button: {fileID: 0}
   DamageText: {fileID: 0}
   AttackSpeedText: {fileID: 0}
   RangeText: {fileID: 0}
-  RangePreview: {fileID: 0}
   UpgradeDamageText: {fileID: 0}
   UpgradeAttackSpeedText: {fileID: 0}
   UpgradeRangeText: {fileID: 0}
   UpgradePriceText: {fileID: 0}
-  Button: {fileID: 0}
-  Entered: 0
-  Exited: 0
 --- !u!1 &1713673178
 GameObject:
   m_ObjectHideFlags: 0
@@ -8173,8 +8173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b6e12ef15df6f4d80a819da1e98297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 0}
-  PurchaseMenu: {fileID: 0}
+  TowerPrefab: {fileID: 1754879253727085245, guid: 1c17102df2918db49a59577ff5bbe14a, type: 3}
+  PurchaseMenu: {fileID: 8360841043719302407}
   Price: 0
 --- !u!114 &1724834542
 MonoBehaviour:
@@ -8192,18 +8192,18 @@ MonoBehaviour:
   AttackSpeed: 0
   Range: 0
   StartPrice: 0
+  Entered: 0
+  Exited: 0
   BulletPrefab: {fileID: 0}
+  RangePreview: {fileID: 0}
+  Button: {fileID: 0}
   DamageText: {fileID: 0}
   AttackSpeedText: {fileID: 0}
   RangeText: {fileID: 0}
-  RangePreview: {fileID: 0}
   UpgradeDamageText: {fileID: 0}
   UpgradeAttackSpeedText: {fileID: 0}
   UpgradeRangeText: {fileID: 0}
   UpgradePriceText: {fileID: 0}
-  Button: {fileID: 0}
-  Entered: 0
-  Exited: 0
 --- !u!224 &1725016137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8382,7 +8382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3d5b1a9fdac114a83d869b10b17cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerSelectionCanvas: {fileID: 0}
+  ShopUICanvas: {fileID: 849696711}
   Clicked: 0
   SpriteRenderer: {fileID: 0}
   TowerSelectionButton: {fileID: 0}
@@ -9205,7 +9205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3d5b1a9fdac114a83d869b10b17cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerSelectionCanvas: {fileID: 0}
+  ShopUICanvas: {fileID: 849696711}
   Clicked: 0
   SpriteRenderer: {fileID: 0}
   TowerSelectionButton: {fileID: 0}
@@ -11206,7 +11206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef459a635359494c9f3d0c28f99b21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 0}
+  Button: {fileID: 9029369850551624962}
 --- !u!1 &7096405016107353714
 GameObject:
   m_ObjectHideFlags: 0
