@@ -9,36 +9,38 @@ namespace Assets.Scripts
 {
     public class Tower : MonoBehaviour
     {
+        // ReSharper disable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.Global RedundantDefaultMemberInitializer
         public float Damage;
         public float AttackSpeed; // attacks per second
         public float Range;
         public float StartPrice;
+        public bool Entered;
+        public bool Exited;
+        
         public GameObject BulletPrefab;
-
+        public GameObject RangePreview;
+        public Button Button;
+        
         public TextMeshProUGUI DamageText;
         public TextMeshProUGUI AttackSpeedText;
         public TextMeshProUGUI RangeText;
-        public GameObject RangePreview;
 
         public TextMeshProUGUI UpgradeDamageText;
         public TextMeshProUGUI UpgradeAttackSpeedText;
         public TextMeshProUGUI UpgradeRangeText;
         public TextMeshProUGUI UpgradePriceText;
-
-        public Button Button;
-
+        
         private List<GameObject> _enemiesInRange = new List<GameObject>();
+        private AudioManager _audioManager;
+
         private float _attackCooldown;
         private float _upgradeDamage;
         private float _upgradeAttackSpeed;
         private float _upgradeRange;
         private float _upgradePrice;
-
-        public bool Entered;
-        public bool Exited;
-
-        private AudioManager _audioManager;
-
+        private bool _isDamageDecreased = false;
+        // ReSharper enable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.Global RedundantDefaultMemberInitializer
+        
         private void Awake()
         {
             _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -134,6 +136,8 @@ namespace Assets.Scripts
             RangePreview.transform.localScale = new Vector3(diameter, diameter, 1);
 
         }
+        
+        #region Enemy Interaction
 
         public void Shoot()
         {
@@ -153,12 +157,25 @@ namespace Assets.Scripts
             }
         }
 
-        public virtual void DealDamage(GameObject enemy)
+        public virtual void DealDamage(GameObject enemyGameObject)
         {
-            Enemy enemyHealth = enemy.GetComponent<Enemy>();
-            if (enemyHealth != null)
+            Enemy enemy = enemyGameObject.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                enemyHealth.TakeDamage(this.Damage);
+                // Decrease damage dealt by 1% for 5 seconds
+                if (enemy.Name == "Ebola")
+                {
+                    StartCoroutine(DecreaseDamageForDuration(0.01f,5, false));
+                }
+                // 
+                if (enemy.Name == "AIDS")
+                {
+                    StartCoroutine(DecreaseDamageForDuration(0.3f, 3, true));
+                }
+                else
+                {
+                    enemy.TakeDamage(Damage);
+                }
             }
         }
 
@@ -175,5 +192,22 @@ namespace Assets.Scripts
             Entered = false;
             Exited = true;
         }
+        
+        private IEnumerator DecreaseDamageForDuration(float percentage, float delay, bool single)
+        {
+            float originalDamage = Damage;
+            if (!_isDamageDecreased)
+            {
+                Damage *= (1 - percentage);
+            }
+            
+            Debug.Log("Damage decreased by " + percentage * 100 + "%");
+            yield return new WaitForSeconds(delay);
+
+            _isDamageDecreased = single;
+            Damage = originalDamage;
+        }
+
+        #endregion 
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using System.Collections;
 using TMPro;
+using Assets.Scripts;
 
 public class BulletTests
 {
@@ -41,7 +42,7 @@ public class BulletTests
         towerScript.RangePreview = rangePreview;
 
         // Link the bullet to the Tower
-        bulletScript.tower = towerScript;
+        bulletScript.Tower = towerScript;
     }
 
     [TearDown]
@@ -69,7 +70,7 @@ public class BulletTests
         bulletScript.Seek(targetGameObject);
 
         // Wait for the bullet's lifetime to elapse
-        yield return new WaitForSeconds(bulletScript.lifeTime + 0.1f);
+        yield return new WaitForSeconds(bulletScript.LifeTime + 0.1f);
 
         // Check if the bullet GameObject has been destroyed
         Assert.IsTrue(bulletGameObject == null || !bulletGameObject.activeInHierarchy);

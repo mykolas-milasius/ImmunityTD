@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using Assets.Scripts;
 
 public class PurchaseButtonTests
 {
@@ -14,13 +15,13 @@ public class PurchaseButtonTests
         GameObject purchaseButtonObject = new GameObject();
         PurchaseButton purchaseButton = purchaseButtonObject.AddComponent<PurchaseButton>();
         Button buttonComponent = purchaseButtonObject.AddComponent<Button>();
-        purchaseButton.button = buttonComponent;
+        purchaseButton.Button = buttonComponent;
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
         towerSelectionButton.Price = 50f; // Set Tower price
         towerSelectionButton.TowerPrefab = towerSelectionButtonObject;
 
-        PurchaseButton.towerButton = towerSelectionButton;
+        PurchaseButton.TowerButton = towerSelectionButton;
         Player.Coins = 100; // Set player coins to a value more than Tower price
 
         // Act
@@ -29,7 +30,7 @@ public class PurchaseButtonTests
         yield return null; // Wait for a frame to process Tower placement
 
         // Assert
-        Assert.IsTrue(purchaseButton.button.interactable); // Button should be interactable when player has enough coins
+        Assert.IsTrue(purchaseButton.Button.interactable); // Button should be interactable when player has enough coins
     }
     [UnityTest]
     public IEnumerator PurchaseButton_SlotIsNull()
@@ -38,14 +39,14 @@ public class PurchaseButtonTests
         GameObject purchaseButtonObject = new GameObject();
         PurchaseButton purchaseButton = purchaseButtonObject.AddComponent<PurchaseButton>();
         Button buttonComponent = purchaseButtonObject.AddComponent<Button>();
-        purchaseButton.button = buttonComponent;
+        purchaseButton.Button = buttonComponent;
 
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
         towerSelectionButton.Price = 50f; // Set Tower price
         towerSelectionButton.TowerPrefab = towerSelectionButtonObject;
 
-        PurchaseButton.currentSlot = null; // Mock current slot
+        PurchaseButton.CurrentSlot = null; // Mock current slot
 
         purchaseButton.PurchaseOnClick();
         yield return null; // Wait for a frame to process Tower placement
@@ -59,7 +60,7 @@ public class PurchaseButtonTests
         GameObject purchaseButtonObject = new GameObject();
         PurchaseButton purchaseButton = purchaseButtonObject.AddComponent<PurchaseButton>();
         Button buttonComponent = purchaseButtonObject.AddComponent<Button>();
-        purchaseButton.button = buttonComponent;
+        purchaseButton.Button = buttonComponent;
 
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
@@ -68,8 +69,8 @@ public class PurchaseButtonTests
 
         GameObject slotObject = new GameObject();
         Slot slot = slotObject.AddComponent<Slot>();
-        PurchaseButton.currentSlot = slot; // Mock current slot
-        PurchaseButton.towerButton = null;
+        PurchaseButton.CurrentSlot = slot; // Mock current slot
+        PurchaseButton.TowerButton = null;
 
         purchaseButton.PurchaseOnClick();
         yield return null; // Wait for a frame to process Tower placement
@@ -83,7 +84,7 @@ public class PurchaseButtonTests
         GameObject purchaseButtonObject = new GameObject();
         PurchaseButton purchaseButton = purchaseButtonObject.AddComponent<PurchaseButton>();
         Button buttonComponent = purchaseButtonObject.AddComponent<Button>();
-        purchaseButton.button = buttonComponent;
+        purchaseButton.Button = buttonComponent;
 
         GameObject towerSelectionButtonObject = new GameObject();
         TowerSelectionButton towerSelectionButton = towerSelectionButtonObject.AddComponent<TowerSelectionButton>();
@@ -93,11 +94,11 @@ public class PurchaseButtonTests
 
         GameObject slotObject = new GameObject();
         Slot slot = slotObject.AddComponent<Slot>();
-        PurchaseButton.currentSlot = slot; // Mock current slot
-        PurchaseButton.currentSlot.Clicked = true;
-        TowerSelectionButton.CurrentSlot = PurchaseButton.currentSlot;
+        PurchaseButton.CurrentSlot = slot; // Mock current slot
+        PurchaseButton.CurrentSlot.Clicked = true;
+        TowerSelectionButton.CurrentSlot = PurchaseButton.CurrentSlot;
 
-        PurchaseButton.towerButton = towerSelectionButton;
+        PurchaseButton.TowerButton = towerSelectionButton;
 
         purchaseButton.PurchaseOnClick();
         yield return null; // Wait for a frame to process Tower placement

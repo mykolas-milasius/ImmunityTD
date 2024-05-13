@@ -2,6 +2,7 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 public class ApplicationQuitterTests
 {

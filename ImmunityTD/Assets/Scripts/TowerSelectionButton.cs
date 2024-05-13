@@ -23,7 +23,7 @@ namespace Assets.Scripts
 
         public void OnTowerButtonClick()
         {
-            PurchaseButton.CowerButton = this;
+            PurchaseButton.TowerButton = this;
         }
 
         public void Place()

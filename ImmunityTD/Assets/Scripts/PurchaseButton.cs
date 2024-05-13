@@ -8,7 +8,7 @@ namespace Assets.Scripts
     public class PurchaseButton : MonoBehaviour
     {
         public static Slot CurrentSlot; // Static reference to the current slot
-        public static TowerSelectionButton CowerButton;
+        public static TowerSelectionButton TowerButton;
         public Button Button;
 
         public void Start()
@@ -18,9 +18,9 @@ namespace Assets.Scripts
 
         public void Update()
         {
-            if (CowerButton != null)
+            if (TowerButton != null)
             {
-                if (Player.Coins >= CowerButton.Price)
+                if (Player.Coins >= TowerButton.Price)
                 {
                     Button.interactable = true;
                 }
@@ -36,10 +36,10 @@ namespace Assets.Scripts
             // Ensure CurrentSlot is not null
             if (CurrentSlot != null)
             {
-                if (CowerButton != null)
+                if (TowerButton != null)
                 {
-                    CowerButton.Place();
-                    CowerButton = null;
+                    TowerButton.Place();
+                    TowerButton = null;
                 }
                 else
                 {

@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public class Slot : MonoBehaviour
     {
-        public GameObject TowerSelectionCanvas;
+        public GameObject ShopUICanvas;
         public bool Clicked = false;
         public SpriteRenderer SpriteRenderer;
         public TowerSelectionButton TowerSelectionButton;
@@ -26,7 +26,7 @@ namespace Assets.Scripts
             InputHandler.PrevSlot = this;
             Clicked = !Clicked;
             ChangeColor();
-            TowerSelectionCanvas.SetActive(true);
+            ShopUICanvas.SetActive(true);
         }
 
         public void ChangeColor()

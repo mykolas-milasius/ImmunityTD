@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Assets.Scripts;
 
 public class LoadSceneTests
 {

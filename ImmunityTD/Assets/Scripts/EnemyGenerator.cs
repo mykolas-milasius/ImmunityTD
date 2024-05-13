@@ -7,6 +7,8 @@ namespace Assets.Scripts
 {
     public class EnemyGenerator : MonoBehaviour
     {
+        // ReSharper disable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.Global RedundantDefaultMemberInitializer
+        // ReSharper disable once UnassignedField.Global
         public GameObject[] EnemyPrefabs;
         public GameObject WayPoints;
         public int SpawnSpeed;
@@ -20,6 +22,7 @@ namespace Assets.Scripts
         private int _maxWaves = 1;
         private int _currentWave = 1;
         private bool _isInitialized = false;
+        // ReSharper enable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.Global RedundantDefaultMemberInitializer
 
         public void Start()
         {

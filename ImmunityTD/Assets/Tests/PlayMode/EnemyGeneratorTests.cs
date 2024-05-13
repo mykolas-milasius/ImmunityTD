@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Reflection;
 using System.Collections;
 using UnityEngine.TestTools;
+using Assets.Scripts;
 
 public class EnemyGeneratorTests
 {

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEditor.SceneManagement;
 using System.Collections;
+using Assets.Scripts;
 
 public class SlotTest
 {
@@ -20,8 +21,8 @@ public class SlotTest
         spriteRenderer = slotGameObject.AddComponent<SpriteRenderer>();
         slotScript.SpriteRenderer = spriteRenderer; // Ensure spriteRenderer is assigned
 
-        slotScript.TowerSelectionCanvas = new GameObject(); // Create a mock Tower selection canvas
-        slotScript.TowerSelectionCanvas.SetActive(false); // Initially set it to inactive
+        slotScript.ShopUICanvas = new GameObject(); // Create a mock Tower selection canvas
+        slotScript.ShopUICanvas.SetActive(false); // Initially set it to inactive
 
         towerPrefab = new GameObject(); // Mock Tower prefab
     }
@@ -55,7 +56,7 @@ public class SlotTest
         // Assert that 'clicked' is toggled
         Assert.IsTrue(slotScript.Clicked);
         // Assert that towerSelectionCanvas is active
-        Assert.IsTrue(slotScript.TowerSelectionCanvas.activeSelf);
+        Assert.IsTrue(slotScript.ShopUICanvas.activeSelf);
         // Assert that the color changes to green initially (assuming starting color is not green)
         Assert.AreEqual(Color.green, spriteRenderer.color);
 

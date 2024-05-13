@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using Assets.Scripts;
 
 public class ExitButtonTests
 {
@@ -14,7 +15,7 @@ public class ExitButtonTests
         exitScript = exitGameObject.AddComponent<Exit>();
 
         quitPanel = new GameObject("QuitPanel");
-        exitScript.quitPanel = quitPanel;
+        exitScript.QuitPanel = quitPanel;
 
         quitPanel.SetActive(false);
     }
@@ -22,14 +23,14 @@ public class ExitButtonTests
     [Test]
     public void OpenConfirmationMenu_ActivatesQuitPanel()
     {
-        exitScript.openConfirmationMenu();
+        exitScript.OpenConfirmationMenu();
         Assert.IsTrue(quitPanel.activeSelf, "Quit panel should be active after opening confirmation menu");
     }
     [Test]
     public void CloseConfirmationMenu_DeactivatesQuitPanel()
     {
-        exitScript.openConfirmationMenu();
-        exitScript.closeConfirmationMenu();
+        exitScript.OpenConfirmationMenu();
+        exitScript.CloseConfirmationMenu();
 
         Assert.IsFalse(quitPanel.activeSelf, "Quit panel should be inactive after closing confirmation menu");
     }
@@ -37,8 +38,8 @@ public class ExitButtonTests
     [Test]
     public void OpenConfirmationMenu_WhenAlreadyOpen_KeepsQuitPanelActive()
     {
-        exitScript.openConfirmationMenu();
-        exitScript.openConfirmationMenu();
+        exitScript.OpenConfirmationMenu();
+        exitScript.OpenConfirmationMenu();
         Assert.IsTrue(quitPanel.activeSelf, "Quit panel should remain active when OpenConfirmationMenu is called while it's already open");
     }
 
@@ -46,7 +47,7 @@ public class ExitButtonTests
     public void CloseConfirmationMenu_WhenAlreadyClosed_KeepsQuitPanelInactive()
     {
         quitPanel.SetActive(false);
-        exitScript.closeConfirmationMenu();
+        exitScript.CloseConfirmationMenu();
 
         Assert.IsFalse(quitPanel.activeSelf, "Quit panel should remain inactive when CloseConfirmationMenu is called while it's already closed");
     }
@@ -61,7 +62,7 @@ public class ExitButtonTests
     public void QuitGame_CallsApplicationQuit()
     {
         var mockQuitter = new MockApplicationQuitter();
-        exitScript.applicationQuitter = mockQuitter;
+        exitScript.ApplicationQuitter = mockQuitter;
 
         exitScript.QuitGame();
 
