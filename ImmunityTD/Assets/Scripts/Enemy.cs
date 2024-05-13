@@ -25,7 +25,6 @@ namespace Assets.Scripts
         
         private SpriteRenderer _spriteRenderer;
         private AudioManager _audioManager;
-        
         // ReSharper enable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.GlobalRedundantDefaultMemberInitializer
 
         #region Getters and Setters

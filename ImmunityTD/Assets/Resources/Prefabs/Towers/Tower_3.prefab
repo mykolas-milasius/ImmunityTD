@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6d259dce6caa54f966c76a762e8d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerMenuCanvas: {fileID: 0}
-  TowerRangePreview: {fileID: 0}
+  TowerMenuCanvas: {fileID: 847569488295683204}
+  TowerRangePreview: {fileID: 8475149508159591956}
   RangeRenderer: {fileID: 0}
   PurchaseMenu: {fileID: 0}
 --- !u!114 &990659629303972133
@@ -186,6 +186,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6723580145586383446}
     m_Modifications:
+    - target: {fileID: 739513443692435803, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+      propertyPath: ParentTower
+      value: 
+      objectReference: {fileID: 990659629303972133}
     - target: {fileID: 739513443692435803, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
       propertyPath: parentTower
       value: 
@@ -255,6 +259,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+--- !u!1 &8475149508159591956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8660268253172249863, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+  m_PrefabInstance: {fileID: 987048650377093907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8591106897357472015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8830166544117391900, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
@@ -425,6 +434,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
+--- !u!1 &847569488295683204 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3858903093862782907, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
+  m_PrefabInstance: {fileID: 4489728320275624767}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7154296435801215751 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6703487832122220600, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}

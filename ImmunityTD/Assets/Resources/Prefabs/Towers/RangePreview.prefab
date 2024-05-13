@@ -133,4 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8b7ef67c51a49038c3223d61203d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentTower: {fileID: 0}
+  ParentTower: {fileID: 0}

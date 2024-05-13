@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6d259dce6caa54f966c76a762e8d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerMenuCanvas: {fileID: 0}
-  TowerRangePreview: {fileID: 0}
+  TowerMenuCanvas: {fileID: 5524830607803062618}
+  TowerRangePreview: {fileID: 5541720044795899073}
   RangeRenderer: {fileID: 0}
   PurchaseMenu: {fileID: 0}
 --- !u!114 &8202089597763261295
@@ -186,6 +186,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7351446725366221534}
     m_Modifications:
+    - target: {fileID: 739513443692435803, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+      propertyPath: ParentTower
+      value: 
+      objectReference: {fileID: 8202089597763261295}
     - target: {fileID: 739513443692435803, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
       propertyPath: parentTower
       value: 
@@ -267,6 +271,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+--- !u!1 &5541720044795899073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8660268253172249863, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
+  m_PrefabInstance: {fileID: 3803097554050357702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5641986290132188122 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8830166544117391900, guid: 9e37337a03eec422f801a22cfb6d1083, type: 3}
@@ -444,5 +453,10 @@ PrefabInstance:
 --- !u!224 &2604810580130410201 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6703487832122220600, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
+  m_PrefabInstance: {fileID: 8728459593888714465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5524830607803062618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3858903093862782907, guid: bf54c47f5fdcecc43bfa33450ce9778c, type: 3}
   m_PrefabInstance: {fileID: 8728459593888714465}
   m_PrefabAsset: {fileID: 0}
