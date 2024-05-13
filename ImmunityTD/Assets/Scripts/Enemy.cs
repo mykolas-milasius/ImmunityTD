@@ -56,10 +56,10 @@ namespace Assets.Scripts
 
         public void Update()
         {
-            if (!_effectUsed)
-            {
-                UseSpecialEffect(false);
-            }
+            // if (!_effectUsed)
+            // {
+            //     UseSpecialEffect(false);
+            // }
         }
 
         #region Collision Detection
