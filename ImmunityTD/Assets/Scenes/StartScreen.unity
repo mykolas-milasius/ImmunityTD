@@ -2132,7 +2132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791211254fa4bc141beb3440124b0b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quitPanel: {fileID: 223486404}
+  QuitPanel: {fileID: 0}
 --- !u!4 &645502739
 Transform:
   m_ObjectHideFlags: 0
@@ -8802,11 +8802,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d718d30f5b28c04d996c40ad8a87ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 906749723}
+  MusicSource: {fileID: 906749723}
   SFXSource: {fileID: 803499851}
-  background: {fileID: 8300000, guid: 25342e84b4c30504191521f1abb329f0, type: 3}
-  mainmenu: {fileID: 8300000, guid: f688480af668aad43bff3ef3161f55ad, type: 3}
-  buttonClick: {fileID: 8300000, guid: 1b398a9852be7954282fefd378a688c9, type: 3}
+  Background: {fileID: 8300000, guid: f688480af668aad43bff3ef3161f55ad, type: 3}
+  MainMenu: {fileID: 8300000, guid: 25342e84b4c30504191521f1abb329f0, type: 3}
+  ButtonClick: {fileID: 8300000, guid: 1b398a9852be7954282fefd378a688c9, type: 3}
+  VirusDeath: {fileID: 8300000, guid: c690e2ebe376fab4c962dc594cd50561, type: 3}
+  TowerShoot: {fileID: 8300000, guid: 71345e73d79eb844c8919cf2ea623b2e, type: 3}
 --- !u!4 &2147214450
 Transform:
   m_ObjectHideFlags: 0
@@ -8836,9 +8838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfeb1a8614221b541866476c854bdfd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMixer: {fileID: 24100000, guid: a4764e02bef7cc64ebbce374365866e6, type: 2}
-  masterSlider: {fileID: 2145012361}
-  musicSlider: {fileID: 1642683038}
+  MyMixer: {fileID: 0}
+  MasterSlider: {fileID: 0}
+  MusicSlider: {fileID: 0}
   SFXSlider: {fileID: 845618892}
   UISlider: {fileID: 1409614754}
 --- !u!1660057539 &9223372036854775807
