@@ -1204,7 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopUICanvas: {fileID: 849696711}
   Clicked: 0
-  SpriteRenderer: {fileID: 0}
+  SpriteRenderer: {fileID: 316671188}
   TowerSelectionButton: {fileID: 0}
 --- !u!1 &322545235
 GameObject:
@@ -1350,7 +1350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327554543}
   - component: {fileID: 327554542}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3769,7 +3769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopUICanvas: {fileID: 849696711}
   Clicked: 0
-  SpriteRenderer: {fileID: 0}
+  SpriteRenderer: {fileID: 880316068}
   TowerSelectionButton: {fileID: 0}
 --- !u!1 &885845861
 GameObject:
@@ -4428,7 +4428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopUICanvas: {fileID: 849696711}
   Clicked: 0
-  SpriteRenderer: {fileID: 0}
+  SpriteRenderer: {fileID: 928429461}
   TowerSelectionButton: {fileID: 0}
 --- !u!1 &975123519
 GameObject:
@@ -4977,7 +4977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopUICanvas: {fileID: 849696711}
   Clicked: 0
-  SpriteRenderer: {fileID: 0}
+  SpriteRenderer: {fileID: 995399784}
   TowerSelectionButton: {fileID: 0}
 --- !u!1 &1011212006
 GameObject:
@@ -5516,7 +5516,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048498478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
@@ -7255,7 +7255,7 @@ GameObject:
   - component: {fileID: 1650212754}
   - component: {fileID: 1650212756}
   - component: {fileID: 1650212755}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7317,7 +7317,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -9636,7 +9636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopUICanvas: {fileID: 849696711}
   Clicked: 0
-  SpriteRenderer: {fileID: 0}
+  SpriteRenderer: {fileID: 1757209579}
   TowerSelectionButton: {fileID: 0}
 --- !u!1 &1761932083
 GameObject:
@@ -10459,7 +10459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopUICanvas: {fileID: 849696711}
   Clicked: 0
-  SpriteRenderer: {fileID: 0}
+  SpriteRenderer: {fileID: 1956691173}
   TowerSelectionButton: {fileID: 0}
 --- !u!1 &1994470788
 GameObject:

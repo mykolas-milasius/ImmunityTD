@@ -26,7 +26,7 @@ namespace Assets.Scripts
             InputHandler.PrevSlot = this;
             Clicked = !Clicked;
             ChangeColor();
-            ShopUICanvas.SetActive(true);
+            //ShopUICanvas.SetActive(true);
         }
 
         public void ChangeColor()

@@ -39,8 +39,9 @@ namespace Assets.Scripts
         private float _upgradeRange;
         private float _upgradePrice;
         private bool _isDamageDecreased = false;
+        private float _originalDamage;
         // ReSharper enable FieldCanBeMadeReadOnly.Global MemberCanBePrivate.Global ConvertToConstant.Global RedundantDefaultMemberInitializer
-        
+
         private void Awake()
         {
             _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -54,6 +55,7 @@ namespace Assets.Scripts
                 return;
             }
 
+            _originalDamage = Damage;
             _upgradePrice = (float)Math.Round(StartPrice * 2, 1);
             _upgradeDamage = (float)Math.Round(Damage * 1.2, 1);
             _upgradeAttackSpeed = (float)Math.Round(AttackSpeed * 1.2, 1);
@@ -93,7 +95,7 @@ namespace Assets.Scripts
                 // Debug.LogWarning("Upgrade UI elements not assigned in Tower script.");
             }
 
-            if (_enemiesInRange.Count != 0 && Button != null)
+            if (_enemiesInRange.Count != 0)
             {
                 _attackCooldown -= Time.deltaTime;
                 if (_attackCooldown <= 0f)
@@ -120,6 +122,7 @@ namespace Assets.Scripts
         public void Upgrade()
         {
             Damage = (float)(Damage * 1.2);
+            _originalDamage = Damage;
             AttackSpeed = (float)(AttackSpeed * 1.2);
             Range = (float)(Range * 1.2);
             Player.Coins -= _upgradePrice;
@@ -172,10 +175,7 @@ namespace Assets.Scripts
                 {
                     StartCoroutine(DecreaseDamageForDuration(0.3f, 3, true));
                 }
-                else
-                {
-                    enemy.TakeDamage(Damage);
-                }
+                enemy.TakeDamage(Damage);
             }
         }
 
@@ -195,7 +195,7 @@ namespace Assets.Scripts
         
         private IEnumerator DecreaseDamageForDuration(float percentage, float delay, bool single)
         {
-            float originalDamage = Damage;
+
             if (!_isDamageDecreased)
             {
                 Damage *= (1 - percentage);
@@ -205,7 +205,7 @@ namespace Assets.Scripts
             yield return new WaitForSeconds(delay);
 
             _isDamageDecreased = single;
-            Damage = originalDamage;
+            Damage = _originalDamage;
         }
 
         #endregion 
