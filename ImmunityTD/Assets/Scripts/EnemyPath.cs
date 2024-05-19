@@ -33,13 +33,10 @@ namespace Assets.Scripts
             {
                 _speed = _enemyComponent.GetSpeed();
                 Transform targetWaypoint = Waypoints[_currentWaypointIndex];
+                Vector2 targetPosition = new Vector2(targetWaypoint.position.x, targetWaypoint.position.y);
+                transform.position = Vector2.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
 
-                // Calculate the adjusted position by subtracting 960 from x and 540 from y
-                Vector2 adjustedPosition = new Vector2((targetWaypoint.position.x - 960) / 100,
-                    (targetWaypoint.position.y - 540) / 100);
-                transform.position = Vector2.MoveTowards(transform.position, adjustedPosition, _speed * Time.deltaTime);
-
-                if ((Vector2)transform.position == adjustedPosition)
+                if ((Vector2)transform.position == targetPosition)
                 {
                     _currentWaypointIndex++;
                 }
