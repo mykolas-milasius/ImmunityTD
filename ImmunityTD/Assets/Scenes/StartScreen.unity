@@ -2132,7 +2132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791211254fa4bc141beb3440124b0b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuitPanel: {fileID: 0}
+  QuitPanel: {fileID: 223486404}
 --- !u!4 &645502739
 Transform:
   m_ObjectHideFlags: 0
