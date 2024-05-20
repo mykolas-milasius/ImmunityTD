@@ -55,11 +55,13 @@ namespace Assets.Scripts
 
         private void RandomInterval()
         {
-            _spawnInterval = UnityEngine.Random.Range(0.1f, 10f / SpawnSpeed);
+            // _spawnInterval = UnityEngine.Random.Range(0.1f, 10f / SpawnSpeed);
+            _spawnInterval = 0f;
         }
 
         public void SpawnEnemy()
         {
+            Player.Instance.enemyCount++;
             int randomIndex = UnityEngine.Random.Range(0, EnemyPrefabs.Length);
             GameObject newEnemy = Instantiate(EnemyPrefabs[randomIndex], transform.position, Quaternion.identity);
             Enemy enemyScript = newEnemy.GetComponent<Enemy>();
@@ -94,8 +96,9 @@ namespace Assets.Scripts
 
             if (Player.Instance.EndlessMode)
             {
-                _maxWaves = 1000;
+                _maxWaves = 350;
                 SpawnSpeed = 2;
+                _maxEnemiesInWave = EnemyLimit;
                 return;
             }
 

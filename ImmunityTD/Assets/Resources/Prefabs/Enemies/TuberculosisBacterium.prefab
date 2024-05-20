@@ -118,7 +118,7 @@ MonoBehaviour:
   IsVirus: 0
   MaxHealth: 120
   CoinsWhenDied: 5
-  Speed: 1.5
+  Speed: 1
   DamageIfNotKilled: 3
   HealthBarForeground: {fileID: 1721387245084656724}
   DamageText: {fileID: 7085059472747651572}
