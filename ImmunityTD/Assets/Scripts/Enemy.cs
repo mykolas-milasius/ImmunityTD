@@ -95,6 +95,7 @@ namespace Assets.Scripts
 
         private void Die()
         {
+            Player.Instance.enemyCount--;
             Player.AddCoins(CoinsWhenDied);
             Player.AddKill();
             Player.AddScore(CoinsWhenDied);

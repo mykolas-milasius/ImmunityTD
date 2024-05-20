@@ -44,6 +44,7 @@ namespace Assets.Scripts
             else
             {
                 Player.TakeDamage(_enemyComponent.GetDamageIfNotKilled());
+                Player.Instance.enemyCount--;
                 Destroy(gameObject);
                 EnemyGenerator.EnemyCount--;
                 // gameOverText.SetActive(true);

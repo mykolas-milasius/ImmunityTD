@@ -5830,8 +5830,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeneratorDelay: 8
   Difficulty: 2
-  DebugMode: 0
-  EndlessMode: 0
+  DebugMode: 1
+  EndlessMode: 1
+  enemyCount: 0
   EnemyGenerator: {fileID: 1621336809}
   CoinsText: {fileID: 810241318}
   ScoreText: {fileID: 1860163357}
@@ -7107,9 +7108,11 @@ MonoBehaviour:
   - {fileID: 3875646891751454614, guid: 293dc9489fa41442899b81d451676e87, type: 3}
   - {fileID: 3875646891751454614, guid: 18d15e2debccf49dfa1d3471aa120c2b, type: 3}
   - {fileID: 3875646891751454614, guid: dad3d0aa03e194b7e933ed7909d6e00a, type: 3}
+  - {fileID: 3875646891751454614, guid: 61755e99235de44279fd06a12e285870, type: 3}
+  - {fileID: 3875646891751454614, guid: 155de3daf63ff47ab94c353fd0e0c955, type: 3}
   WayPoints: {fileID: 289915106}
-  SpawnSpeed: 0
-  EnemyLimit: 100
+  SpawnSpeed: 100000
+  EnemyLimit: 2147483647
 --- !u!4 &1621336811
 Transform:
   m_ObjectHideFlags: 0

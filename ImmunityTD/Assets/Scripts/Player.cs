@@ -22,6 +22,7 @@ namespace Assets.Scripts
         private readonly float _enemyWaveTextTimer = 5f;
         private bool _gameRunning = false;
         private bool _gameFinished = false;
+        public int enemyCount = 0;
 
         public GameObject EnemyGenerator;
         public TextMeshProUGUI CoinsText;
@@ -31,9 +32,11 @@ namespace Assets.Scripts
         public TextMeshProUGUI EnemySpawnDelayText;
         public TextMeshProUGUI EnemyWaveText;
         public TextMeshProUGUI GameOverText;
-
+        
         public void FixedUpdate()
         {
+            Debug.Log(enemyCount);
+
             if (!_gameFinished && !_gameRunning)
             {
                 StartEnemyGenerator();
@@ -44,6 +47,11 @@ namespace Assets.Scripts
 
         private void Awake()
         {
+            if (DebugMode)
+            {
+                _health = 1000000;
+            }
+            
             if (Instance == null)
             {
                 Instance = this;
